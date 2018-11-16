@@ -15,25 +15,20 @@ import javax.validation.constraints.NotNull;
 /**
  * @author jury
  */
-//@Component
 @Entity
-
-
-//    @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Country p")
 public class Country {
     @Id
     @GeneratedValue
-    @NotNull
     private long id;
     @NotNull
     @Column(unique = true)
-    private String countryName;
+    private String name;
 
     public Country() {
     }
 
-    public Country(String countryName) {
-        this.countryName = countryName;
+    public Country(String name) {
+        this.name = name;
     }
 
     /**
@@ -50,24 +45,18 @@ public class Country {
         this.id = id;
     }
 
-    /**
-     * @return the country_name
-     */
-    public String getCountryName() {
-        return countryName;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * @param country_name the country_name to set
-     */
-    public void setCountryName(String country_name) {
-        this.countryName = country_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
 
-        return id + " " + countryName;
+        return id + " " + name;
     }
 
 }

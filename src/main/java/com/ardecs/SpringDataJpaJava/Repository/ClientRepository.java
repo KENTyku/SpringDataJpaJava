@@ -16,8 +16,7 @@ import java.util.Optional;
  */
 
 public interface ClientRepository extends CrudRepository<Client, Long> {
-    ArrayList <Client> findAll();
-    Optional<Client> findById(Long id);
+
 
 
 

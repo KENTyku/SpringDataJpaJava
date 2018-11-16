@@ -4,27 +4,23 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-
 /**
  * @author jury
  */
-//@Component
+
 @Entity
 @Table(name = "OrderTable")
 public class Order {
-
     @Id
     @GeneratedValue
-    @NotNull
     private long id;
     @NotNull
     private String date;
-    @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER,cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<OrderPosition> orderPositions;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)
@@ -43,9 +39,6 @@ public class Order {
         this.orderPositions = orderPositions;
         this.client = client;
     }
-
-
-
 
     /**
      * @return the id
@@ -78,7 +71,7 @@ public class Order {
     @Override
     public String toString() {
 
-        return id + " " + date+" "+client;
+        return id + " " + date + " " + client;
     }
 
 

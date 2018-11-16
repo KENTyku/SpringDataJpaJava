@@ -13,8 +13,8 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface CountryRepository extends CrudRepository<Country, Long> {
-    Country findByCountryName(String name);
-//    Optional<Country> findById(Long id);
+    Country findByName(String name);
+
 
 
 

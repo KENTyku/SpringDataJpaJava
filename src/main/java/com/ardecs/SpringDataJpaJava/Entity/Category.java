@@ -4,7 +4,6 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,20 +14,18 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Category {
-
     @Id
     @GeneratedValue
-    @NotNull
     private long id;
     @NotNull
-    private String categoryName;
+    private String name;
 
     public Category() {
     }
 
-    public Category(String categoryName) {
+    public Category(String name) {
 
-        this.categoryName = categoryName;
+        this.name = name;
     }
 
     /**
@@ -49,20 +46,20 @@ public class Category {
      * @return the country_name
      */
     public String getCategoryName() {
-        return categoryName;
+        return name;
     }
 
     /**
      * @param catgory_name the catgory_name to set
      */
     public void setCategoryName(String catgory_name) {
-        this.categoryName = catgory_name;
+        this.name = catgory_name;
     }
 
     @Override
     public String toString() {
 
-        return id + " " + categoryName;
+        return id + " " + name;
     }
 
 }

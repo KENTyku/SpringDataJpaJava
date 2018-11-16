@@ -4,10 +4,8 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-
 import javax.persistence.*;
 import java.io.Serializable;
-
 
 /**
  * @author jury

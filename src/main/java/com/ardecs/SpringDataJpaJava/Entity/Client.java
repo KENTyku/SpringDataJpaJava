@@ -4,36 +4,31 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-
 /**
  * @author jury
  */
-//@Component
 @Entity
 public class Client {
-
     @Id
     @GeneratedValue
-    @NotNull
     private long id;
     @NotNull
     private String name;
     @NotNull
-    private String telefonNumber;
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
+    private String phoneNumber;
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
     private List<Order> orders;
 
     public Client() {
     }
 
-    public Client(String name, String telefonNumber) {
+    public Client(String name, String phoneNumber) {
         this.name = name;
-        this.telefonNumber = telefonNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     /**
@@ -65,26 +60,17 @@ public class Client {
     }
 
 
-
-    public String getTelefonNumber() {
-        return telefonNumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTelefonNumber(String telefonNumber) {
-        this.telefonNumber = telefonNumber;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-//
-//    public List<Order> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(List<Order> orders) {
-//        this.orders = orders;
-//    }
     @Override
     public String toString() {
 
-        return id + " " + name+" "+telefonNumber;
+        return id + " " + name + " " + phoneNumber;
     }
 }

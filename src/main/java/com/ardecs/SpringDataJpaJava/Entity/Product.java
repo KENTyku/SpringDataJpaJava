@@ -11,12 +11,10 @@ import javax.validation.constraints.NotNull;
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 @Entity
-//    @NamedQuery(name = "findAllProducts", query = "SELECT p FROM Product p")
 public class Product {
 
     @Id
     @GeneratedValue
-    @NotNull
     private long id;
     @NotNull
     private float price;
@@ -69,34 +67,6 @@ public class Product {
     public void setPrice(float price) {
         this.price = price;
     }
-
-//    /**
-//     * @return the categoryID
-//     */
-//    public long getCategoryID() {
-//        return categoryID;
-//    }
-//
-//    /**
-//     * @param categoryID the categoryID to set
-//     */
-//    public void setCategoryID(long categoryID) {
-//        this.categoryID = categoryID;
-//    }
-//
-//    /**
-//     * @return the countryID
-//     */
-//    public long getCountryID() {
-//        return countryID;
-//    }
-//
-//    /**
-//     * @param countryID the countryID to set
-//     */
-//    public void setCountryID(long countryID) {
-//        this.countryID = countryID;
-//    }
 
     /**
      * @return the name

@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
 @ContextConfiguration(classes = ConfigTest.class)
@@ -39,10 +40,11 @@ public class SpringDataJpaJavaTests {
         clientRepository.save(client);
         Long idClient = client.getId();
         System.out.println(idClient);
-        client = null;
+
 
         //Sign in
-        client = clientRepository.findById(idClient).get();
+        Optional<Client> clientOptional = clientRepository.findById(idClient);
+        client = clientOptional.get();
 
         //create order
         Date date = new Date();
@@ -57,7 +59,7 @@ public class SpringDataJpaJavaTests {
             System.out.println(item.getCategoryName());
         }
         //doing request
-        List<Product> products = productRepository.findByCategoryAndNameLike(categoriesList.get(1), name);
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), name);
         //show results
         for (Product product : products) {
             System.out.println(product);
@@ -78,7 +80,7 @@ public class SpringDataJpaJavaTests {
         orderRepository.save(order);
 
         //show all orders for client
-        List<Order> ordersList = orderRepository.findAllOrder(idClient);
+        List<Order> ordersList= orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
         for (Order item : ordersList) {
             System.out.println(item.getId());
 

@@ -4,15 +4,12 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-
 
 /**
  * @author jury
  */
-//@Component
 @Entity
 public class OrderPosition {
     @EmbeddedId
@@ -30,7 +27,7 @@ public class OrderPosition {
     @Override
     public String toString() {
         return "OrderPosition{" +
-                "id="  +
+                "id=" +
                 ", quantity=" + quantity +
                 '}';
     }

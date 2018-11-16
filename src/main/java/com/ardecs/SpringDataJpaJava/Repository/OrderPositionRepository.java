@@ -14,8 +14,7 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface OrderPositionRepository extends CrudRepository<OrderPosition, OrderPositionId> {
-//    Country findByCountryName(String name);
-//    Optional<Country> findById(Long id);
+
 
 
 
