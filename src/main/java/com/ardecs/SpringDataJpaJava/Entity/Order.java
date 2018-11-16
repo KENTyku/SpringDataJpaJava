@@ -6,6 +6,8 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -19,7 +21,8 @@ public class Order {
     @GeneratedValue
     private long id;
     @NotNull
-    private String date;
+    private LocalDateTime date;
+//    private String date;
     @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<OrderPosition> orderPositions;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -29,12 +32,12 @@ public class Order {
     public Order() {
     }
 
-    public Order(@NotNull String date, Client client) {
+    public Order(@NotNull LocalDateTime date, Client client) {
         this.date = date;
         this.client = client;
     }
 
-    public Order(@NotNull String date, List<OrderPosition> orderPositions, Client client) {
+    public Order(@NotNull LocalDateTime date, List<OrderPosition> orderPositions, Client client) {
         this.date = date;
         this.orderPositions = orderPositions;
         this.client = client;
@@ -57,14 +60,14 @@ public class Order {
     /**
      * @return the country_name
      */
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
     /**
      * @param date the date to set
      */
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

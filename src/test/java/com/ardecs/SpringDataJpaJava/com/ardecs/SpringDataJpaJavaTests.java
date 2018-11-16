@@ -6,9 +6,13 @@ import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,8 +51,10 @@ public class SpringDataJpaJavaTests {
         client = clientOptional.get();
 
         //create order
-        Date date = new Date();
-        Order order = new Order(date.toString(), client);
+        LocalDateTime date;
+        date = LocalDateTime.now();
+        System.out.println(date.toString());
+        Order order = new Order(date, client);
 
 
         //find Products
@@ -80,12 +86,18 @@ public class SpringDataJpaJavaTests {
         orderRepository.save(order);
 
         //show all orders for client
-        List<Order> ordersList= orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
+        List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
         for (Order item : ordersList) {
             System.out.println(item.getId());
 
         }
-
+        Page<Product> page = productRepository.findAll(new PageRequest(0, 5, new Sort(new Sort.Order(Sort.Direction.ASC, "price"))));
+        products = page.getContent();
+        //show results
+        System.out.println("*****************");
+        for (Product product : products) {
+            System.out.println(product);
+        }
     }
 
 }
