@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static com.ardecs.SpringDataJpaJava.Repository.specification.ProductSpecificaton.productFindByName;
 
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
 @ContextConfiguration(classes = ConfigTest.class)
@@ -65,7 +68,7 @@ public class SpringDataJpaJavaTests {
             System.out.println(item.getCategoryName());
         }
         //doing request
-        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), name);
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(0), name);
         //show results
         for (Product product : products) {
             System.out.println(product);
@@ -98,6 +101,8 @@ public class SpringDataJpaJavaTests {
         for (Product product : products) {
             System.out.println(product);
         }
+        productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
+
     }
 
 }
