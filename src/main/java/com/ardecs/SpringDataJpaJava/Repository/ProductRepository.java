@@ -25,5 +25,7 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, L
     @Query(("SELECT p from Product p where p.name like %:productNamePart% order by p.name desc "))
     List<Product> findByProductNamePart(@Param(value = "productNamePart") String name);
 
+    @Query(("SELECT p from Product p where p.country like %:countryNamePart% order by p.name"))
+    List<Product> findProductByCountryNamePart(@Param(value = "countryNamePart") String name);
 
 }
