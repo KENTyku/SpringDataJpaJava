@@ -21,4 +21,5 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
     Category findByName(String name);
     @Query(("SELECT c from Category c where c.name like %:categoryNamePart% order by c.name "))
     List<Category> findByCategoryNamePart(@Param(value = "categoryNamePart") String name);
+    Boolean existsByName(String Name);
 }

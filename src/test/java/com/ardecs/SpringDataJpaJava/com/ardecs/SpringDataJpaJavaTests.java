@@ -3,6 +3,7 @@ package com.ardecs.SpringDataJpaJava.com.ardecs;
 import com.ardecs.SpringDataJpaJava.config.ConfigTest;
 import com.ardecs.SpringDataJpaJava.Entity.*;
 import com.ardecs.SpringDataJpaJava.Repository.*;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +42,27 @@ public class SpringDataJpaJavaTests {
     private OrderPositionRepository orderPositionRepository;
     private OrderPositionId id;
 
+    @Before
+    //Create data
+    public void init() {
+
+    }
+
     @Test
     public void testCrud() {
-        //Create data
-        Category category=new Category("Mobile");
-        categoryRepository.save(category);
-        Country country=new Country("USA");
-        countryRepository.save(country);
+
+//        Category category = new Category("Mobile");
+////        categoryRepository.save(category);
+////        if (!categoryRepository.existsByName("Mobile")) categoryRepository.save(category);
+////        else category = categoryRepository.findByName("Mobile");
+//        Country country = new Country("USA");
+//        countryRepository.save(country);
+//        if (!countryRepository.existsByName("USA")) countryRepository.save(country);
+//        else country = countryRepository.findByName("USA");
+//        Product product = new Product(1000, "IPhone", "mobile comment IPhone", country, category);
+////        productRepository.save(product);
+//        product = new Product(500, "Sony", "mobile comment Sony", country, category);
+//        productRepository.save(product);
         //registration
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
@@ -74,10 +89,10 @@ public class SpringDataJpaJavaTests {
             System.out.println(item.getCategoryName());
         }
         //doing request
-        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), name);
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(0), name);
         //show results
-        for (Product product : products) {
-            System.out.println(product);
+        for (Product item : products) {
+            System.out.println(item);
         }
         //select product and quantity
         id = new OrderPositionId(order, products.get(0));
@@ -104,8 +119,8 @@ public class SpringDataJpaJavaTests {
         products = page.getContent();
         //show results
         System.out.println("*****************");
-        for (Product product : products) {
-            System.out.println(product);
+        for (Product item : products) {
+            System.out.println(item);
         }
         //Use Specification
         productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
