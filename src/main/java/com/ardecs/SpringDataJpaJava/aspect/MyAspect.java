@@ -31,12 +31,12 @@ public class MyAspect {
 //        Report report=new Report(nameClass,"save",LocalDateTime.now());
 //        reportRepository.save(report);
 //    }
-@Pointcut("execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.save())")
+@Pointcut("execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.findByCategoryNamePart(..))")
 public void saveToReport() {
 }
 
     @AfterReturning("saveToReport()")
-    public void logEntity(Object entity) {
+    public void logEntity() {
         System.out.println("ASPECT");
     }
 }
