@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ProductSpecificaton.productFindByName;
+import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.*;
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
 @ContextConfiguration(classes = ConfigTest.class)
@@ -41,7 +43,11 @@ public class SpringDataJpaJavaTests {
 
     @Test
     public void testCrud() {
-
+        //Create data
+        Category category=new Category("Mobile");
+        categoryRepository.save(category);
+        Country country=new Country("USA");
+        countryRepository.save(country);
         //registration
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
@@ -68,7 +74,7 @@ public class SpringDataJpaJavaTests {
             System.out.println(item.getCategoryName());
         }
         //doing request
-        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(0), name);
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), name);
         //show results
         for (Product product : products) {
             System.out.println(product);
@@ -101,7 +107,14 @@ public class SpringDataJpaJavaTests {
         for (Product product : products) {
             System.out.println(product);
         }
+        //Use Specification
         productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
+
+        //Use Specification for any word part
+        String wordPart = "Yuri";
+        System.out.println("***********************test");
+        clientRepository.findAll(where(clientFindByName(wordPart)).or(clientFindByPhoneName(wordPart))).forEach(System.out::println);
+
 
     }
 
