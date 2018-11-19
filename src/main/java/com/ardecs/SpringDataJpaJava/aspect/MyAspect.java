@@ -31,12 +31,17 @@ public class MyAspect {
 //        Report report=new Report(nameClass,"save",LocalDateTime.now());
 //        reportRepository.save(report);
 //    }
-@Pointcut("execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.findByCategoryNamePart(..))")
+@Pointcut("execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(..))")
+//@Pointcut("execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(..))")
 public void saveToReport() {
 }
 
     @AfterReturning("saveToReport()")
     public void logEntity() {
-        System.out.println("ASPECT");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaSPECT");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaSPECT");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaSPECT");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaSPECT");
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaSPECT");
     }
 }

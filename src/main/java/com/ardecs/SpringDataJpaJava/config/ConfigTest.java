@@ -15,11 +15,12 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableAspectJAutoProxy
 @EnableTransactionManagement
 @ComponentScan("com.ardecs.SpringDataJpaJava")
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.ardecs.SpringDataJpaJava")
-@EnableAspectJAutoProxy
+
 public class ConfigTest {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
