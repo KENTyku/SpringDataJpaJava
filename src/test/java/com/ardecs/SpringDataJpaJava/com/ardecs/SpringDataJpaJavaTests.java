@@ -106,6 +106,7 @@ public class SpringDataJpaJavaTests {
         list.add(orderPosition);
 
         //add to order and save order
+        System.out.println("SAVEEEEEEEEEEEEEEEEEEEEEEEEE");
         order.setOrderPositions(list);
         orderRepository.save(order);
 
