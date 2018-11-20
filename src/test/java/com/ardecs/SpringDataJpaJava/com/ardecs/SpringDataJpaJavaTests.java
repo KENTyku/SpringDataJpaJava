@@ -51,8 +51,8 @@ public class SpringDataJpaJavaTests {
     @Test
     public void testCrud() {
 
-//        Category category = new Category("Mobile");
-////        categoryRepository.save(category);
+//        Category category = new Category("Car");
+//        categoryRepository.save(category);
 ////        if (!categoryRepository.existsByName("Mobile")) categoryRepository.save(category);
 ////        else category = categoryRepository.findByName("Mobile");
 //        Country country = new Country("USA");
@@ -106,7 +106,6 @@ public class SpringDataJpaJavaTests {
         list.add(orderPosition);
 
         //add to order and save order
-        System.out.println("SAVEEEEEEEEEEEEEEEEEEEEEEEEE");
         order.setOrderPositions(list);
         orderRepository.save(order);
 
@@ -119,7 +118,6 @@ public class SpringDataJpaJavaTests {
         Page<Product> page = productRepository.findAll(new PageRequest(0, 5, new Sort(new Sort.Order(Sort.Direction.ASC, "price"))));
         products = page.getContent();
         //show results
-        System.out.println("*****************");
         for (Product item : products) {
             System.out.println(item);
         }
@@ -128,10 +126,12 @@ public class SpringDataJpaJavaTests {
 
         //Use Specification for any word part
         String wordPart = "Yuri";
-        System.out.println("***********************test");
         clientRepository.findAll(where(clientFindByName(wordPart)).or(clientFindByPhoneName(wordPart))).forEach(System.out::println);
 
-
+        //Test Logging
+        Category category = new Category("Books");
+        categoryRepository.save(category);
+        categoryRepository.delete(category);
     }
 
 }
