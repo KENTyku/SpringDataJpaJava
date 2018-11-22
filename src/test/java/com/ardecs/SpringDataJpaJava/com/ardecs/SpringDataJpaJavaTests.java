@@ -47,22 +47,22 @@ public class SpringDataJpaJavaTests {
     public void init() {
 
     }
-
+//TODO написать тест с генерацией данных для тестирования и использовать ассерты
     @Test
     public void testCrud() {
 
-//        Category category = new Category("Car");
-//        categoryRepository.save(category);
-////        if (!categoryRepository.existsByName("Mobile")) categoryRepository.save(category);
-////        else category = categoryRepository.findByName("Mobile");
-//        Country country = new Country("USA");
-//        countryRepository.save(country);
-//        if (!countryRepository.existsByName("USA")) countryRepository.save(country);
-//        else country = countryRepository.findByName("USA");
-//        Product product = new Product(1000, "IPhone", "mobile comment IPhone", country, category);
-////        productRepository.save(product);
-//        product = new Product(500, "Sony", "mobile comment Sony", country, category);
+        Category category = new Category("Car");
+        categoryRepository.save(category);
+//        if (!categoryRepository.existsByName("Mobile")) categoryRepository.save(category);
+//        else category = categoryRepository.findByName("Mobile");
+        Country country = new Country("USA");
+        countryRepository.save(country);
+        if (!countryRepository.existsByName("USA")) countryRepository.save(country);
+        else country = countryRepository.findByName("USA");
+        Product product = new Product(1000, "IPhone", "mobile comment IPhone", country, category);
 //        productRepository.save(product);
+        product = new Product(500, "Sony", "mobile comment Sony", country, category);
+        productRepository.save(product);
         //registration
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
@@ -115,7 +115,7 @@ public class SpringDataJpaJavaTests {
             System.out.println(item.getId());
 
         }
-        Page<Product> page = productRepository.findAll(new PageRequest(0, 5, new Sort(new Sort.Order(Sort.Direction.ASC, "price"))));
+        Page<Product> page = productRepository.findAll(new PageRequest(0, 5, new Sort(new Sort.Order(Sort.Direction.ASC, "price"))));//заменить методы на неустаревающие
         products = page.getContent();
         //show results
         for (Product item : products) {
@@ -129,9 +129,11 @@ public class SpringDataJpaJavaTests {
         clientRepository.findAll(where(clientFindByName(wordPart)).or(clientFindByPhoneName(wordPart))).forEach(System.out::println);
 
         //Test Logging
-        Category category = new Category("Books");
+        category = new Category("Books");
         categoryRepository.save(category);
         categoryRepository.delete(category);
     }
 
 }
+
+

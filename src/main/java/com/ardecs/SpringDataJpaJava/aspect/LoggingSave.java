@@ -21,12 +21,12 @@ public class LoggingSave {
 
 @Pointcut(
         "(" +
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.ClientRepository.save(Object))||" +
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(Object))||" +
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.save(Object))||"+
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.CountryRepository.save(Object))||"+
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository.save(Object))||"+
-                "execution(* com.ardecs.SpringDataJpaJava.Repository.ProductRepository.save(Object))"+
+                "execution(* com.ardecs.SpringDataJpaJava.Repository..*.save(Object))" +//добавить исключение интерфейса ReportRepository
+//                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(Object))||" +
+//                "execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.save(Object))||"+
+//                "execution(* com.ardecs.SpringDataJpaJava.Repository.CountryRepository.save(Object))||"+
+//                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository.save(Object))||"+
+//                "execution(* com.ardecs.SpringDataJpaJava.Repository.ProductRepository.save(Object))"+
         ")"+
                 "&&args(entity)"
 )
@@ -35,7 +35,7 @@ public class LoggingSave {
 
     @AfterReturning("saveToReport(entity)")
     public void logEntity(Object entity) {
-        Object unknowEntity=entity;
+        Object unknowEntity=entity;//убрать лишний объект
         Class classEntity=unknowEntity.getClass();
         String nameClass=classEntity.getName();
         Report report=new Report(nameClass,"save",LocalDateTime.now());

@@ -10,15 +10,21 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class ClientSpecificaton {
-    public static Specification<Client> clientFindByName(final String name) {
+    public static Specification<Client> clientFindByName(final String name, final String phoneNumber) {//доделать спецификацию чтобы был поис по двум полям формы
         return new Specification<Client>() {
             @Override
             public Predicate toPredicate(Root<Client> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-                return criteriaBuilder.like(root.get("name"), name);
+                if (name != null) {
+                    criteriaBuilder.like(root.get("name"), name);
+                }
+                if (phoneNumber) {
+                    criteriaBuilder.and(equals(root.get("phoneNumber"), phoneNumber));
+                }
+                return criteriaBuilder;
             }
         };
     }
-    public static Specification<Client> clientFindByPhoneName(final String phoneNumber) {
+    public static Specification<Client> findByPhoneNumber(final String phoneNumber) {
         return new Specification<Client>() {
             @Override
             public Predicate toPredicate(Root<Client> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
