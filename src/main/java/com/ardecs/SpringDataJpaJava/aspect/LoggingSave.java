@@ -20,14 +20,16 @@ public class LoggingSave {
     private Object entity;
 
 @Pointcut(
-        "(" +
-                "execution(* com.ardecs.SpringDataJpaJava.Repository..*.save(Object))" +//добавить исключение интерфейса ReportRepository
+//        "(" +
+                "execution(* com.ardecs.SpringDataJpaJava.Repository..*.save(Object))" +
+                "&&!execution(* com.ardecs.SpringDataJpaJava.Repository.ReportRepository.save(Object))"+
+                //добавить исключение интерфейса ReportRepository
 //                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(Object))||" +
 //                "execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.save(Object))||"+
 //                "execution(* com.ardecs.SpringDataJpaJava.Repository.CountryRepository.save(Object))||"+
 //                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository.save(Object))||"+
 //                "execution(* com.ardecs.SpringDataJpaJava.Repository.ProductRepository.save(Object))"+
-        ")"+
+//        ")"+
                 "&&args(entity)"
 )
     public void saveToReport(Object entity) {
@@ -35,9 +37,7 @@ public class LoggingSave {
 
     @AfterReturning("saveToReport(entity)")
     public void logEntity(Object entity) {
-        Object unknowEntity=entity;//убрать лишний объект
-        Class classEntity=unknowEntity.getClass();
-        String nameClass=classEntity.getName();
+        String nameClass=entity.getClass().getName();
         Report report=new Report(nameClass,"save",LocalDateTime.now());
         reportRepository.save(report);
     }

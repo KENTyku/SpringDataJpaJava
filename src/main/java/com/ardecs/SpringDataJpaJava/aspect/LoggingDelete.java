@@ -35,9 +35,7 @@ public class LoggingDelete {
 
     @AfterReturning("saveToReport(entity)")
     public void logEntity(Object entity) {
-        Object unknowEntity = entity;
-        Class classEntity = unknowEntity.getClass();
-        String nameClass = classEntity.getName();
+        String nameClass = entity.getClass().getName();
         Report report = new Report(nameClass, "delete", LocalDateTime.now());
         reportRepository.save(report);
     }

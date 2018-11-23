@@ -126,7 +126,7 @@ public class SpringDataJpaJavaTests {
 
         //Use Specification for any word part
         String wordPart = "Yuri";
-        clientRepository.findAll(where(clientFindByName(wordPart)).or(clientFindByPhoneName(wordPart))).forEach(System.out::println);
+        clientRepository.findAll(clientFindByCriteries("Yuri","9058762476")).forEach(System.out::println);
 
         //Test Logging
         category = new Category("Books");
