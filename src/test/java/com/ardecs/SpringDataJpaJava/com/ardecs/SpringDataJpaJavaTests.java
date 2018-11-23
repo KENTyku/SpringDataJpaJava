@@ -22,6 +22,8 @@ import java.util.Optional;
 
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ProductSpecificaton.productFindByName;
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.*;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.TestCase.assertEquals;
 import static org.springframework.data.jpa.domain.Specification.where;
 
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
@@ -44,30 +46,41 @@ public class SpringDataJpaJavaTests {
 
     @Before
     //Create data
-    public void init() {
-
-    }
-//TODO написать тест с генерацией данных для тестирования и использовать ассерты
-    @Test
-    public void testCrud() {
-
-        Category category = new Category("Car");
+    public void initDataBase() {
+        Category category = new Category("Computer");
         categoryRepository.save(category);
-//        if (!categoryRepository.existsByName("Mobile")) categoryRepository.save(category);
-//        else category = categoryRepository.findByName("Mobile");
+        category = new Category("Mobile");
+        categoryRepository.save(category);
+        category = new Category("Audio");
+        categoryRepository.save(category);
+
         Country country = new Country("USA");
         countryRepository.save(country);
-        if (!countryRepository.existsByName("USA")) countryRepository.save(country);
-        else country = countryRepository.findByName("USA");
-        Product product = new Product(1000, "IPhone", "mobile comment IPhone", country, category);
-//        productRepository.save(product);
-        product = new Product(500, "Sony", "mobile comment Sony", country, category);
+        country = new Country("Russia");
+        countryRepository.save(country);
+        country = new Country("Japan");
+        countryRepository.save(country);
+
+        Product product = new Product(1000, "IPhone", "mobile comment IPhone",
+                countryRepository.findByName("USA"), categoryRepository.findByName("Mobile"));
         productRepository.save(product);
-        //registration
+        product = new Product(500, "Sony", "mobile comment Sony",
+                countryRepository.findByName("Japan"), categoryRepository.findByName("Mobile"));
+        productRepository.save(product);
+        product = new Product(550, "Sony next", "mobile comment Sony next",
+                countryRepository.findByName("Japan"), categoryRepository.findByName("Mobile"));
+        productRepository.save(product);
+    }
+
+    @Test
+    public void clientRegistration() {
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
         Long idClient = client.getId();
-        System.out.println(idClient);
+        assertTrue(!idClient.equals(null));
+    }
+    @Test
+    public void clientSign() {
 
 
         //Sign in
@@ -82,15 +95,17 @@ public class SpringDataJpaJavaTests {
 
 
         //find Products
-        String name = "Sony";
+        String namePart = "Sony";
         //select Category
         List<Category> categoriesList = (ArrayList<Category>) categoryRepository.findAll();
+        System.out.println("*************************************");
         for (Category item : categoriesList) {
             System.out.println(item.getCategoryName());
         }
         //doing request
-        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(0), name);
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), namePart);
         //show results
+        System.out.println("*************************************");
         for (Product item : products) {
             System.out.println(item);
         }
@@ -126,10 +141,10 @@ public class SpringDataJpaJavaTests {
 
         //Use Specification for any word part
         String wordPart = "Yuri";
-        clientRepository.findAll(clientFindByCriteries("Yuri","9058762476")).forEach(System.out::println);
+        clientRepository.findAll(clientFindByCriteries("Yuri", "9058762476")).forEach(System.out::println);
 
         //Test Logging
-        category = new Category("Books");
+        Category category = new Category("Books");
         categoryRepository.save(category);
         categoryRepository.delete(category);
     }
