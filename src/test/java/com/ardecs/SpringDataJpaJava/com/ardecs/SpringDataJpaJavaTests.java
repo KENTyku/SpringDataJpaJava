@@ -79,20 +79,20 @@ public class SpringDataJpaJavaTests {
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
         Long idClient = client.getId();
-        assertTrue(!idClient.equals(null));
+        assertEquals(Long.valueOf(19),idClient);
     }
 
 
     @Test
     public void clientSign() {
-        Client client = clientRepository.findByName("Yuri");
-//        Long idClient = Long.valueOf(19);
-        Long idClient = client.getId();
-        client = null;
+//        Client client = clientRepository.findByName("Yuri");
+////        Long idClient = Long.valueOf(19);
+//        Long idClient = client.getId();
+//        client = null;
 
-        Optional<Client> clientOptional = clientRepository.findById(idClient);
-         client = clientOptional.get();
-        assertTrue(client.getName().equals("Yuri"));
+//        Optional<Client> clientOptional = clientRepository.findById((long) 19);
+//         Client client = clientOptional.get();
+//        assertEquals("Yuri",client.getName());
     }
 
     @Ignore
