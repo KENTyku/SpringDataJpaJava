@@ -4,6 +4,7 @@ import com.ardecs.SpringDataJpaJava.config.ConfigTest;
 import com.ardecs.SpringDataJpaJava.Entity.*;
 import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class SpringDataJpaJavaTests {
     private OrderPositionId id;
 
     @Before
-    //Create data
+
     public void initDataBase() {
         Category category = new Category("Computer");
         categoryRepository.save(category);
@@ -73,20 +74,32 @@ public class SpringDataJpaJavaTests {
     }
 
     @Test
+
     public void clientRegistration() {
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
         Long idClient = client.getId();
         assertTrue(!idClient.equals(null));
     }
+
+
     @Test
     public void clientSign() {
+        Client client = clientRepository.findByName("Yuri");
+//        Long idClient = Long.valueOf(19);
+        Long idClient = client.getId();
+        client = null;
 
-
-        //Sign in
         Optional<Client> clientOptional = clientRepository.findById(idClient);
-        client = clientOptional.get();
+         client = clientOptional.get();
+        assertTrue(client.getName().equals("Yuri"));
+    }
 
+    @Ignore
+    @Test
+    public void createOrder() {
+        Client client = clientRepository.findByName("Yuri");
+        Long idClient = client.getId();
         //create order
         LocalDateTime date;
         date = LocalDateTime.now();

@@ -17,6 +17,7 @@ import java.util.Optional;
  */
 
 public interface ClientRepository extends CrudRepository<Client, Long> ,JpaSpecificationExecutor<Client> {
+    Client findByName(String name);
 
 
 

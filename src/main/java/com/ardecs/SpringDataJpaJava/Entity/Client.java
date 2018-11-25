@@ -20,7 +20,7 @@ public class Client {
     private String name;
     @NotNull
     private String phoneNumber;
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     private List<Order> orders;
 
     public Client() {
