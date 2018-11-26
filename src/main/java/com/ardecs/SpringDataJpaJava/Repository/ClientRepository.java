@@ -12,16 +12,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 /**
- *
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 
-public interface ClientRepository extends CrudRepository<Client, Long> ,JpaSpecificationExecutor<Client> {
+public interface ClientRepository extends CrudRepository<Client, Long>, JpaSpecificationExecutor<Client> {
     Client findByName(String name);
 
-
-
-
+    Boolean existsByName(String name);
 
 
 }
