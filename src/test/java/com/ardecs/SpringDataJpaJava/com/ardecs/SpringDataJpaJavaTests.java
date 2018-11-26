@@ -170,7 +170,6 @@ public class SpringDataJpaJavaTests {
         Optional<Client> clientOptional = clientRepository.findById((long) 19);
         Client client = clientOptional.get();
         Long idClient = client.getId();
-        //show all orders for client
         List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
 
         ArrayList<Long> listIdOrders = new ArrayList<>();
@@ -186,44 +185,35 @@ public class SpringDataJpaJavaTests {
     public void pagingAllProducts() {
         Page<Product> page = productRepository.findAll(PageRequest.of(1, 2, Sort.by(new Sort.Order(Sort.Direction.ASC, "price"))));
         List<Product> products = page.getContent();
-        //show results
         ArrayList<Long> listIdProducts = new ArrayList<>();
         for (Product item : products) {
-            System.out.println(item);
             listIdProducts.add(item.getId());
         }
         Long[] expecteds = {Long.valueOf(13)};
         Long[] actual = listIdProducts.toArray(new Long[listIdProducts.size()]);
-        assertEquals(expecteds,actual);//TODO: переопределить метод сравнения как в кеше
+        assertArrayEquals(expecteds, actual);
     }
 
-    @Ignore
     @Test
-    public void test5() {
-
-        //Use Specification
-        productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
+    public void searchClientsWithCriteries() {
+        List<Client> clientList = clientRepository.findAll(clientFindByCriteries("Yuri", "9051111111"));
+        ArrayList<Long> listIdClients = new ArrayList<>();
+        for (Client item : clientList) {
+            listIdClients.add(item.getId());
+        }
+        Long[] expecteds = {Long.valueOf(23)};
+        Long[] actual = listIdClients.toArray(new Long[listIdClients.size()]);
+        assertArrayEquals(expecteds, actual);
     }
 
-    @Ignore
-    @Test
-    public void test6() {
-        //Use Specification for criteries
-        System.out.println("Criteria1");
-//        String wordPart = "Yuri";
-        clientRepository.findAll(clientFindByCriteries("Yuri", "9051111111")).forEach(System.out::println);
-    }
 
-    @Ignore
     @Test
-    public void test7() {
-        //Test Logging
+    public void addToReport() {
         Category category = new Category("Books");
         categoryRepository.save(category);
         categoryRepository.delete(category);
         long count = reportRepository.count();
         assertEquals(14, count);
-
     }
 }
 
