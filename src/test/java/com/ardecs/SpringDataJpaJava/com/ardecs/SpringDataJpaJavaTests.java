@@ -1,5 +1,10 @@
 package com.ardecs.SpringDataJpaJava.com.ardecs;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
@@ -26,15 +31,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.clientFindByCriteries;
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ProductSpecificaton.productFindByName;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
 @ContextConfiguration(classes = ConfigTest.class)
@@ -103,36 +103,47 @@ public class SpringDataJpaJavaTests {
             Client client = new Client("Bob", "9052222222");
             clientRepository.save(client);
         }
-
     }
 
     @Test
 
-    public void clientOrder() {
+    public void clientRegistration() {
         Client client = new Client("Yuri", "9051111111");
         clientRepository.save(client);
         Long idClient = client.getId();
-        assertEquals(Long.valueOf(21), idClient);
+        assertEquals(Long.valueOf(23), idClient);
 
-        //add order
+    }
+
+    @Test
+    public void clientSignIn() {
+
+        Optional<Client> clientOptional = clientRepository.findById((long) 19);
+        Client client = clientOptional.get();
+        assertEquals("Bob", client.getName());
+        assertEquals("9052222222", client.getPhoneNumber());
+    }
+
+
+    @Test
+    public void addOrder() {
+        Optional<Client> clientOptional = clientRepository.findById((long) 19);
+        Client client = clientOptional.get();
+        Long idClient = client.getId();
+        //create order
         LocalDateTime date;
         date = LocalDateTime.now();
-        System.out.println(date.toString());
         Order order = new Order(date, client);
-
-
         //find Products
         String namePart = "Sony";
         //select Category
         List<Category> categoriesList = (ArrayList<Category>) categoryRepository.findAll();
-        System.out.println("*************************************");
         for (Category item : categoriesList) {
             System.out.println(item.getCategoryName());
         }
         //doing request
         List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), namePart);
         //show results
-        System.out.println("*************************************");
         for (Product item : products) {
             System.out.println(item);
         }
@@ -151,34 +162,61 @@ public class SpringDataJpaJavaTests {
         order.setOrderPositions(list);
         orderRepository.save(order);
         Long idOrder = order.getId();
-        assertEquals(Long.valueOf(23), idOrder);
+        assertEquals(Long.valueOf(21), idOrder);
+    }
 
+    @Test
+    public void showAllClientOrders() {
+        Optional<Client> clientOptional = clientRepository.findById((long) 19);
+        Client client = clientOptional.get();
+        Long idClient = client.getId();
         //show all orders for client
         List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
-        Long[] expecteds = {Long.valueOf(23)};
+
         ArrayList<Long> listIdOrders = new ArrayList<>();
         for (Order item : ordersList) {
             listIdOrders.add(item.getId());
         }
+        Long[] expecteds = {Long.valueOf(21)};
         Long[] actual = listIdOrders.toArray(new Long[listIdOrders.size()]);
         assertArrayEquals(expecteds, actual);
+    }
 
-        Page<Product> page = productRepository.findAll(PageRequest.of(0, 5, Sort.by(new Sort.Order(Sort.Direction.ASC, "price"))));
-        products = page.getContent();
+    @Test
+    public void pagingAllProducts() {
+        Page<Product> page = productRepository.findAll(PageRequest.of(1, 2, Sort.by(new Sort.Order(Sort.Direction.ASC, "price"))));
+        List<Product> products = page.getContent();
         //show results
+        ArrayList<Long> listIdProducts = new ArrayList<>();
         for (Product item : products) {
             System.out.println(item);
+            listIdProducts.add(item.getId());
         }
-//        assertArrayEquals("Products arn't pages",,);
+        Long[] expecteds = {Long.valueOf(13)};
+        Long[] actual = listIdProducts.toArray(new Long[listIdProducts.size()]);
+        assertEquals(expecteds,actual);//TODO: переопределить метод сравнения как в кеше
+    }
+
+    @Ignore
+    @Test
+    public void test5() {
 
         //Use Specification
         productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
+    }
 
+    @Ignore
+    @Test
+    public void test6() {
         //Use Specification for criteries
         System.out.println("Criteria1");
 //        String wordPart = "Yuri";
         clientRepository.findAll(clientFindByCriteries("Yuri", "9051111111")).forEach(System.out::println);
+    }
 
+    @Ignore
+    @Test
+    public void test7() {
         //Test Logging
         Category category = new Category("Books");
         categoryRepository.save(category);
@@ -187,87 +225,6 @@ public class SpringDataJpaJavaTests {
         assertEquals(14, count);
 
     }
-
-    //    @Ignore
-    @Test
-    public void clientSign() {
-
-        Optional<Client> clientOptional = clientRepository.findById((long) 19);
-        Client client = clientOptional.get();
-        assertEquals("Bob", client.getName());
-    }
-//
-//    @Ignore
-//    @Test
-//    public void createOrder() {
-//        Optional<Client> clientOptional = clientRepository.findById((long) 19);
-//        Client client = clientOptional.get();
-//        Long idClient = client.getId();
-//        LocalDateTime date;
-//        date = LocalDateTime.now();
-//        System.out.println(date.toString());
-//        Order order = new Order(date, client);
-//
-//
-//        //find Products
-//        String namePart = "Sony";
-//        //select Category
-//        List<Category> categoriesList = (ArrayList<Category>) categoryRepository.findAll();
-//        System.out.println("*************************************");
-//        for (Category item : categoriesList) {
-//            System.out.println(item.getCategoryName());
-//        }
-//        //doing request
-//        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), namePart);
-//        //show results
-//        System.out.println("*************************************");
-//        for (Product item : products) {
-//            System.out.println(item);
-//        }
-//        //select product and quantity
-//        id = new OrderPositionId(order, products.get(0));
-//        OrderPosition orderPosition = new OrderPosition(id, 5);
-//        List<OrderPosition> list = new ArrayList<>();
-//        list.add(orderPosition);
-//
-//        //select product and quantity
-//        id = new OrderPositionId(order, products.get(1));
-//        orderPosition = new OrderPosition(id, 2);
-//        list.add(orderPosition);
-//
-//        //add to order and save order
-//        order.setOrderPositions(list);
-//        orderRepository.save(order);
-//
-//        //show all orders for client
-//        List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
-//        for (Order item : ordersList) {
-//            System.out.println(item.getId());
-//
-//        }
-//        Page<Product> page = productRepository.findAll(new PageRequest(0, 5, new Sort(new Sort.Order(Sort.Direction.ASC, "price"))));//заменить методы на неустаревающие
-//        products = page.getContent();
-//        //show results
-//        for (Product item : products) {
-//            System.out.println(item);
-//        }
-//        //Use Specification
-//        productRepository.findAll(productFindByName("Sony")).forEach(System.out::println);
-//
-//        //Use Specification for any word part
-////        String wordPart = "Yuri";
-//        System.out.println("Criteria1");
-//        clientRepository.findAll(clientFindByCriteries("Yuri", "9051111111")).forEach(System.out::println);
-//
-//        //Test Logging
-//        Category category = new Category("Books");
-//        categoryRepository.save(category);
-//        categoryRepository.delete(category);
-//
-//        long count=reportRepository.count();
-//        assertEquals(14,count);
-//    }
-
 }
 
 

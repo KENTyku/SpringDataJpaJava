@@ -123,4 +123,10 @@ public class Product {
                 ", category=" + category +
                 '}';
     }
+
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (obj!=null)
+//        return super.equals(obj);
+//    }
 }

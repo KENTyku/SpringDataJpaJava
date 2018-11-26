@@ -8,9 +8,6 @@ import com.ardecs.SpringDataJpaJava.Entity.Client;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.ArrayList;
-import java.util.Optional;
-
 /**
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
