@@ -7,13 +7,12 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{ConfigApp.class};
-//        return null;
+        //        return null;
     }
     // Тут добавляем конфигурацию, в которой инициализируем ViewResolver
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[]{ConfigServlet.class};
-//        return null;
     }
 //настройка обработки запросов сервлетом диспетчером
     @Override
