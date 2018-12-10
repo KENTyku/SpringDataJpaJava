@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
+import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
@@ -70,13 +71,13 @@ public class editController {
 
         countryList = (ArrayList<Country>) countryRepository.findAll();
         categoryList = (ArrayList<Category>) categoryRepository.findAll();
-        System.out.println("TEST!!!!!!!!!!!!!!!!!!");
-        for (Country item : countryList) {
-            System.out.println(item.getName());
-        }
-        for (Category item : categoryList) {
-            System.out.println(item.getCategoryName());
-        }
+//        System.out.println("TEST!!!!!!!!!!!!!!!!!!");
+//        for (Country item : countryList) {
+//            System.out.println(item.getName());
+//        }
+//        for (Category item : categoryList) {
+//            System.out.println(item.getCategoryName());
+//        }
 
         model.addAttribute(countryList);
         model.addAttribute(categoryList);
@@ -87,22 +88,24 @@ public class editController {
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String saveProduct(Product product, Model model) {
         model.addAttribute(product);
-        product.setCategory(categoryRepository.findByName("Mobile"));
-        product.setCountry(countryRepository.findByName("USA"));
-        productRepository.save(product);
+//        product.setCategory(categoryRepository.findByName("Mobile"));
+//        product.setCountry(countryRepository.findByName("USA"));
+        if (!productRepository.existsById(product.getId())) {
+            productRepository.save(product);
+        }
 //        return "productList";
         return "home";
     }
 
     @RequestMapping(value = "/productList", method = RequestMethod.GET)
     public String showProductList(ArrayList<Product> productList, Model model) {
-        productList= (ArrayList<Product>) productRepository.findAll();
+        productList = (ArrayList<Product>) productRepository.findAll();
         model.addAttribute(productList);
         return "productList";
     }
 
     @RequestMapping(value = "/listOrder", method = RequestMethod.GET)
-    public String showListOrder() {
+    public String showListOrder(@ModelAttribute("orderPosition") OrderPosition orderPosition) {
         return "listOrder";
     }
 }

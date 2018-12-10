@@ -14,6 +14,7 @@
 ${Description}<br>
 <a href="createProduct?new">Добавить/Изменить продукт</a><br>
 <a href="productList">Показать список продуктов</a><br>
+<a href="">Сделать заказ</a><br>
 <a href="listOrder">Корзина</a><br>
   </body>
 </html>
