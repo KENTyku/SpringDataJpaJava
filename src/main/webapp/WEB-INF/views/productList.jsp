@@ -7,6 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--<%@ taglib prefix="c" uri="http://www.springframework.org/tags/form" %>--%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <html>
 <head>
     <title>ProductList</title>
@@ -14,7 +17,8 @@
 <body>
 <dif>
     <h1>Все товары магазина</h1>
-    <form:form method="POST" modelAttribute="product">
+    <%--<form:form method="POST" modelAttribute="product">--%>
+    <form:form method="POST">
         <table border="1">
             <tr>
                 <td><b>id товара:</b></td>
@@ -26,16 +30,18 @@
                 <td><b>Количество</b></td>
                 <td><b>Добавить в корзину</b></td>
             </tr>
-            <tr>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.comment}</td>
-                <td>${product.price}</td>
-                <td>${product.category.categoryName}</td>
-                <td>${product.country.name}</td>
-                <td><form:input path="name" type="text" name="country_editProduct" value="Кол-во"/></td>
-                <td colspan="2"><input type="submit" value="Добавить в корзину"/></td>
-            </tr>
+            <c:forEach var="product" items="${productList}">
+                <tr>
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.comment}</td>
+                    <td>${product.price}</td>
+                    <td>${product.category.categoryName}</td>
+                    <td>${product.country.name}</td>
+                    <%--<td><form:input path="name" type="text" name="country_editProduct" value="Кол-во"/></td>--%>
+                    <%--<td colspan="2"><input type="submit" value="Добавить в корзину"/></td>--%>
+                </tr>
+            </c:forEach>
         </table>
     </form:form>
 </dif>

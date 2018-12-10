@@ -95,7 +95,9 @@ public class editController {
     }
 
     @RequestMapping(value = "/productList", method = RequestMethod.GET)
-    public String showProductList() {
+    public String showProductList(ArrayList<Product> productList, Model model) {
+        productList= (ArrayList<Product>) productRepository.findAll();
+        model.addAttribute(productList);
         return "productList";
     }
 
