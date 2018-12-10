@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>ProductList</title>
@@ -30,9 +31,9 @@
                 <td>${product.name}</td>
                 <td>${product.comment}</td>
                 <td>${product.price}</td>
-                <td>${product.cateroty}</td>
-                <td>${product.county}</td>
-                <td><form:input path="county" type="text" name="country_editProduct" value="кол-во"/></td>
+                <td>${product.category.categoryName}</td>
+                <td>${product.country.name}</td>
+                <td><form:input path="name" type="text" name="country_editProduct" value="Кол-во"/></td>
                 <td colspan="2"><input type="submit" value="Добавить в корзину"/></td>
             </tr>
         </table>

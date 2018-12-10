@@ -1,5 +1,8 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
@@ -38,7 +41,8 @@ public class editController {
     private ReportRepository reportRepository;
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET, params = "new")
-    public String createProduct(@ModelAttribute("product") Product product) {
+//    public String createProduct( ArrayList<Category> categoryList, ArrayList<Country> countryList, Model model) {
+    public String createProduct(@ModelAttribute("product") Product product, ArrayList<Category> categoryList, ArrayList<Country> countryList, Model model) {
         if (!categoryRepository.existsByName("Computer")) {
             Category category = new Category("Computer");
             categoryRepository.save(category);
@@ -63,17 +67,31 @@ public class editController {
             Country country = new Country("Japan");
             countryRepository.save(country);
         }
+
+        countryList = (ArrayList<Country>) countryRepository.findAll();
+        categoryList = (ArrayList<Category>) categoryRepository.findAll();
+        System.out.println("TEST!!!!!!!!!!!!!!!!!!");
+        for (Country item : countryList) {
+            System.out.println(item.getName());
+        }
+        for (Category item : categoryList) {
+            System.out.println(item.getCategoryName());
+        }
+
+        model.addAttribute(countryList);
+        model.addAttribute(categoryList);
+
         return "editProduct"; // Вернуть имя представления
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String saveProduct(Product product, Model model) {
-        String name = product.getName();
-        System.out.println(name);
         model.addAttribute(product);
+        product.setCategory(categoryRepository.findByName("Mobile"));
+        product.setCountry(countryRepository.findByName("USA"));
         productRepository.save(product);
-        return "productList";
-
+//        return "productList";
+        return "home";
     }
 
     @RequestMapping(value = "/productList", method = RequestMethod.GET)
