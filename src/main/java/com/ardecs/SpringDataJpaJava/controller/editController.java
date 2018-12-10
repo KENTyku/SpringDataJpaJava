@@ -4,7 +4,13 @@ import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
-import com.ardecs.SpringDataJpaJava.Repository.*;
+import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
+import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +37,6 @@ public class editController {
     @Autowired
     private ReportRepository reportRepository;
 
-    // Обрабатывать запросы на получение  формы по GET запросу формата: URL/createProduct?new
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET, params = "new")
     public String createProduct(@ModelAttribute("product") Product product) {
         if (!categoryRepository.existsByName("Computer")) {
@@ -58,30 +63,26 @@ public class editController {
             Country country = new Country("Japan");
             countryRepository.save(country);
         }
-        return "editProduct";
+        return "editProduct"; // Вернуть имя представления
     }
 
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String saveProduct(Product product, Model model) {
-//    public String saveProduct() {
-//        if (bindingResult.hasErrors()) {
-//// Проверка ошибок
-//            return "editProduct";
-//        }
-
-//        Обрабатываем результаты
-
-        System.out.println(product.getName());
+        String name = product.getName();
+        System.out.println(name);
         model.addAttribute(product);
         productRepository.save(product);
-
-
-//                return "home"; // Переадресовать
-// Сохранить объект Spitter
-//        spitterService.saveSpitter(spitter);
-
-//        return "redirect:/createProduct/" + spitter.getUsername(); // Переадресовать
         return "productList";
-// после запроса POST
+
+    }
+
+    @RequestMapping(value = "/productList", method = RequestMethod.GET)
+    public String showProductList() {
+        return "productList";
+    }
+
+    @RequestMapping(value = "/listOrder", method = RequestMethod.GET)
+    public String showListOrder() {
+        return "listOrder";
     }
 }

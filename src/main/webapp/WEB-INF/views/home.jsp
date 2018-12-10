@@ -13,6 +13,7 @@
   <body>
 ${Description}<br>
 <a href="/WebApp/createProduct?new">Добавить/Изменить продукт</a><br>
-<a href="/">Показать список продуктов</a><br>
+<a href="/WebApp/productList">Показать список продуктов</a><br>
+<a href="/WebApp/listOrder">Корзина</a><br>
   </body>
 </html>
