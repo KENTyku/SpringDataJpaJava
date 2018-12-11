@@ -14,6 +14,15 @@ import javax.persistence.Entity;
 public class OrderPosition {
     @EmbeddedId
     private OrderPositionId id;
+
+    public OrderPositionId getId() {
+        return id;
+    }
+
+    public void setId(OrderPositionId id) {
+        this.id = id;
+    }
+
     private long quantity;
 
     public OrderPosition() {

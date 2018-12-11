@@ -98,8 +98,8 @@ public class editController {
         return "productList";
     }
 
-    @RequestMapping(value = "/listOrder", method = RequestMethod.GET)
-    public String showListOrder(@ModelAttribute("orderPosition") OrderPosition orderPosition) {
-        return "listOrder";
-    }
+//    @RequestMapping(value = "/listOrder", method = RequestMethod.GET)
+//    public String showListOrder(@ModelAttribute("orderPosition") OrderPosition orderPosition) {
+//        return "listOrder";
+//    }
 }

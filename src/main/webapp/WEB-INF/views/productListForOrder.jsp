@@ -31,7 +31,7 @@
                 <td><b>Добавить в корзину</b></td>
             </tr>
             <c:forEach var="product" items="${productList}">
-                <form:form method="POST" modelAttribute="orderModel">
+                <form:form method="POST" modelAttribute="orderModel" action="listOrder">
                     <form:input path="idProduct" type="hidden" value="${product.id}" id="productId_productListForOrder"/>
                 <tr>
                     <td>${product.id}</td>
@@ -49,6 +49,10 @@
             </c:forEach>
         </table>
 
+</dif>
+<dif>
+    <a href="listOrder">Корзина</a><br>
+    <a href="home">На главную</a><br>
 </dif>
 </body>
 </html>

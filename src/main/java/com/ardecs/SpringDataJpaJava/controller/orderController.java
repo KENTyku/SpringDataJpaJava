@@ -64,8 +64,8 @@ public class orderController {
 //        return "productList";
     }
 
-    @RequestMapping(value = "/createOrder", method = RequestMethod.POST)
-    public String createOrder(OrderModel orderModel, Order order, Model model) {
+    @RequestMapping(value = "/listOrder", method = RequestMethod.POST)
+    public String createOrder(@ModelAttribute("orderModel") OrderModel orderModel, Order order, Model model) {
 
         if (orderModel.getClient() == null) {
             Client client = new Client("Yuri", "9051111111");
@@ -82,16 +82,22 @@ public class orderController {
         Product product = productOptional.get();
         OrderPositionId id = new OrderPositionId(order, product);
         OrderPosition orderPosition = new OrderPosition(id, orderModel.getQuantity());
-        if (orderModel.getList() == null) {
-            List<OrderPosition> list = new ArrayList<>();
-            orderModel.setList(list);
+
+        List<OrderPosition> list = orderModel.getList();
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        List<OrderPosition> list=orderModel.getList();
         list.add(orderPosition);
         orderModel.setList(list);
 
-        return "redirect:?newOrder";
+
+        order.setOrderPositions(list);
+        orderRepository.save(order);
+//        Long idOrder = order.getId();
+
+        return "listOrder";
     }
+
 }
 
 class OrderModel {
