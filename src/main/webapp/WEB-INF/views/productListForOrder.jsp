@@ -31,6 +31,7 @@
                 <td><b>Добавить в корзину</b></td>
             </tr>
             <c:forEach var="product" items="${productList}">
+                <%--@elvariable id="orderModel" type=""--%>
                 <form:form method="POST" modelAttribute="orderModel" action="listOrder">
                     <form:input path="idProduct" type="hidden" value="${product.id}" id="productId_productListForOrder"/>
                 <tr>
