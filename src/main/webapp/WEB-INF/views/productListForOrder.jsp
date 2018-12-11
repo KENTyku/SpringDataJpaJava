@@ -18,7 +18,7 @@
 <dif>
     <h1>Все товары магазина</h1>
     <%--<form:form method="POST" modelAttribute="product">--%>
-    <form:form method="POST" modelAttribute="orderPosition">
+
         <table border="1">
             <tr>
                 <td><b>id товара:</b></td>
@@ -31,7 +31,8 @@
                 <td><b>Добавить в корзину</b></td>
             </tr>
             <c:forEach var="product" items="${productList}">
-                <form:input path=""
+                <form:form method="POST" modelAttribute="orderModel">
+                    <form:input path="idProduct" type="hidden" value="${product.id}" id="productId_productListForOrder"/>
                 <tr>
                     <td>${product.id}</td>
                     <td>${product.name}</td>
@@ -39,12 +40,15 @@
                     <td>${product.price}</td>
                     <td>${product.category.categoryName}</td>
                     <td>${product.country.name}</td>
-                    <td><form:input path="quantity" type="text" name="orderPosition_productListForOrder" value="Кол-во"/></td>
+                    <td><form:input path="quantity" type="text" id="quantity_productListForOrder"
+                                    value="Кол-во"/></td>
                     <td colspan="2"><input type="submit" value="Добавить в корзину"/></td>
                 </tr>
+                <%--<form:input path=""--%>
+                </form:form>
             </c:forEach>
         </table>
-    </form:form>
+
 </dif>
 </body>
 </html>

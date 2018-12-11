@@ -68,38 +68,32 @@ public class editController {
             Country country = new Country("Japan");
             countryRepository.save(country);
         }
-
         countryList = (ArrayList<Country>) countryRepository.findAll();
         categoryList = (ArrayList<Category>) categoryRepository.findAll();
-//        System.out.println("TEST!!!!!!!!!!!!!!!!!!");
-//        for (Country item : countryList) {
-//            System.out.println(item.getName());
-//        }
-//        for (Category item : categoryList) {
-//            System.out.println(item.getCategoryName());
-//        }
-
         model.addAttribute(countryList);
         model.addAttribute(categoryList);
-
         return "editProduct"; // Вернуть имя представления
     }
-
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String saveProduct(Product product, Model model) {
         model.addAttribute(product);
-//        product.setCategory(categoryRepository.findByName("Mobile"));
-//        product.setCountry(countryRepository.findByName("USA"));
-        if (!productRepository.existsById(product.getId())) {
+        //TODO не работает выборка категории и страны при добавлении/измененеии товара. Пока сделана ниже заглушка
+//        String countryName=product.getCountry().getName();
+//        product.setCountry(countryRepository.findByName(countryName));
+//        String categoryName=product.getCategory().getCategoryName();
+//        product.setCategory(categoryRepository.findByName(categoryName));
+        product.setCategory(categoryRepository.findByName("Mobile"));
+        product.setCountry(countryRepository.findByName("USA"));
+//        if (!productRepository.existsById(product.getId())) {
             productRepository.save(product);
-        }
-//        return "productList";
-        return "home";
+//        }
+//        return " redirect:productList";
+        return "productList";
     }
 
     @RequestMapping(value = "/productList", method = RequestMethod.GET)
-    public String showProductList(ArrayList<Product> productList, Model model) {
-        productList = (ArrayList<Product>) productRepository.findAll();
+    public String showProductList( Model model) {
+        ArrayList<Product>productList = (ArrayList<Product>) productRepository.findAll();
         model.addAttribute(productList);
         return "productList";
     }

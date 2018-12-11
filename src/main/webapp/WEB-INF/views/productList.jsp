@@ -27,8 +27,8 @@
                 <td><b>Цена:</b></td>
                 <td><b>Категория:</b></td>
                 <td><b>Производитель:</b></td>
-                <%--<td><b>Количество</b></td>--%>
-                <%--<td><b>Добавить в корзину</b></td>--%>
+                    <%--<td><b>Количество</b></td>--%>
+                    <%--<td><b>Добавить в корзину</b></td>--%>
             </tr>
             <c:forEach var="product" items="${productList}">
                 <tr>
@@ -38,12 +38,16 @@
                     <td>${product.price}</td>
                     <td>${product.category.categoryName}</td>
                     <td>${product.country.name}</td>
-                    <%--<td><form:input path="name" type="text" name="country_editProduct" value="Кол-во"/></td>--%>
-                    <%--<td colspan="2"><input type="submit" value="Добавить в корзину"/></td>--%>
+                        <%--<td><form:input path="name" type="text" name="country_editProduct" value="Кол-во"/></td>--%>
+                        <%--<td colspan="2"><input type="submit" value="Добавить в корзину"/></td>--%>
                 </tr>
             </c:forEach>
         </table>
     </form:form>
+</dif>
+<dif>
+    <a href="productList">Обновить</a><br>
+    <a href="home">На главную</a><br>
 </dif>
 </body>
 </html>
