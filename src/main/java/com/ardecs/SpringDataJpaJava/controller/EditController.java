@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 //@RequestMapping({"/createProduct"})
-public class editController {
+public class EditController {
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
