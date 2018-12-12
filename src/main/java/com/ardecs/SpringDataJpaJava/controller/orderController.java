@@ -19,6 +19,7 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
 import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
+import com.ardecs.SpringDataJpaJava.controller.model.OrderModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,104 +47,54 @@ public class orderController {
 
     @RequestMapping(value = "/createOrder", method = RequestMethod.GET, params = "newOrder")
     public String createOrderForm(@ModelAttribute("orderModel") OrderModel orderModel,
-//                                  OrderPosition orderPosition,
                                   ArrayList<Product> productList,
-
-//                                  OrderPositionId orderPositionId,
-//                                  Product product,
                                   Model model) {
-
-
         productList = (ArrayList<Product>) productRepository.findAll();
         model.addAttribute(productList);
-//        model.addAttribute(orderPositionId);
-//        model.addAttribute(product);
-//        model.addAttribute(client);
-//        model.addAttribute(order);
         return "productListForOrder";
-//        return "productList";
     }
 
     @RequestMapping(value = "/listOrder", method = RequestMethod.POST)
-    public String createOrder(@ModelAttribute("orderModel") OrderModel orderModel, Order order, Model model) {
-
-        if (orderModel.getClient() == null) {
+    public String createOrder(@ModelAttribute("orderModel") OrderModel orderModel, Model model) {
+        Order order = null;
+        List<OrderPosition> list;
+        if (orderModel.getOrderId() == 0) {
             Client client = new Client("Yuri", "9051111111");
             orderModel.setClient(client);
             clientRepository.save(client);
-        }
-        if (orderModel.getOrder() == null) {
             LocalDateTime date;
             date = LocalDateTime.now();
             order = new Order(date, orderModel.getClient());
             orderModel.setOrder(order);
+        } else {
+            order = orderRepository.findById(Long.valueOf(orderModel.getOrderId())).get();
         }
         Optional<Product> productOptional = productRepository.findById(orderModel.getIdProduct());
         Product product = productOptional.get();
+
         OrderPositionId id = new OrderPositionId(order, product);
         OrderPosition orderPosition = new OrderPosition(id, orderModel.getQuantity());
-
-        List<OrderPosition> list = orderModel.getList();
-        if (list == null) {
+        if (orderModel.getOrderId() == 0) {
             list = new ArrayList<>();
+            list.add(orderPosition);
+            order.setOrderPositions(list);
+            orderRepository.save(order);
+        } else {
+            orderPositionRepository.save(orderPosition);
+            list = (List<OrderPosition>) orderPositionRepository.findAll();
         }
-        list.add(orderPosition);
-        orderModel.setList(list);
-
-
-        order.setOrderPositions(list);
-        orderRepository.save(order);
-//        Long idOrder = order.getId();
-
+        model.addAttribute(list);
+        model.addAttribute(order);
         return "listOrder";
     }
 
+    @RequestMapping(value = "/addOrderItem", method = RequestMethod.POST)
+    public String addOrderItem(@ModelAttribute("orderModel") OrderModel orderModel, Model model) {
+        ArrayList<Product> productList = (ArrayList<Product>) productRepository.findAll();
+        model.addAttribute(productList);
+        return "productListForOrder";
+    }
+
+
 }
 
-class OrderModel {
-    private long idProduct;
-    private long quantity;
-    private Client client;
-    private Order order;
-    private List<OrderPosition> list;
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public List<OrderPosition> getList() {
-        return list;
-    }
-
-    public void setList(List<OrderPosition> list) {
-        this.list = list;
-    }
-
-    public long getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(long idProduct) {
-        this.idProduct = idProduct;
-    }
-
-    public long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(long quantity) {
-        this.quantity = quantity;
-    }
-}

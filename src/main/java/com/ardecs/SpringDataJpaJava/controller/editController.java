@@ -77,6 +77,7 @@ public class editController {
     @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
     public String saveProduct(Product product, Model model) {
         model.addAttribute(product);
+//        ArrayList<Product>productList=туц
         //TODO не работает выборка категории и страны при добавлении/измененеии товара. Пока сделана ниже заглушка
 //        String countryName=product.getCountry().getName();
 //        product.setCountry(countryRepository.findByName(countryName));
@@ -86,6 +87,8 @@ public class editController {
         product.setCountry(countryRepository.findByName("USA"));
 //        if (!productRepository.existsById(product.getId())) {
             productRepository.save(product);
+
+            //TODO добавить в модель продукты для корректного обновления
 //        }
 //        return " redirect:productList";
         return "productList";
