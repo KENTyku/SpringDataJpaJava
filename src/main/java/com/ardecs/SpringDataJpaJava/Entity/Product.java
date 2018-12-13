@@ -16,7 +16,7 @@ public class Product {
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
+//    @NotNull
     private float price;
     @NotNull
     private String name;
@@ -29,6 +29,10 @@ public class Product {
     private Category category;
 
     public Product() {
+//        this.id = 0;
+//        this.name = "";
+//        this.comment = "";
+//        this.price = 0;
     }
 
     public Product(@NotNull float price, @NotNull String name, String comment, Country country, Category category) {

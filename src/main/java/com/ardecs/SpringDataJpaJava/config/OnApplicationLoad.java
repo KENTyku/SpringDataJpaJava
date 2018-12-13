@@ -2,7 +2,11 @@ package com.ardecs.SpringDataJpaJava.config;
 
 import javax.annotation.PostConstruct;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.ardecs.SpringDataJpaJava.Entity.Category;
+import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Repository.*;
@@ -30,17 +34,29 @@ public class OnApplicationLoad {
 
     @PostConstruct//выполняет этот метод после инициализации всех бинов
     public void onApplicationLoad() {
+        List<Category> categoryList = new ArrayList<>();
         Category category = new Category("Computer");
-        categoryRepository.save(category);
+        categoryList.add(category);
         category = new Category("Mobile");
-        categoryRepository.save(category);
+        categoryList.add(category);
         category = new Category("Audio");
-        categoryRepository.save(category);
+        categoryList.add(category);
+        categoryRepository.saveAll(categoryList);
+        List<Country> countryList = new ArrayList<>();
         Country country = new Country("USA");
-        countryRepository.save(country);
+        countryList.add(country);
         country = new Country("Russia");
-        countryRepository.save(country);
+        countryList.add(country);
         country = new Country("Japan");
-        countryRepository.save(country);
+        countryList.add(country);
+        countryRepository.saveAll(countryList);
+        List<Client> clientList = new ArrayList<>();
+        Client client = new Client("Yuri", "9051111111");
+        clientList.add(client);
+        client = new Client("Bob", "9052222222");
+        clientList.add(client);
+        client = new Client("Den", "9053333333");
+        clientList.add(client);
+        clientRepository.saveAll(clientList);
     }
 }
