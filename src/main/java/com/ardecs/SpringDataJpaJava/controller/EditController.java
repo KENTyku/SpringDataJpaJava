@@ -44,30 +44,30 @@ public class EditController {
     @RequestMapping(value = "/createProduct", method = RequestMethod.GET, params = "new")
 //    public String createProduct( ArrayList<Category> categoryList, ArrayList<Country> countryList, Model model) {
     public String createProduct(@ModelAttribute("product") Product product, ArrayList<Category> categoryList, ArrayList<Country> countryList, Model model) {
-        if (!categoryRepository.existsByName("Computer")) {
-            Category category = new Category("Computer");
-            categoryRepository.save(category);
-        }
-        if (!categoryRepository.existsByName("Mobile")) {
-            Category category = new Category("Mobile");
-            categoryRepository.save(category);
-        }
-        if (!categoryRepository.existsByName("Audio")) {
-            Category category = new Category("Audio");
-            categoryRepository.save(category);
-        }
-        if (!countryRepository.existsByName("USA")) {
-            Country country = new Country("USA");
-            countryRepository.save(country);
-        }
-        if (!countryRepository.existsByName("Russia")) {
-            Country country = new Country("Russia");
-            countryRepository.save(country);
-        }
-        if (!countryRepository.existsByName("Japan")) {
-            Country country = new Country("Japan");
-            countryRepository.save(country);
-        }
+//        if (!categoryRepository.existsByName("Computer")) {
+//            Category category = new Category("Computer");
+//            categoryRepository.save(category);
+//        }
+//        if (!categoryRepository.existsByName("Mobile")) {
+//            Category category = new Category("Mobile");
+//            categoryRepository.save(category);
+//        }
+//        if (!categoryRepository.existsByName("Audio")) {
+//            Category category = new Category("Audio");
+//            categoryRepository.save(category);
+//        }
+//        if (!countryRepository.existsByName("USA")) {
+//            Country country = new Country("USA");
+//            countryRepository.save(country);
+//        }
+//        if (!countryRepository.existsByName("Russia")) {
+//            Country country = new Country("Russia");
+//            countryRepository.save(country);
+//        }
+//        if (!countryRepository.existsByName("Japan")) {
+//            Country country = new Country("Japan");
+//            countryRepository.save(country);
+//        }
         countryList = (ArrayList<Country>) countryRepository.findAll();
         categoryList = (ArrayList<Category>) categoryRepository.findAll();
         model.addAttribute(countryList);

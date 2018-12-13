@@ -66,6 +66,10 @@ public class ConfigApp {
 
         return dataSource;
     }
+    @Bean
+    public OnApplicationLoad addLoad(){
+        return new OnApplicationLoad();
+    }
 
 
 
@@ -77,4 +81,5 @@ public class ConfigApp {
 
         return properties;
     }
+
 }
