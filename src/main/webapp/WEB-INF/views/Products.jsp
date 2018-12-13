@@ -14,7 +14,7 @@
     <title>ProductList</title>
 </head>
 <body>
-<%--<jsp:include page="/get?id=${snippet.id}"/>--%>
+<jsp:include page="../resources/Menu.jsp"/>
 <dif>
     <h1>Все товары магазина</h1>
     <a href="editProduct?id=new">Добавить товар</a><br>
@@ -47,11 +47,6 @@
             </form:form>
         </c:forEach>
     </table>
-
-</dif>
-<dif>
-    <%--<a href="listOrder">Корзина</a><br>--%>
-    <a href="cart">Корзина</a><br>
 </dif>
 </body>
 </html>

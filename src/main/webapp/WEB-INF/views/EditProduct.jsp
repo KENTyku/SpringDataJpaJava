@@ -17,6 +17,7 @@
     <title>EditProduct</title>
 </head>
 <body>
+<jsp:include page="../resources/Menu.jsp"/>
 <div>
     <h1>Добавление/Редактирование продукта</h1>
     <form method="POST" action="saveProduct">
@@ -32,7 +33,6 @@
                 <td><b>Действие:</b></td>
             </tr>
             <tr>
-
                 <td>${product.id}</td>
                 <td><input name="name" type="text" id="name_editProduct" value="${product.name}"/></td>
                 <td><input name="comment" type="text" id="comment_editProduct" value="${product.comment}"/></td>

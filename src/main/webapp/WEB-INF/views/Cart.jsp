@@ -14,10 +14,9 @@
     <title>Cart</title>
 </head>
 <body>
-<%--<jsp:include page="/get?id=${snippet.id}"/>--%>
+<jsp:include page="../resources/Menu.jsp"/>
 <div>
     <h1>Корзина</h1>
-    <%--<a href="editProduct?id=new">Добавить товар</a><br>--%>
     <table border="1">
         <tr>
             <td><b>id товара:</b></td>
@@ -31,39 +30,26 @@
             <td><b>Удалить:</b></td>
         </tr>
         <c:forEach var="position" items="${positions}">
-
-            <%--<form:input path="orderId" type="hidden" id="orderId_productListForOrder"--%>
-            <%--value="${orderModel.orderId}"/>--%>
-            <tr>
-                <td>${position.value.product.id}</td>
-                <td>${position.value.product.name}</td>
-                <td>${position.value.product.comment}</td>
-                <td>${position.value.product.price}</td>
-                <td>${position.value.product.category.categoryName}</td>
-                <td>${position.value.product.country.name}</td>
-                <form:form method="post" action="editCartProduct">
-                    <input name="productId" type="hidden" value="${position.value.product.id}" id="productId_Products"/>
+            <form:form method="post" action="editCartProduct">
+                <input name="productId" type="hidden" value="${position.value.product.id}" id="productId_Products"/>
+                <tr>
+                    <td>${position.value.product.id}</td>
+                    <td>${position.value.product.name}</td>
+                    <td>${position.value.product.comment}</td>
+                    <td>${position.value.product.price}</td>
+                    <td>${position.value.product.category.categoryName}</td>
+                    <td>${position.value.product.country.name}</td>
                     <td><input name="quantity" type="text" id="quantity_Products" value="${position.value.quantity}"/>
                     </td>
-                    <td colspan="1">
-                        <input type="submit" value="Пересчитать"/>
-                    </td>
-                </form:form>
-
-                <form:form method="get" action="deleteCartProduct">
-                    <input name="productId" type="hidden" value="${position.value.product.id}"/>
-                    <td colspan="1">
-                        <input type="submit" value="Удалить"/>
-                    </td>
-                </form:form>
-            </tr>
-
+                    <td><a href="deleteCartProduct?productId=${position.value.product.id}">Удалить</a></td>
+                    <td colspan="1"><input type="submit" value="Пересчитать"/></td>
+                </tr>
+            </form:form>
         </c:forEach>
     </table>
-
 </div>
 <div>
-    <a href="order">Заказать</a><br>
+    <a href="saveOrder">Заказать</a><br>
 </div>
 </body>
 </html>
