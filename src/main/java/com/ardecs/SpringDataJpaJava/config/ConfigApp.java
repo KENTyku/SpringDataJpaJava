@@ -1,5 +1,7 @@
 package com.ardecs.SpringDataJpaJava.config;
 
+import com.ardecs.SpringDataJpaJava.Entity.Category;
+import com.ardecs.SpringDataJpaJava.Entity.Client;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -30,11 +32,11 @@ public class ConfigApp {
     private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
-//инъектируем в поле наши Свойства подключенные в аннотации @PropertySource
+    //инъектируем в поле наши Свойства подключенные в аннотации @PropertySource
     @Autowired
     private Environment env;
 
-//Менеджер танзакций для управления операциями менеджера сущностей
+    //Менеджер танзакций для управления операциями менеджера сущностей
     @Bean
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -66,10 +68,7 @@ public class ConfigApp {
 
         return dataSource;
     }
-    @Bean
-    public OnApplicationLoad addLoad(){
-        return new OnApplicationLoad();
-    }
+
 
 
 

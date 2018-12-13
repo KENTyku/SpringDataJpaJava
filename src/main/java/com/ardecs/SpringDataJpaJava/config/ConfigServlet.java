@@ -27,4 +27,8 @@ public class ConfigServlet extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
+//    @Bean
+//    public OnApplicationLoad addLoad() {
+//        return new OnApplicationLoad();
+//    }
 }

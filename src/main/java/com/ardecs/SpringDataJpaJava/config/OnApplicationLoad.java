@@ -1,5 +1,7 @@
 package com.ardecs.SpringDataJpaJava.config;
 
+import javax.annotation.PostConstruct;
+
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
@@ -7,7 +9,8 @@ import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//@Component
+
+@Component
 public class OnApplicationLoad {
     @Autowired
     private CountryRepository countryRepository;
@@ -25,7 +28,8 @@ public class OnApplicationLoad {
     @Autowired
     private ReportRepository reportRepository;
 
-    OnApplicationLoad() {
+    @PostConstruct//выполняет этот метод после инициализации всех бинов
+    public void onApplicationLoad() {
         Category category = new Category("Computer");
         categoryRepository.save(category);
         category = new Category("Mobile");
