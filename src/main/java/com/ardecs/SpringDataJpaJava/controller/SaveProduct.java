@@ -42,10 +42,10 @@ public class SaveProduct {
             @RequestParam("countryId") long countryId,
             @RequestParam("categoryId") long categoryId
     ) {
-        if ((name == "") || (name == null)) {
+        if (name == null || name.isEmpty()) {
             name = String.valueOf(random.nextInt(10000000) + 1);
         }
-        if ((comment == "") || (comment == null)) {
+        if (comment == null || comment.isEmpty()) {
             comment = String.valueOf(random.nextInt(10000000) + 1);
         }
         Country country = countryRepository.findById(countryId).get();

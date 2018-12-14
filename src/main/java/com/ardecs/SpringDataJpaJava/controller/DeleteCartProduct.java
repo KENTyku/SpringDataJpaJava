@@ -1,16 +1,17 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
-import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
-import com.ardecs.SpringDataJpaJava.Repository.*;
+import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.Random;
-import java.util.TreeMap;
+import java.util.Map;
 
 @SessionAttributes("positions")
 @Controller
@@ -19,12 +20,14 @@ public class DeleteCartProduct {
     private ProductRepository productRepository;
 
     @RequestMapping(value = "/deleteCartProduct", method = RequestMethod.GET)
-    public String deleteCartProduct(@RequestParam("productId") long id,
-                                    @ModelAttribute("positions") TreeMap<Product, Long> positions,
+    public String deleteCartProduct(@RequestParam("productId") long productId,
                                     HttpSession httpSession) {
-        System.out.println("TESTTTTTTTTTTTTTT" + positions.size());
-        Product product = productRepository.findById(id).get();
-        positions.remove(product);
+        Map<Long, Pair<Product, Long>> positions = (Map<Long, Pair<Product, Long>>) httpSession.getAttribute("positions");
+        if (positions == null) {
+            return "redirect:cart";
+        }
+        Product product = positions.get(productId).getFirst();
+        positions.remove(product.getId());
         httpSession.setAttribute("positions", positions);
         return "redirect:cart";
     }

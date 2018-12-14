@@ -39,7 +39,7 @@ public class EditProduct {
         model.addAttribute(countriesList);
         model.addAttribute(categoriesList);
         Product product = new Product();
-        if (!id.equals("new")) {
+        if (!"new".equals(id)) {
             product = productRepository.findById(Long.valueOf(id)).get();
         }
         model.addAttribute(product);
