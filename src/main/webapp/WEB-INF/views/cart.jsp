@@ -14,7 +14,7 @@
     <title>Cart</title>
 </head>
 <body>
-<jsp:include page="Menu.jsp"/>
+<jsp:include page="menu.jsp"/>
 <div>
     <h1>Корзина</h1>
     <table border="1">
@@ -31,21 +31,25 @@
         </tr>
         <c:forEach var="position" items="${positions}">
             <form:form method="post" action="editCartProduct">
-                <input name="productId" type="hidden" value="${position.key.id}" id="productId_Products"/>
+                <input name="productId" type="hidden" value="${position.value.first.id}" id="productId_Products"/>
                 <tr>
-                    <td>${position.key.id}</td>
-                    <td>${position.key.name}</td>
-                    <td>${position.key.comment}</td>
-                    <td>${position.key.price}</td>
-                    <td>${position.key.category.categoryName}</td>
-                    <td>${position.key.country.name}</td>
-                    <td><input name="quantity" type="text" id="quantity_Products" value="${position.value}"/>
+                    <td>${position.value.first.id}</td>
+                    <td>${position.value.first.name}</td>
+                    <td>${position.value.first.comment}</td>
+                    <td>${position.value.first.price}</td>
+                    <td>${position.value.first.category.categoryName}</td>
+                    <td>${position.value.first.country.name}</td>
+                    <td><input name="quantity" type="text" id="quantity_Products" value="${position.value.second}"/>
                     </td>
-                    <td><a href="deleteCartProduct?productId=${position.key.id}">Удалить</a></td>
+                    <td><a href="deleteCartProduct?productId=${position.value.first.id}">Удалить</a></td>
                     <td colspan="1"><input type="submit" value="Пересчитать"/></td>
                 </tr>
             </form:form>
         </c:forEach>
+        <tr>
+            <td>Итого:</td>
+            <td>${cost.cost}</td>
+        </tr>
     </table>
 </div>
 <div>

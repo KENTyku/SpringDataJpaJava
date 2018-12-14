@@ -30,7 +30,7 @@ public class Order {
     @NotNull
     private LocalDateTime date;
 //    private String date;
-    @OneToMany(mappedBy = "id.order", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE,CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "id.order", fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE,CascadeType.PERSIST, CascadeType.REFRESH})
     private List<OrderPosition> orderPositions;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id", nullable = false)

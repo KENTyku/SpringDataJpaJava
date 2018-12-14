@@ -168,8 +168,7 @@ public class SpringDataJpaJavaTests {
     public void showAllClientOrders() {
         Optional<Client> clientOptional = clientRepository.findById((long) 19);
         Client client = clientOptional.get();
-        Long idClient = client.getId();
-        List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
+        List<Order> ordersList = orderRepository.findAllByClientOrderByDateDesc(client);
 
         ArrayList<Long> listIdOrders = new ArrayList<>();
         for (Order item : ordersList) {

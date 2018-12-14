@@ -15,7 +15,7 @@ import java.util.Map;
 
 @SessionAttributes("positions")
 @Controller
-public class EditCartProduct {
+public class EditCartProductController {
     @Autowired
     private ProductRepository productRepository;
 

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-public class Orders {
+public class OrdersController {
     @Autowired
     private ClientRepository clientRepository;
     @Autowired
@@ -24,6 +24,6 @@ public class Orders {
         Client client = clientRepository.findByName("Yuri");
         List<Order> orderList = orderRepository.findAllByClientOrderByDateDesc(client);
         model.addAttribute(orderList);
-        return "Orders";
+        return "orders";
     }
 }

@@ -15,7 +15,7 @@ import java.util.Map;
 
 @SessionAttributes("positions")
 @Controller
-public class DeleteCartProduct {
+public class DeleteCartProductController {
     @Autowired
     private ProductRepository productRepository;
 

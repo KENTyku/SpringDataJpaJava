@@ -14,7 +14,7 @@
     <title>ProductList</title>
 </head>
 <body>
-<jsp:include page="Menu.jsp"/>
+<jsp:include page="menu.jsp"/>
 <div>
     <h1>Все товары магазина</h1>
     <a href="editProduct?id=new">Добавить товар</a><br>

@@ -19,7 +19,7 @@ import java.util.Map;
 
 @SessionAttributes("positions")
 @Controller
-public class SaveOrder {
+public class SaveOrderController {
     @Autowired
     private ClientRepository clientRepository;
     @Autowired

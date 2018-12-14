@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class OrderInfo {
+public class OrderInfoController {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -19,11 +19,12 @@ public class OrderInfo {
 
     @RequestMapping(value = {"/orderInfo"}, method = RequestMethod.GET)
     public String showOrders(@RequestParam("id") long orderId, Model model) {
-        Order order = orderRepository.findById(orderId).get();
+        Order order = orderRepository.getOrderWithPositions(orderId);
         if (order == null) {
             return "redirect:orders";
         }
+
         model.addAttribute(order.getOrderPositions());
-        return "OrderInfo";
+        return "orderInfo";
     }
 }
