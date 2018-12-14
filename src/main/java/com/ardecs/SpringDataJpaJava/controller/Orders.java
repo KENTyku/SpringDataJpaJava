@@ -16,27 +16,15 @@ import java.util.List;
 @Controller
 public class Orders {
     @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
     private ClientRepository clientRepository;
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    private OrderPositionId id;
-    @Autowired
-    private ReportRepository reportRepository;
 
     @RequestMapping(value = {"/orders"}, method = RequestMethod.GET)
-    // Обрабатывать запросы на получение  главной страницы
     public String showOrders(Model model) {
-        long clientId=clientRepository.findByName("Yuri").getId();
-        List<Order> orderList = (ArrayList<Order>) orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(clientId);
+        long clientId = clientRepository.findByName("Yuri").getId();
+        List<Order> orderList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(clientId);
         model.addAttribute(orderList);
-        return "Orders"; // Вернуть имя представления
+        return "Orders";
     }
 }

@@ -15,7 +15,7 @@
 </head>
 <body>
 <jsp:include page="Menu.jsp"/>
-<dif>
+<div>
     <h1>Все товары магазина</h1>
     <a href="editProduct?id=new">Добавить товар</a><br>
     <table border="1">
@@ -32,8 +32,6 @@
         <c:forEach var="product" items="${productList}">
             <form:form method="post" action="addProductToCart">
                 <input name="productId" type="hidden" value="${product.id}" id="productId_Products"/>
-                <%--<form:input path="orderId" type="hidden" id="orderId_productListForOrder"--%>
-                <%--value="${orderModel.orderId}"/>--%>
                 <tr>
                     <td>${product.id}</td>
                     <td><a href="editProduct?id=${product.id}">${product.name}</a></td>
@@ -47,6 +45,6 @@
             </form:form>
         </c:forEach>
     </table>
-</dif>
+</div>
 </body>
 </html>

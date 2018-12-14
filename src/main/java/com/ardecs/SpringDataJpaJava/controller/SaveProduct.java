@@ -31,16 +31,7 @@ public class SaveProduct {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    private OrderPositionId id;
-    @Autowired
-    private ReportRepository reportRepository;
-    final Random random=new Random();
+    final Random random = new Random();
 
     @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
     public String saveProduct(
@@ -51,18 +42,17 @@ public class SaveProduct {
             @RequestParam("countryId") long countryId,
             @RequestParam("categoryId") long categoryId
     ) {
-        if ((name=="")||(name==null)){
-            name=String.valueOf(random.nextInt(10000000)+1);
+        if ((name == "") || (name == null)) {
+            name = String.valueOf(random.nextInt(10000000) + 1);
         }
-        if ((comment=="")||(comment==null)){
-            comment=String.valueOf(random.nextInt(10000000)+1);
+        if ((comment == "") || (comment == null)) {
+            comment = String.valueOf(random.nextInt(10000000) + 1);
         }
-        System.out.println( "TESTTTTTTTTTTTTTTTTTTTTTTT"+id+" " + name+" " + comment +" "+ price+" "+categoryId);
         Country country = countryRepository.findById(countryId).get();
         Category category = categoryRepository.findById(categoryId).get();
         Product product = new Product(price, name, comment, country, category);
-        if (id!=0){
-            product=productRepository.findById(id).get();
+        if (id != 0) {
+            product = productRepository.findById(id).get();
             product.setName(name);
             product.setComment(comment);
             product.setCountry(country);

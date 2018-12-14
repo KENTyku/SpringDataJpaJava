@@ -31,15 +31,6 @@ public class EditProduct {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    private OrderPositionId id;
-    @Autowired
-    private ReportRepository reportRepository;
 
     @RequestMapping(value = "/editProduct", method = RequestMethod.GET)
     public String editProduct(@RequestParam("id") String id, Model model) {
@@ -52,38 +43,6 @@ public class EditProduct {
             product = productRepository.findById(Long.valueOf(id)).get();
         }
         model.addAttribute(product);
-        return "EditProduct"; // Вернуть имя представления
+        return "EditProduct";
     }
-
-//    @RequestMapping(value = "/createProduct", method = RequestMethod.POST)
-//    public String saveProduct(Product product, Model model) {
-//        model.addAttribute(product);
-////        ArrayList<Product>productList=туц
-//        //TODO не работает выборка категории и страны при добавлении/измененеии товара. Пока сделана ниже заглушка
-////        String countryName=product.getCountry().getName();
-////        product.setCountry(countryRepository.findByName(countryName));
-////        String categoryName=product.getCategory().getCategoryName();
-////        product.setCategory(categoryRepository.findByName(categoryName));
-//        product.setCategory(categoryRepository.findByName("Mobile"));
-//        product.setCountry(countryRepository.findByName("USA"));
-////        if (!productRepository.existsById(product.getId())) {
-//        productRepository.save(product);
-//
-//        //TODO добавить в модель продукты для корректного обновления
-////        }
-////        return " redirect:productList";
-//        return "productList";
-//    }
-//
-//    @RequestMapping(value = "/productList", method = RequestMethod.GET)
-//    public String showProductList(Model model) {
-//        ArrayList<Product> productList = (ArrayList<Product>) productRepository.findAll();
-//        model.addAttribute(productList);
-//        return "productList";
-//    }
-//
-////    @RequestMapping(value = "/listOrder", method = RequestMethod.GET)
-////    public String showListOrder(@ModelAttribute("orderPosition") OrderPosition orderPosition) {
-////        return "listOrder";
-////    }
 }

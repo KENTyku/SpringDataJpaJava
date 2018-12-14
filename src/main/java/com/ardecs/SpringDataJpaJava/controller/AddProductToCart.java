@@ -28,22 +28,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 @SessionAttributes("positions")
 @Controller
 public class AddProductToCart {
-    @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
+     @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    private OrderPositionId id;
-    @Autowired
-    private ReportRepository reportRepository;
-    final Random random = new Random();
+
 
     @RequestMapping(value = "/addProductToCart", method = RequestMethod.POST)
     public String addProductToCart(@RequestParam("productId") long id, @RequestParam("quantity") long quantity, HttpSession httpSession) {
@@ -52,8 +39,6 @@ public class AddProductToCart {
             httpSession.setAttribute("positions", positions);
         }
         Product product = productRepository.findById(id).get();
-//        Position position = new Position(quantity, product);
-//        TreeMap<Long, Position> positions = (TreeMap<Long, Position>) httpSession.getAttribute("positions");
         TreeMap<Product, Long> positions = (TreeMap<Product, Long>) httpSession.getAttribute("positions");
         if (positions.isEmpty() || !positions.containsKey(product)) {
             positions.put(product, quantity);

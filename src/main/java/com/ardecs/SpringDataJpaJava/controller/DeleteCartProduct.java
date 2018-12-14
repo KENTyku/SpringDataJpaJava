@@ -16,30 +16,16 @@ import java.util.TreeMap;
 @Controller
 public class DeleteCartProduct {
     @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
     private ProductRepository productRepository;
-    @Autowired
-    private ClientRepository clientRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    private OrderPositionId id;
-    @Autowired
-    private ReportRepository reportRepository;
-    final Random random = new Random();
 
     @RequestMapping(value = "/deleteCartProduct", method = RequestMethod.GET)
     public String deleteCartProduct(@RequestParam("productId") long id,
-                                    @ModelAttribute("positions")TreeMap<Product,Long> positions,
+                                    @ModelAttribute("positions") TreeMap<Product, Long> positions,
                                     HttpSession httpSession) {
-        System.out.println("TESTTTTTTTTTTTTTT"+positions.size());
-        Product product=productRepository.findById(id).get();
+        System.out.println("TESTTTTTTTTTTTTTT" + positions.size());
+        Product product = productRepository.findById(id).get();
         positions.remove(product);
-        httpSession.setAttribute("positions",positions);
+        httpSession.setAttribute("positions", positions);
         return "redirect:cart";
     }
 }

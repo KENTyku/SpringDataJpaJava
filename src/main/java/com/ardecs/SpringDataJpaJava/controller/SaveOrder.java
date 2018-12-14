@@ -15,20 +15,9 @@ import java.util.*;
 @Controller
 public class SaveOrder {
     @Autowired
-    private CountryRepository countryRepository;
-    @Autowired
-    private CategoryRepository categoryRepository;
-    @Autowired
-    private ProductRepository productRepository;
-    @Autowired
     private ClientRepository clientRepository;
     @Autowired
     private OrderRepository orderRepository;
-    @Autowired
-    private OrderPositionRepository orderPositionRepository;
-    @Autowired
-    private ReportRepository reportRepository;
-    final Random random = new Random();
 
     @RequestMapping(value = "/saveOrder", method = RequestMethod.GET)
     public String savaOrder(@ModelAttribute("positions") TreeMap<Product, Long> positions, SessionStatus sessionStatus) {
@@ -45,7 +34,6 @@ public class SaveOrder {
             OrderPosition orderPosition = new OrderPosition(id, quantity);
             list.add(orderPosition);
         }
-
         order.setOrderPositions(list);
         orderRepository.save(order);
         sessionStatus.setComplete();
