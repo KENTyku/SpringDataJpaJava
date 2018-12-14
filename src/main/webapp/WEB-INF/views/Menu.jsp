@@ -12,7 +12,7 @@
 </head>
 <body>
 <div>
-    <a href="/">Каталог товаров</a><br>
+    <a href="home">Каталог товаров</a><br>
     <a href="orders">Список заказов</a><br>
     <a href="cart">Корзина</a><br>
 </div>

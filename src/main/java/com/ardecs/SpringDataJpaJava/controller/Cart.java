@@ -43,8 +43,12 @@ public class Cart {
     final Random random = new Random();
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public String showCart(@ModelAttribute("positions") TreeMap<Long,Position> positions, Model model) {
-        System.out.println("TEST55555555555555555"+positions.size());
+    public String showCart( Model model,HttpSession httpSession) {
+        TreeMap<Long,Position> positions= (TreeMap<Long, Position>) httpSession.getAttribute("positions");
+        if (positions == null) {
+            positions = new TreeMap<>();
+            httpSession.setAttribute("positions", positions);
+        }
         model.addAttribute(positions);
         return "Cart";
     }

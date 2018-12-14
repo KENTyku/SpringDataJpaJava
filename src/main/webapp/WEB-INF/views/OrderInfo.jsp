@@ -14,7 +14,7 @@
     <title>Информация о заказе</title>
 </head>
 <body>
-<jsp:include page="../resources/Menu.jsp"/>
+<jsp:include page="Menu.jsp"/>
 <div>
     <h1>Заказ</h1>
     <table border="1">

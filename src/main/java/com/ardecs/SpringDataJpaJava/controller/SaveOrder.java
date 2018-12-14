@@ -37,8 +37,7 @@ public class SaveOrder {
         date = LocalDateTime.now();
         Order order = new Order(date, client);
         List<OrderPosition> list = new ArrayList<>();
-
-
+        if (positions.isEmpty()) return "redirect:cart";
         for (Map.Entry<Long, Position> position : positions.entrySet()) {
             Product product = position.getValue().getProduct();
             long quantity = position.getValue().getQuantity();
@@ -49,7 +48,7 @@ public class SaveOrder {
 
         order.setOrderPositions(list);
         orderRepository.save(order);
-       sessionStatus.setComplete();
+        sessionStatus.setComplete();
         return "redirect:orders";
     }
 }

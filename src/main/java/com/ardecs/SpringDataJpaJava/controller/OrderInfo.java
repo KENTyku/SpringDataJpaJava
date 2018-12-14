@@ -3,6 +3,7 @@ package com.ardecs.SpringDataJpaJava.controller;
 import com.ardecs.SpringDataJpaJava.Entity.Order;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
+import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +37,16 @@ public class OrderInfo {
     public String showOrders(@RequestParam("id") long id, Model model) {
         Order order = orderRepository.findById(id).get();
         List<OrderPosition> orderPositionList = order.getOrderPositions();
+        for (OrderPosition orderPosition : orderPositionList) {
+            long ProductId = orderPosition.getId().getProduct().getId();
+            System.out.println("77777777777777777"+ProductId);
+            Product product=productRepository.findById(ProductId).get();
+            OrderPositionId orderPositionId=orderPosition.getId();
+            orderPositionId.setProduct(product);
+            orderPosition.setId(orderPositionId);
+        }
         model.addAttribute(orderPositionList);
+
         return "OrderInfo";
     }
 }

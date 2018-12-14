@@ -14,7 +14,7 @@
     <title>Cart</title>
 </head>
 <body>
-<jsp:include page="../resources/Menu.jsp"/>
+<jsp:include page="Menu.jsp"/>
 <div>
     <h1>Список заказов</h1>
     <table border="1">

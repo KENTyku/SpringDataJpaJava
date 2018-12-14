@@ -17,7 +17,7 @@
     <title>EditProduct</title>
 </head>
 <body>
-<jsp:include page="../resources/Menu.jsp"/>
+<jsp:include page="Menu.jsp"/>
 <div>
     <h1>Добавление/Редактирование продукта</h1>
     <form method="POST" action="saveProduct">
