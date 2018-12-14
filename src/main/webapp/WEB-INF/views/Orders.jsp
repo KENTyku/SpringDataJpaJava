@@ -22,14 +22,14 @@
             <td><b>id заказа</b></td>
             <td><b>Дата:</b></td>
             <td><b>Просмотреть:</b></td>
-            <td><b>Удалить:</b></td>
+            <%--<td><b>Удалить:</b></td>--%>
         </tr>
         <c:forEach var="order" items="${orderList}">
             <tr>
                 <td>${order.id}</td>
                 <td>${order.date}</td>
                 <td><a href="orderInfo?id=${order.id}">Просмотреть</a></td>
-                <td><a href="deleteOrder?orderId=${order.id}">Удалить</a></td>
+                <%--<td><a href="deleteOrder?orderId=${order.id}">Удалить</a></td>--%>
             </tr>
         </c:forEach>
     </table>

@@ -48,14 +48,15 @@ public class AddProductToCart {
     @RequestMapping(value = "/addProductToCart", method = RequestMethod.POST)
     public String addProductToCart(@RequestParam("productId") long id, @RequestParam("quantity") long quantity, HttpSession httpSession) {
         if (httpSession.getAttribute("positions") == null) {
-            TreeMap<Long, Position> positions = new TreeMap<>();
+            TreeMap<Product, Long> positions = new TreeMap<>();
             httpSession.setAttribute("positions", positions);
         }
         Product product = productRepository.findById(id).get();
-        Position position = new Position(quantity, product);
-        TreeMap<Long, Position> positions = (TreeMap<Long, Position>) httpSession.getAttribute("positions");
-        if (positions.isEmpty() || !positions.containsKey(id)) {
-            positions.put(id, position);
+//        Position position = new Position(quantity, product);
+//        TreeMap<Long, Position> positions = (TreeMap<Long, Position>) httpSession.getAttribute("positions");
+        TreeMap<Product, Long> positions = (TreeMap<Product, Long>) httpSession.getAttribute("positions");
+        if (positions.isEmpty() || !positions.containsKey(product)) {
+            positions.put(product, quantity);
         }
         httpSession.setAttribute("positions", positions);
         return "redirect:/";

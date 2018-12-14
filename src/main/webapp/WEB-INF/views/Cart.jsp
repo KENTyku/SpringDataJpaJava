@@ -31,17 +31,17 @@
         </tr>
         <c:forEach var="position" items="${positions}">
             <form:form method="post" action="editCartProduct">
-                <input name="productId" type="hidden" value="${position.value.product.id}" id="productId_Products"/>
+                <input name="productId" type="hidden" value="${position.key.id}" id="productId_Products"/>
                 <tr>
-                    <td>${position.value.product.id}</td>
-                    <td>${position.value.product.name}</td>
-                    <td>${position.value.product.comment}</td>
-                    <td>${position.value.product.price}</td>
-                    <td>${position.value.product.category.categoryName}</td>
-                    <td>${position.value.product.country.name}</td>
-                    <td><input name="quantity" type="text" id="quantity_Products" value="${position.value.quantity}"/>
+                    <td>${position.key.id}</td>
+                    <td>${position.key.name}</td>
+                    <td>${position.key.comment}</td>
+                    <td>${position.key.price}</td>
+                    <td>${position.key.category.categoryName}</td>
+                    <td>${position.key.country.name}</td>
+                    <td><input name="quantity" type="text" id="quantity_Products" value="${position.value}"/>
                     </td>
-                    <td><a href="deleteCartProduct?productId=${position.value.product.id}">Удалить</a></td>
+                    <td><a href="deleteCartProduct?productId=${position.key.id}">Удалить</a></td>
                     <td colspan="1"><input type="submit" value="Пересчитать"/></td>
                 </tr>
             </form:form>

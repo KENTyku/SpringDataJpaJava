@@ -1,6 +1,7 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
+import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,12 +34,12 @@ public class EditCartProduct {
     @RequestMapping(value = "/editCartProduct", method = RequestMethod.POST)
     public String deleteCartProduct(@RequestParam("productId") long id,
                                     @RequestParam("quantity") long quantity,
-                                    @ModelAttribute("positions")TreeMap<Long,Position> positions,
+                                    @ModelAttribute("positions") TreeMap<Product, Long> positions,
                                     HttpSession httpSession) {
-        Position position=positions.get(id);
-        position.setQuantity(quantity);
-        positions.put(id,position);
-        httpSession.setAttribute("positions",positions);
+//        Position position=positions.get(id);
+        Product product = productRepository.findById(id).get();
+        positions.put(product, quantity);
+        httpSession.setAttribute("positions", positions);
         return "redirect:cart";
     }
 }

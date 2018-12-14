@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 @Entity
-public class Product {
+public class Product implements Comparable<Product>{
 
     @Id
     @GeneratedValue
@@ -127,6 +127,18 @@ public class Product {
                 ", category=" + category +
                 '}';
     }
+
+
+
+    @Override
+    public int compareTo(Product p) {
+        int i=0;
+        if(this.id==p.getId())i=0;
+        if(this.id>p.getId()) i=1;
+        if(this.id<p.getId())i=-1;
+        return i;
+    }
+
 
 //    @Override
 //    public boolean equals(Object obj) {

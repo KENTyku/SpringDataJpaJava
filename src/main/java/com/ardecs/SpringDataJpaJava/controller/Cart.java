@@ -44,7 +44,7 @@ public class Cart {
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart( Model model,HttpSession httpSession) {
-        TreeMap<Long,Position> positions= (TreeMap<Long, Position>) httpSession.getAttribute("positions");
+        TreeMap<Product,Long> positions= (TreeMap<Product, Long>) httpSession.getAttribute("positions");
         if (positions == null) {
             positions = new TreeMap<>();
             httpSession.setAttribute("positions", positions);

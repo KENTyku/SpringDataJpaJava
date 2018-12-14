@@ -31,16 +31,16 @@ public class SaveOrder {
     final Random random = new Random();
 
     @RequestMapping(value = "/saveOrder", method = RequestMethod.GET)
-    public String deleteCartProduct(@ModelAttribute("positions") TreeMap<Long, Position> positions, SessionStatus sessionStatus) {
+    public String savaOrder(@ModelAttribute("positions") TreeMap<Product, Long> positions, SessionStatus sessionStatus) {
         Client client = clientRepository.findByName("Yuri");
         LocalDateTime date;
         date = LocalDateTime.now();
         Order order = new Order(date, client);
         List<OrderPosition> list = new ArrayList<>();
         if (positions.isEmpty()) return "redirect:cart";
-        for (Map.Entry<Long, Position> position : positions.entrySet()) {
-            Product product = position.getValue().getProduct();
-            long quantity = position.getValue().getQuantity();
+        for (Map.Entry<Product, Long> position : positions.entrySet()) {
+            Product product = position.getKey();
+            long quantity = position.getValue();
             OrderPositionId id = new OrderPositionId(order, product);
             OrderPosition orderPosition = new OrderPosition(id, quantity);
             list.add(orderPosition);
