@@ -49,7 +49,7 @@ public class SaveProductController {
 
     ) {
         try {
-            float price = Float.parseFloat(priceString);
+            price = Float.parseFloat(priceString);
         } catch (NumberFormatException ex) {
             return "redirect:home";
         }

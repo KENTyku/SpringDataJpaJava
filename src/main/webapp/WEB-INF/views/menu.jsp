@@ -12,9 +12,13 @@
 </head>
 <body>
 <div>
-    <a href="home">Каталог товаров</a><br>
-    <a href="orders">Список заказов</a><br>
-    <a href="cart">Корзина</a><br>
+    <table cellpadding="10" width="50%" >
+        <tr>
+            <td align="left"><a href="home">Каталог товаров</a><br></td>
+            <td align="center"><a href="orders">Список заказов</a><br></td>
+            <td align="right"><a href="cart">Корзина</a><br></td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

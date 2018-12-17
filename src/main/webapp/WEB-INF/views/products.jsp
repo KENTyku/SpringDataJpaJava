@@ -16,7 +16,7 @@
 <body>
 <jsp:include page="menu.jsp"/>
 <div>
-    <h1>Все товары магазина</h1>
+    <h3>Каталог товаров</h3>
     <a href="editProduct?id=new">Добавить товар</a><br>
     <table border="1">
         <tr>
