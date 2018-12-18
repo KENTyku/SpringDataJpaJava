@@ -18,11 +18,17 @@ import java.util.Map;
 public class EditCartProductController {
     @Autowired
     private ProductRepository productRepository;
+    long quantity;
 
     @RequestMapping(value = "/editCartProduct", method = RequestMethod.POST)
     public String deleteCartProduct(@RequestParam("productId") long productId,
-                                    @RequestParam("quantity") long quantity,
+                                    @RequestParam("quantity") String quantityString,
                                     HttpSession httpSession) {
+        try {
+            quantity = Long.parseLong(quantityString);
+        } catch (NumberFormatException ex) {
+            return "redirect:cart";
+        }
         Map<Long, Pair<Product, Long>> positions = (Map<Long, Pair<Product, Long>>) httpSession.getAttribute("positions");
         if (positions == null) {
             return "redirect:cart";

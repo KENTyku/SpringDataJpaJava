@@ -19,10 +19,16 @@ import java.util.Map;
 public class AddProductToCartController {
     @Autowired
     private ProductRepository productRepository;
+    long quantity;
 
 
     @RequestMapping(value = "/addProductToCart", method = RequestMethod.POST)
-    public String addProductToCart(@RequestParam("productId") long productId, @RequestParam("quantity") long quantity, HttpSession httpSession) {
+    public String addProductToCart(@RequestParam("productId") long productId, @RequestParam("quantity") String quantityString, HttpSession httpSession) {
+        try {
+            quantity = Long.parseLong(quantityString);
+        } catch (NumberFormatException ex) {
+            return "redirect:home";
+        }
         Product product = productRepository.findById(productId).get();
         Map<Long, Pair<Product, Long>> positions = (Map<Long, Pair<Product, Long>>) httpSession.getAttribute("positions");
         if (positions == null) {

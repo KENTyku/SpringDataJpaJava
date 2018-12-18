@@ -32,7 +32,6 @@ public class CartController {
             }
             Cost cost=new Cost();
             cost.setCost(totalCost);
-            System.out.println("COAST!!!!!!!!!!!!!!!!"+totalCost);
             model.addAttribute(cost);
         }
         return "cart";
