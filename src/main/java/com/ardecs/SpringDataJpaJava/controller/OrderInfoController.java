@@ -1,6 +1,7 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
 import com.ardecs.SpringDataJpaJava.Entity.Order;
+import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
 import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,13 @@ public class OrderInfoController {
         if (order == null) {
             return "redirect:orders";
         }
-
+        float cost=0;
+        for (OrderPosition orderPosition : order.getOrderPositions()) {
+            cost = cost+orderPosition.getId().getProduct().getPrice() * orderPosition.getQuantity();
+        }
         model.addAttribute(order.getOrderPositions());
+        Float fl=Float.valueOf(cost);
+        model.addAttribute(fl);
         return "orderInfo";
     }
 }
