@@ -19,7 +19,7 @@
 <body>
 <jsp:include page="menu.jsp"/>
 <div>
-    <h1>Добавление/Редактирование продукта</h1>
+    <h3>Добавление/Редактирование продукта</h3>
     <form method="POST" action="saveProduct">
         <input name="id" type="hidden" id="id_editProduct" value="${product.id}"/><br>
         <table border="1">

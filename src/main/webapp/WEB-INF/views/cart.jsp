@@ -16,16 +16,17 @@
 <body>
 <jsp:include page="menu.jsp"/>
 <div>
-    <h1>Корзина</h1>
+    <h3>Корзина</h3>
     <table border="1">
         <tr>
             <td><b>id товара:</b></td>
             <td><b>Наименование:</b></td>
             <td><b>Описание:</b></td>
-            <td><b>Цена:</b></td>
             <td><b>Категория:</b></td>
             <td><b>Производитель:</b></td>
-            <td><b>Количество</b></td>
+            <td><b>Цена:</b></td>
+            <td><b>Количество:</b></td>
+            <td><b>Стоимость:</b></td>
             <td><b>Пересчитать:</b></td>
             <td><b>Удалить:</b></td>
         </tr>
@@ -36,11 +37,12 @@
                     <td>${position.value.first.id}</td>
                     <td>${position.value.first.name}</td>
                     <td>${position.value.first.comment}</td>
-                    <td>${position.value.first.price}</td>
                     <td>${position.value.first.category.categoryName}</td>
                     <td>${position.value.first.country.name}</td>
+                    <td>${position.value.first.price}</td>
                     <td><input name="quantity" type="text" id="quantity_Products" value="${position.value.second}"/>
                     </td>
+                    <td>${position.value.first.price*position.value.second}</td>
                     <td><a href="deleteCartProduct?productId=${position.value.first.id}">Удалить</a></td>
                     <td colspan="1"><input type="submit" value="Пересчитать"/></td>
                 </tr>

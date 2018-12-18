@@ -19,6 +19,9 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
     List<Order> findAllByClientOrderByDateDesc(Client client);
 
+    @Query("select o from Order o left join fetch o.orderPositions where o.client = :client")
+    List<Order> getOrderWithPositionsByClient(Client client);
+
     @Query("select o from Order o left join fetch o.orderPositions where o.id = :orderId")
     Order getOrderWithPositions(Long orderId);
 }

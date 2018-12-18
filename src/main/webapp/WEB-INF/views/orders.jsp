@@ -16,11 +16,12 @@
 <body>
 <jsp:include page="menu.jsp"/>
 <div>
-    <h1>Список заказов</h1>
+    <h3>Список заказов</h3>
     <table border="1">
         <tr>
             <td><b>id заказа</b></td>
             <td><b>Дата:</b></td>
+            <td><b>Стоимость:</b></td>
             <td><b>Просмотреть:</b></td>
             <%--<td><b>Удалить:</b></td>--%>
         </tr>
@@ -28,6 +29,13 @@
             <tr>
                 <td>${order.id}</td>
                 <td>${order.date}</td>
+                <td>
+
+                    <%--<c:forEach var="position" items="${order.orderPositions}">--%>
+                        <%--${position.id.product.price}--%>
+                    <%--</c:forEach>--%>
+                    <%--${order.orderPositions.stream().map(id.product->id.product.price*quantity).sum()}--%>
+                </td>
                 <td><a href="orderInfo?id=${order.id}">Просмотреть</a></td>
                 <%--<td><a href="deleteOrder?orderId=${order.id}">Удалить</a></td>--%>
             </tr>
