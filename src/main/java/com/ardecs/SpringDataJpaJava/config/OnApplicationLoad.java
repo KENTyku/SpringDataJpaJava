@@ -4,11 +4,13 @@ import javax.annotation.PostConstruct;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
+import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,7 @@ public class OnApplicationLoad {
     private OrderPositionId id;
     @Autowired
     private ReportRepository reportRepository;
+    final Random random = new Random();
 
     @PostConstruct//выполняет этот метод после инициализации всех бинов
     public void onApplicationLoad() {
@@ -58,5 +61,16 @@ public class OnApplicationLoad {
         client = new Client("Den", "9053333333");
         clientList.add(client);
         clientRepository.saveAll(clientList);
+        for (int i = 0; i < 20; i++) {
+            float price = random.nextInt(100) + 1;
+//            String name = String.valueOf(random.nextInt(10000000) + 1);
+            String name = java.util.UUID.randomUUID().toString();
+//            String comment = String.valueOf(random.nextInt(10000000) + 1);
+            String comment = java.util.UUID.randomUUID().toString();
+            long idCountry = random.nextInt(3) + 4;
+            long idCategory = random.nextInt(3) + 1;
+            Product product = new Product(price, name, comment, countryRepository.findById(idCountry).get(), categoryRepository.findById(idCategory).get());
+            productRepository.save(product);
+        }
     }
 }
