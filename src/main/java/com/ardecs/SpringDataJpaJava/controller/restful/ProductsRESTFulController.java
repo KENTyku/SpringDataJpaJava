@@ -17,7 +17,7 @@ public class ProductsRESTFulController {
 
     @RequestMapping(value = {"/product"}, method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ArrayList<Product> getProcucts() {
+    public ArrayList<Product> getProducts() {
         ArrayList<Product> productsList = (ArrayList<Product>) productRepository.findAll();
         return productsList;
     }

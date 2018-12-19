@@ -34,25 +34,25 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 //указываем обработчик jar файлов для swagger
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-    @ApiResponses(value = {
-            @ApiResponse(code=400, message = "This is a bad request, please stick to the API description"),
-            @ApiResponse(code=401, message = "Your request cannot be authorized.")
-    })
+
     @Bean
     public Docket api() {
-               List<ResponseMessage> responseMessages = Arrays.asList(
+        List<ResponseMessage> responseMessages = Arrays.asList(
                 new ResponseMessageBuilder().code(400).message("Bad Request").build(),
                 new ResponseMessageBuilder().code(403).message("Forbidden").build(),
                 new ResponseMessageBuilder().code(404).message("NotFound").build(),
                 new ResponseMessageBuilder().code(401).message("Unauthorized").build()
-                );
+        );
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.ardecs.SpringDataJpaJava.controller.restful"))
                 .paths(PathSelectors.any())
                 .build()
                 .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.PUT,responseMessages)
+                .globalResponseMessage(RequestMethod.PUT, responseMessages)
+                .globalResponseMessage(RequestMethod.GET, responseMessages)
+                .globalResponseMessage(RequestMethod.DELETE, responseMessages)
+                .globalResponseMessage(RequestMethod.POST, responseMessages)
                 ;
 
     }
