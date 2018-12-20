@@ -55,9 +55,9 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .globalResponseMessage(RequestMethod.DELETE, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)
                 .apiInfo(apiInfo())
-                .tags(new Tag("name", "name Test"),
-                        new Tag("propertySort", "sort Test"),
-                        new Tag("limit", "limit Test"))
+//                .tags(new Tag("name", "name Test"),
+//                        new Tag("propertySort", "sort Test"),
+//                        new Tag("limit", "limit Test"))
                 ;
 
     }
@@ -66,10 +66,10 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
         return new ApiInfo(
                 "REST API for Shop",
                 "Shop API",
-                "API 1.0",
+                "1.0",
                 "Terms of service",
-                new Contact("Yuri Tveritin", "www.ardecs.com", "yury.tveritin@ardecs.com"),
-                "License of API", "www.ardecs.com",
+                new Contact("Yuri Tveritin", "http://www.ardecs.com", "yury.tveritin@ardecs.com"),
+                "License of API", "http://www.ardecs.com",
                 Collections.emptyList())
                 ;
 

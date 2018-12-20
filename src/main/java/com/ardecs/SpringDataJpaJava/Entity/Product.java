@@ -4,6 +4,8 @@
  */
 package com.ardecs.SpringDataJpaJava.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +19,7 @@ public class Product implements Comparable<Product>{
     @GeneratedValue
     private long id;
 //    @NotNull
+@ApiModelProperty(notes = "Price of product Test ")
     private float price;
     @NotNull
     private String name;
