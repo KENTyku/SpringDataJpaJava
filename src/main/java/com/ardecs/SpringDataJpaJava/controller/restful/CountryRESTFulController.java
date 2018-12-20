@@ -5,7 +5,9 @@ import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -61,19 +63,21 @@ public class CountryRESTFulController {
 
     @RequestMapping(value = {"/country/{id}"}, method = RequestMethod.DELETE)
 //    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCountry(@PathVariable @Valid @Pattern(regexp = "^[1-9][0-9]+") long id, BindingResult result,HttpServletResponse response) throws IOException {
+//    public void deleteCountry(@PathVariable @Valid @Pattern(regexp = "^[1-9][0-9]+") long id, BindingResult result,HttpServletResponse response) throws IOException {
+    public void deleteCountry(@PathVariable long id, HttpServletResponse response) throws IOException {
         try {
-            if (result.hasFieldErrors("id")) {
-                throw new ValidationException();
-            }
-            if (null == countryRepository.findById(Long.valueOf(id))) {
-                throw new NoSuchElementException();
-            }
+//            if (result.hasFieldErrors("id")) {
+//                throw new ValidationException();
+//            }
+            countryRepository.findById(Long.valueOf(id)).orElseThrow(NoSuchElementException::new);
             countryRepository.deleteById(id);
-        }catch (ValidationException e){
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad countrie's param  ID="+id);
-        }catch (NoSuchElementException e){
+        } catch (ValidationException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad countrie's param  ID=" + id);
+        } catch (NoSuchElementException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Country with ID=" + id + " no found ");
+        } catch (JpaSystemException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad countrie's param  ID=" + id + ". " +
+                    "This ID can't delete because it's use ");
         }
     }
 
