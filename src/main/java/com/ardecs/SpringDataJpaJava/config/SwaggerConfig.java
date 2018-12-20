@@ -20,6 +20,7 @@ import springfox.documentation.schema.ModelRef;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.ResponseMessage;
+import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -53,18 +54,25 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .globalResponseMessage(RequestMethod.GET, responseMessages)
                 .globalResponseMessage(RequestMethod.DELETE, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)
+                .apiInfo(apiInfo())
+                .tags(new Tag("name", "name Test"),
+                        new Tag("propertySort", "sort Test"),
+                        new Tag("limit", "limit Test"))
                 ;
 
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "My REST API",
-                "Some custom description of API.",
-                "API TOS",
+                "REST API for Shop",
+                "Shop API",
+                "API 1.0",
                 "Terms of service",
-                new Contact("John Doe", "www.example.com", "myeaddress@company.com"),
-                "License of API", "API license URL", Collections.emptyList());
+                new Contact("Yuri Tveritin", "www.ardecs.com", "yury.tveritin@ardecs.com"),
+                "License of API", "www.ardecs.com",
+                Collections.emptyList())
+                ;
+
     }
 }
 
