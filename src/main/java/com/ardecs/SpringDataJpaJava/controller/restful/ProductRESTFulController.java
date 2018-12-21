@@ -1,22 +1,19 @@
 package com.ardecs.SpringDataJpaJava.controller.restful;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
 import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.NoSuchElementException;
 
 @RestController
 public class ProductRESTFulController {
@@ -31,8 +28,7 @@ public class ProductRESTFulController {
     @ResponseBody
     public Product getProduct(@PathVariable long id, HttpServletResponse response) throws IOException {
         try {
-            Product product = productRepository.findById(Long.valueOf(id)).get();
-            return product;
+            return productRepository.findById(id).get();
         } catch (NoSuchElementException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Product with ID=" + id + " no found");
             return null;
@@ -41,9 +37,18 @@ public class ProductRESTFulController {
     }
 
     @RequestMapping(value = {"/product/{id}"}, method = RequestMethod.PUT)
-    public void updateProduct(@PathVariable Long id, String name, Long countryId, Long categoryId, String comment, Float price, HttpServletResponse response) throws IOException {
+    public void updateProduct(@PathVariable Long id,
+                              String name,
+                              Long countryId,
+                              Long categoryId,
+                              @ApiParam(value = "Product description")
+                              @RequestParam("comment")
+                                      String comment,
+                              Float price,
+                              HttpServletResponse response
+    ) throws IOException {
         try {
-            productRepository.findById(id);
+            productRepository.findById(id).get();
         } catch (NoSuchElementException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Product with ID=" + id + " no found");
         }
@@ -54,36 +59,39 @@ public class ProductRESTFulController {
         if (null != price) {
             product.setPrice(price);
         }
+        if (null != comment) {
+            product.setComment(comment);
+        }
         if (null != categoryId) {
             try {
-                categoryRepository.findById(categoryId);
+                Category category = categoryRepository.findById(categoryId).get();
+                product.setCategory(category);
             } catch (NoSuchElementException e) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Category with ID=" + id + " no found");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Category with ID=" + categoryId + " no found");
             }
-            Category category = categoryRepository.findById(categoryId).get();
-            product.setCategory(category);
         }
         if (null != countryId) {
             try {
-                countryRepository.findById(countryId);
+                Country country = countryRepository.findById(countryId).get();
+                product.setCountry(country);
             } catch (NoSuchElementException e) {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Country with ID=" + id + " no found");
+                response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Country with ID=" + countryId + " no found");
             }
-            Country country = countryRepository.findById(countryId).get();
-            product.setCountry(country);
         }
         productRepository.save(product);
         response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-
     }
 
     @RequestMapping(value = {"/product/{id}"}, method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable long id) {
-        productRepository.deleteById(id);
-
+    public void deleteProduct(@PathVariable long id,HttpServletResponse response) throws IOException {
+        try {
+            productRepository.deleteById(id);
+        } catch (NoSuchElementException e) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Product with ID=" + id + " no found");
+        }
     }
-
+//TODO сделать проверку, передавать только необходимые параметры(не объекты целиком)
     @RequestMapping(value = {"/product"}, method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void createProduct(Product product, HttpServletResponse response) {

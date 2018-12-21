@@ -32,10 +32,6 @@ public class Product implements Comparable<Product>{
     private Category category;
 
     public Product() {
-//        this.id = 0;
-//        this.name = "";
-//        this.comment = "";
-//        this.price = 0;
     }
 
     public Product(@NotNull float price, @NotNull String name, String comment, Country country, Category category) {
