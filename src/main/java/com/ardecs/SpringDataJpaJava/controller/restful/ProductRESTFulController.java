@@ -8,6 +8,7 @@ import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class ProductRESTFulController {
                               Long countryId,
                               Long categoryId,
                               @ApiParam(value = "Product description")
-                              @RequestParam("comment")
+                              @RequestParam(value = "comment",required = false)
                                       String comment,
                               Float price,
                               HttpServletResponse response
@@ -87,7 +88,7 @@ public class ProductRESTFulController {
     public void deleteProduct(@PathVariable long id,HttpServletResponse response) throws IOException {
         try {
             productRepository.deleteById(id);
-        } catch (NoSuchElementException e) {
+        } catch (NoSuchElementException| EmptyResultDataAccessException e) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Entity Product with ID=" + id + " no found");
         }
     }
