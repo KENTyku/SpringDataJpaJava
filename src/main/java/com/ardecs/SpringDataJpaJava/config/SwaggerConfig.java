@@ -55,9 +55,6 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .globalResponseMessage(RequestMethod.DELETE, responseMessages)
                 .globalResponseMessage(RequestMethod.POST, responseMessages)
                 .apiInfo(apiInfo())
-//                .tags(new Tag("name", "name Test"),
-//                        new Tag("propertySort", "sort Test"),
-//                        new Tag("limit", "limit Test"))
                 ;
 
     }

@@ -19,7 +19,7 @@ public class Product implements Comparable<Product>{
     @GeneratedValue
     private long id;
 //    @NotNull
-@ApiModelProperty(notes = "Price of product Test ")
+//@ApiModelProperty(notes = "Price of product Test ")
     private float price;
     @NotNull
     private String name;
