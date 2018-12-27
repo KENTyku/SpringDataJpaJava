@@ -13,23 +13,25 @@ import javax.validation.constraints.NotNull;
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 @Entity
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product> {
 
     @Id
     @GeneratedValue
     private long id;
-//    @NotNull
+    //    @NotNull
 //@ApiModelProperty(notes = "Price of product Test ")
     private float price;
     @NotNull
     private String name;
     private String comment;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    private String fotoUrl;
 
     public Product() {
     }
@@ -42,6 +44,13 @@ public class Product implements Comparable<Product>{
         this.category = category;
     }
 
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
 
     /**
      * @return the id
@@ -128,13 +137,12 @@ public class Product implements Comparable<Product>{
     }
 
 
-
     @Override
     public int compareTo(Product p) {
-        int i=0;
-        if(this.id==p.getId())i=0;
-        if(this.id>p.getId()) i=1;
-        if(this.id<p.getId())i=-1;
+        int i = 0;
+        if (this.id == p.getId()) i = 0;
+        if (this.id > p.getId()) i = 1;
+        if (this.id < p.getId()) i = -1;
         return i;
     }
 
