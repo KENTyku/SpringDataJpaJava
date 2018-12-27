@@ -3,6 +3,7 @@ package com.ardecs.SpringDataJpaJava.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -31,6 +32,12 @@ public class ConfigServlet extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
+    @Bean
+    public CommonsMultipartResolver setupMultipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSize(9000000);
+        return resolver;
+    }
 
 
 }
