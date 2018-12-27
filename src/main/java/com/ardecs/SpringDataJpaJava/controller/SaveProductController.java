@@ -71,17 +71,13 @@ public class SaveProductController {
             product.setCategory(category);
             product.setPrice(price);
             if (!image.isEmpty()) {
-//                System.out.println("TEST!!!!!!1" + image.getOriginalFilename());
                 String rootPath = request.getSession().getServletContext().getRealPath("/");
-//                System.out.println(rootPath + "WEB-INF/resources");
 //                File dir = new File(rootPath + File.separator + "img");
-                File dir = new File(rootPath + "WEB-INF/resources");
-                dir.mkdirs();
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
-                System.out.println(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                File dir = new File(rootPath + "/resources");
+//                dir.mkdirs();
+                String fileName = "name_" + String.valueOf(random.nextInt(10000000) + 1) + image.getOriginalFilename();
+                File serverFile = new File(dir.getAbsolutePath() + File.separator +fileName);
                 serverFile.createNewFile();
-//                String filePath = rootPath+"WEB-INF/resources/image/image_" + name + "_" + image.getOriginalFilename();
-                System.out.println(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
                 try {
                     try (InputStream is = image.getInputStream();
                          BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
@@ -96,7 +92,7 @@ public class SaveProductController {
                 }
 
 //                saveImage(filePath, image);
-                product.setImageUrl("WEB-INF/resources" + image.getOriginalFilename());
+                product.setImageUrl(fileName);
             }
         }
         productRepository.save(product);

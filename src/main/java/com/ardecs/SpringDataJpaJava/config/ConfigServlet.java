@@ -20,7 +20,7 @@ public class ConfigServlet extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         //указываем расположение статических ресурсов(css, image, js и другие)
-        registry.addResourceHandler("/WEB-INF/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
     //определяем бин резолвера для представлений

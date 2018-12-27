@@ -22,6 +22,7 @@
             <td><b>id товара:</b></td>
             <td><b>Наименование:</b></td>
             <td><b>Описание:</b></td>
+            <td><b>Изображение:</b></td>
             <td><b>Категория:</b></td>
             <td><b>Производитель:</b></td>
             <td><b>Цена:</b></td>
@@ -37,6 +38,7 @@
                     <td>${position.value.first.id}</td>
                     <td>${position.value.first.name}</td>
                     <td>${position.value.first.comment}</td>
+                    <td><img src="/resources/${position.value.first.imageUrl}" alt="image" width="100"  height="100></td>
                     <td>${position.value.first.category.categoryName}</td>
                     <td>${position.value.first.country.name}</td>
                     <td>${position.value.first.price}</td>
