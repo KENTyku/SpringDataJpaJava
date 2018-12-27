@@ -32,7 +32,7 @@ public class ConfigServlet extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean
+    @Bean (name = "multipartResolver")
     public CommonsMultipartResolver setupMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
         resolver.setMaxUploadSize(9000000);

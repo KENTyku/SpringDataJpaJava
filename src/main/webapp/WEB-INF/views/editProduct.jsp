@@ -35,15 +35,16 @@
                 <td>
                     <select name="categoryId">
                         <f:forEach items="${categoryList}" var="category">
-                            <option name="categoryId" value="${category.id}"><f:out
-                                    value="${category.categoryName}"/></option>
+                            <option name="categoryId" value="${category.id}">
+                                <f:out value="${category.categoryName}"/></option>
                         </f:forEach>
                     </select>
                 </td>
                 <td>
                     <select name="countryId">
                         <f:forEach items="${countryList}" var="country">
-                            <option name="countryId" value="${country.id}"><f:out value="${country.name}"/></option>
+                            <option name="countryId" value="${country.id}">
+                                <f:out value="${country.name}"/></option>
                         </f:forEach>
                     </select>
                 </td>

@@ -1,11 +1,14 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
@@ -42,7 +45,8 @@ public class SaveProductController {
             @RequestParam("price") String priceString,
             @RequestParam("countryId") long countryId,
             @RequestParam("categoryId") long categoryId,
-            @RequestParam(value = "image", required = false) MultipartFile image
+            @RequestParam(value = "image", required = false) MultipartFile image,
+            HttpServletRequest request
     ) throws IOException {
         try {
             price = Float.parseFloat(priceString);
@@ -58,9 +62,7 @@ public class SaveProductController {
         }
         Country country = countryRepository.findById(countryId).get();
         Category category = categoryRepository.findById(categoryId).get();
-
         Product product = new Product(price, name, comment, country, category);
-
         if (id != 0) {
             product = productRepository.findById(id).get();
             product.setName(name);
@@ -69,9 +71,32 @@ public class SaveProductController {
             product.setCategory(category);
             product.setPrice(price);
             if (!image.isEmpty()) {
-                System.out.println("TEST!!!!!!1" + image.getOriginalFilename());
-                saveImage("image_" + id + "_" + image.getOriginalFilename(), image);
+//                System.out.println("TEST!!!!!!1" + image.getOriginalFilename());
+                String rootPath = request.getSession().getServletContext().getRealPath("/");
+//                System.out.println(rootPath + "WEB-INF/resources");
+//                File dir = new File(rootPath + File.separator + "img");
+                File dir = new File(rootPath + "WEB-INF/resources");
+                dir.mkdirs();
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                System.out.println(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                serverFile.createNewFile();
+//                String filePath = rootPath+"WEB-INF/resources/image/image_" + name + "_" + image.getOriginalFilename();
+                System.out.println(dir.getAbsolutePath() + File.separator + image.getOriginalFilename());
+                try {
+                    try (InputStream is = image.getInputStream();
+                         BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
+                        int i;
+                        while ((i = is.read()) != -1) {
+                            stream.write(i);
+                        }
+                        stream.flush();
+                    }
+                } catch (IOException e) {
+                    System.out.println("error : " + e.getMessage());
+                }
 
+//                saveImage(filePath, image);
+                product.setImageUrl("WEB-INF/resources" + image.getOriginalFilename());
             }
         }
         productRepository.save(product);
@@ -79,14 +104,6 @@ public class SaveProductController {
     }
 
     private void saveImage(String filePath, MultipartFile image) throws IOException {
-//
-//        try {
-//            File file =new File(webRootPath + "/resources/" + filePath)
-//            FileOutputStream fileOutputStream=new FileOutputStream(file);
-////            fileOutputStream.write();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
         BufferedWriter w = Files.newBufferedWriter(Paths.get(filePath));
         w.write(new String(image.getBytes()));
         w.flush();
