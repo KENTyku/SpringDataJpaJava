@@ -31,7 +31,7 @@ public class Product implements Comparable<Product> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    private String fotoUrl;
+    private String imageUrl;
 
     public Product() {
     }
@@ -44,12 +44,13 @@ public class Product implements Comparable<Product> {
         this.category = category;
     }
 
-    public String getFotoUrl() {
-        return fotoUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setFotoUrl(String fotoUrl) {
-        this.fotoUrl = fotoUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     /**

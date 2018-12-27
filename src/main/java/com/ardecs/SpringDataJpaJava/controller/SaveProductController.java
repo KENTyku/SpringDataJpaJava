@@ -2,6 +2,8 @@ package com.ardecs.SpringDataJpaJava.controller;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,6 +27,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class SaveProductController {
@@ -44,9 +47,8 @@ public class SaveProductController {
             @RequestParam("comment") String comment,
             @RequestParam("price") String priceString,
             @RequestParam("countryId") long countryId,
-            @RequestParam("categoryId") long categoryId
-
-
+            @RequestParam("categoryId") long categoryId,
+            @RequestParam(value = "image", required = false) MultipartFile image
     ) {
         try {
             price = Float.parseFloat(priceString);
@@ -62,6 +64,7 @@ public class SaveProductController {
         }
         Country country = countryRepository.findById(countryId).get();
         Category category = categoryRepository.findById(categoryId).get();
+
         Product product = new Product(price, name, comment, country, category);
 
         if (id != 0) {
@@ -71,8 +74,18 @@ public class SaveProductController {
             product.setCountry(country);
             product.setCategory(category);
             product.setPrice(price);
+            if(!image.isEmpty()){
+                System.out.println("TEST!!!!!!1"+image.getOriginalFilename());
+                saveImage("image_"+id,image);
+
+            }
         }
         productRepository.save(product);
         return "redirect:/";
+    }
+
+    private void saveImage(String filename, MultipartFile image) {
+//        File file =new File(webRootPath + "/resources/" + filename)
+//                FileInputStream fileInputStream=new FileInputStream(file);
     }
 }
