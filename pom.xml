@@ -62,54 +62,18 @@
             <version>5.1.2.RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aspects</artifactId>
             <version>${spring.version}</version>
         </dependency>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-test</artifactId>-->
-        <!--<version>5.1.2.RELEASE</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-slf4j-impl</artifactId>-->
-        <!--<version>2.1</version>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.apache.logging.log4j</groupId>-->
-        <!--<artifactId>log4j-core</artifactId>-->
-        <!--<version>2.11.1</version>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/io.gatling/jsonpath &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>io.gatling</groupId>-->
-        <!--<artifactId>jsonpath_2.12</artifactId>-->
-        <!--<version>0.6.14</version>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.skyscreamer/jsonassert &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>org.skyscreamer</groupId>-->
-        <!--<artifactId>jsonassert</artifactId>-->
-        <!--<version>1.5.0</version>-->
-        <!--<scope>test</scope>-->
-        <!--</dependency>-->
-
-
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -118,6 +82,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
