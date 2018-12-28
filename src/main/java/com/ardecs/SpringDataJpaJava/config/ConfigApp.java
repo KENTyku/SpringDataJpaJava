@@ -22,7 +22,6 @@ import java.util.Properties;
 @Configuration
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
-@ComponentScan("com.ardecs.SpringDataJpaJava")
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.ardecs.SpringDataJpaJava")
 

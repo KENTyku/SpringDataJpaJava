@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
-@SessionAttributes("positions")
 @Controller
 public class EditCartProductController {
     @Autowired

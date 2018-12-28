@@ -19,7 +19,7 @@ public class LoggingDelete {
     private ReportRepository reportRepository;
     private Object entity;
 
-    @Pointcut(
+    @AfterReturning(
             "(" +
                     "execution(* com.ardecs.SpringDataJpaJava.Repository.ClientRepository.delete(Object))||" +
                     "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.delete(Object))||" +
@@ -30,10 +30,6 @@ public class LoggingDelete {
                     ")" +
                     "&&args(entity)"
     )
-    public void saveToReport(Object entity) {
-    }
-
-    @AfterReturning("saveToReport(entity)")
     public void logEntity(Object entity) {
         String nameClass = entity.getClass().getName();
         Report report = new Report(nameClass, "delete", LocalDateTime.now());

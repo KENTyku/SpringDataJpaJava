@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SessionAttributes("positions")
 @Controller
 public class SaveOrderController {
     @Autowired

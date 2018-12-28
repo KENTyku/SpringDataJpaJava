@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@SessionAttributes("positions")
 @Controller
 public class CartController {
 

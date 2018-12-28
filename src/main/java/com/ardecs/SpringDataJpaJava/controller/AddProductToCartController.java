@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
-@SessionAttributes("positions")
 @Controller
 public class AddProductToCartController {
     @Autowired
