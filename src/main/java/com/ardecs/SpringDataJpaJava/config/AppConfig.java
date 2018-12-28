@@ -25,7 +25,7 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.ardecs.SpringDataJpaJava")
 
-public class ConfigApp {
+public class AppConfig {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
     private static final String PROP_DATABASE_URL = "db.url";
