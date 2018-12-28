@@ -1,14 +1,19 @@
 package com.ardecs.SpringDataJpaJava.config;
 
+import com.ardecs.SpringDataJpaJava.Entity.Category;
+import com.ardecs.SpringDataJpaJava.Entity.Client;
+import org.hibernate.PersistentObjectException;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 
 import javax.sql.DataSource;
@@ -21,7 +26,7 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.ardecs.SpringDataJpaJava")
 
-public class ConfigTest {
+public class ConfigApp {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
     private static final String PROP_DATABASE_URL = "db.url";
@@ -30,11 +35,11 @@ public class ConfigTest {
     private static final String PROP_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
     private static final String PROP_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
     private static final String PROP_HIBERNATE_HBM2DDL_AUTO = "hibernate.hbm2ddl.auto";
-//инъектируем в поле наши Свойства подключенные в аннотации @PropertySource
+    //инъектируем в поле наши Свойства подключенные в аннотации @PropertySource
     @Autowired
     private Environment env;
 
-//Менеджер танзакций для управления операциями менеджера сущностей
+    //Менеджер танзакций для управления операциями менеджера сущностей
     @Bean
     public JpaTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -68,7 +73,6 @@ public class ConfigTest {
     }
 
 
-
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
@@ -77,4 +81,16 @@ public class ConfigTest {
 
         return properties;
     }
+
+    //преобразования специализированных исключений в универсальные исключения Spring
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+//    //    <bean id="myBeansValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+//    @Bean
+//    public org.springframework.validation.Validator validatorFactory() {
+//        return new LocalValidatorFactoryBean();
+//    }
 }

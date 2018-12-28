@@ -19,7 +19,7 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
 import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
-import com.ardecs.SpringDataJpaJava.config.ConfigTest;
+import com.ardecs.SpringDataJpaJava.config.ConfigApp;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,13 +29,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.clientFindByCriteries;
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertArrayEquals;
-
 @RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
-@ContextConfiguration(classes = ConfigTest.class)
+@ContextConfiguration(classes = ConfigApp.class)
 //указываем конфиг для работы автокофигурации контекста в тесте
 public class SpringDataJpaJavaTests {
     @Autowired
@@ -167,8 +165,7 @@ public class SpringDataJpaJavaTests {
     public void showAllClientOrders() {
         Optional<Client> clientOptional = clientRepository.findById((long) 19);
         Client client = clientOptional.get();
-        Long idClient = client.getId();
-        List<Order> ordersList = orderRepository.findAllOrderByClient_IdLikeOrderByIdAsc(idClient);
+        List<Order> ordersList = orderRepository.findAllByClientOrderByDateDesc(client);
 
         ArrayList<Long> listIdOrders = new ArrayList<>();
         for (Order item : ordersList) {

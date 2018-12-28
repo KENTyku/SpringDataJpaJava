@@ -4,21 +4,24 @@
  */
 package com.ardecs.SpringDataJpaJava.Repository;
 
+import java.util.List;
+
+import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Order;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 
 public interface OrderRepository extends CrudRepository<Order, Long> {
-//    @Query("SELECT o from Order o where o.client.id=?1 ")
-//    List<Order> findAllOrdersClient(long clientId);
 
-    List<Order> findAllOrderByClient_IdLikeOrderByIdAsc(Long id);
+    List<Order> findAllByClientOrderByDateDesc(Client client);
 
+    @Query("select o from Order o left join fetch o.orderPositions where o.client = :client")
+    List<Order> getOrderWithPositionsByClient(Client client);
 
+    @Query("select o from Order o left join fetch o.orderPositions where o.id = :orderId")
+    Order getOrderWithPositions(Long orderId);
 }

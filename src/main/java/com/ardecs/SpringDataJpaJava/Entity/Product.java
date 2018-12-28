@@ -4,6 +4,8 @@
  */
 package com.ardecs.SpringDataJpaJava.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,22 +13,25 @@ import javax.validation.constraints.NotNull;
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 @Entity
-public class Product {
+public class Product implements Comparable<Product> {
 
     @Id
     @GeneratedValue
     private long id;
-    @NotNull
+    //    @NotNull
+//@ApiModelProperty(notes = "Price of product Test ")
     private float price;
     @NotNull
     private String name;
     private String comment;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+    private String imageUrl;
 
     public Product() {
     }
@@ -39,6 +44,14 @@ public class Product {
         this.category = category;
     }
 
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     /**
      * @return the id
@@ -123,6 +136,17 @@ public class Product {
                 ", category=" + category +
                 '}';
     }
+
+
+    @Override
+    public int compareTo(Product p) {
+        int i = 0;
+        if (this.id == p.getId()) i = 0;
+        if (this.id > p.getId()) i = 1;
+        if (this.id < p.getId()) i = -1;
+        return i;
+    }
+
 
 //    @Override
 //    public boolean equals(Object obj) {
