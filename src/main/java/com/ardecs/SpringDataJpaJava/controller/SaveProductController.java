@@ -76,7 +76,7 @@ public class SaveProductController {
                 File dir = new File(rootPath + "/resources");
 //                dir.mkdirs();
                 String fileName = "name_" + String.valueOf(random.nextInt(10000000) + 1) + image.getOriginalFilename();
-                File serverFile = new File(dir.getAbsolutePath() + File.separator +fileName);
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + fileName);
                 serverFile.createNewFile();
                 try {
                     try (InputStream is = image.getInputStream();

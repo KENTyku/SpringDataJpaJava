@@ -38,7 +38,6 @@
                     <td><a href="editProduct?id=${product.id}">${product.name}</a></td>
                     <td>${product.comment}</td>
                     <td><img src="/resources/${product.imageUrl}" alt="image" width="100"  height="100"></td>
-                    <%--<td><img src="/resources/sun.png" alt="image"></td>--%>
                     <td>${product.price}</td>
                     <td>${product.category.categoryName}</td>
                     <td>${product.country.name}</td>
