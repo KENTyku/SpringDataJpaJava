@@ -9,7 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -22,6 +25,8 @@ public class Country {
     private long id;
     @NotNull
     @Column(unique = true)
+    @Size(min =1,max = 20,message = "Countryname must be between 2 and 20 characters")
+//    @Pattern(regexp = "[a-zA-Z]+")
     private String name;
 
     public Country() {

@@ -8,6 +8,8 @@ import java.util.List;
 
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
