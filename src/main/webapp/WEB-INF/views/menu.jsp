@@ -9,10 +9,13 @@
 <html>
 <head>
     <title>Информация о заказе</title>
+    <style>
+        body { background: url(/resources/background.png); }
+    </style>
 </head>
 <body>
 <div>
-    <table cellpadding="10" width="50%" >
+    <table cellpadding="10" width="50%">
         <tr>
             <td align="left"><a href="home">Каталог товаров</a><br></td>
             <td align="center"><a href="orders">Список заказов</a><br></td>

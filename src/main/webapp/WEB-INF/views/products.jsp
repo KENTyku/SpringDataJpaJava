@@ -23,6 +23,7 @@
             <td><b>id товара:</b></td>
             <td><b>Наименование:</b></td>
             <td><b>Описание:</b></td>
+            <td><b>Изображение:</b></td>
             <td><b>Цена:</b></td>
             <td><b>Категория:</b></td>
             <td><b>Производитель:</b></td>
@@ -36,6 +37,7 @@
                     <td>${product.id}</td>
                     <td><a href="editProduct?id=${product.id}">${product.name}</a></td>
                     <td>${product.comment}</td>
+                    <td><img src="/resources/${product.imageUrl}" alt="image" width="100"  height="100"></td>
                     <td>${product.price}</td>
                     <td>${product.category.categoryName}</td>
                     <td>${product.country.name}</td>
