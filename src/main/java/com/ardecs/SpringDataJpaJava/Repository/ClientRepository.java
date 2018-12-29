@@ -12,7 +12,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
  */
 
-public interface ClientRepository extends CrudRepository<Client, Long>, JpaSpecificationExecutor<Client> {
+public interface ClientRepository extends CrudRepository<Client, String>, JpaSpecificationExecutor<Client> {
     Client findByName(String name);
 
     Boolean existsByName(String name);

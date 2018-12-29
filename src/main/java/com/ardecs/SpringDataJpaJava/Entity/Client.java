@@ -14,8 +14,7 @@ import java.util.List;
 @Entity
 public class Client {
     @Id
-    @GeneratedValue
-    private long id;
+    private String login;
     @NotNull
     private String name;
     //    @NotNull
@@ -28,30 +27,24 @@ public class Client {
     public Client() {
     }
 
-    public Client(String name, String phoneNumber, String password) {
+    public Client(String login, String name, String phoneNumber, String password) {
+        this.login = login;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
 
-    public Client(String name, String password) {
-        this.name = name;
+    public Client(String login, String phoneNumber, String password) {
+        this.login = login;
+        this.phoneNumber = phoneNumber;
         this.password = password;
     }
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
+    public Client(String login, String password) {
+        this.name = login;
+        this.password = password;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
-    }
 
     /**
      * @return the country_name
@@ -76,9 +69,25 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
 
-        return id + " " + name + " " + phoneNumber;
+        return login + " " + name + " " + phoneNumber;
     }
 }

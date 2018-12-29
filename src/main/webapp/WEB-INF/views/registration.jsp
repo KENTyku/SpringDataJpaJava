@@ -21,7 +21,7 @@
     <%--</table>--%>
 </div>
 Регистрация на сайте:
-<form method="POST" action="/registrationClient" enctype="multipart/form-data">
+<form method="POST" action="registrationClient" enctype="multipart/form-data">
     <%--<input name="id" type="hidden" id="id_editProduct" value="${product.id}"/><br>--%>
     <table>
         <tr>
