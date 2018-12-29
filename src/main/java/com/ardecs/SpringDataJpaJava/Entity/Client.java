@@ -18,17 +18,25 @@ public class Client {
     private long id;
     @NotNull
     private String name;
-    @NotNull
+    //    @NotNull
     private String phoneNumber;
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     private List<Order> orders;
+    @NotNull
+    private String password;
 
     public Client() {
     }
 
-    public Client(String name, String phoneNumber) {
+    public Client(String name, String phoneNumber, String password) {
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
+    public Client(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
     /**

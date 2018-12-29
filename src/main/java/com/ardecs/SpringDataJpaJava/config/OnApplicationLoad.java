@@ -54,11 +54,11 @@ public class OnApplicationLoad {
         countryList.add(country);
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
-        Client client = new Client("Yuri", "9051111111");
+        Client client = new Client("Yuri", "9051111111","1234");
         clientList.add(client);
-        client = new Client("Bob", "9052222222");
+        client = new Client("Bob", "9052222222","321654");
         clientList.add(client);
-        client = new Client("Den", "9053333333");
+        client = new Client("Den", "9053333333","654654");
         clientList.add(client);
         clientRepository.saveAll(clientList);
         for (int i = 0; i < 20; i++) {
