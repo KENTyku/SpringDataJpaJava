@@ -19,10 +19,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("password").roles("USER");
     }
 
-
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/resources/images/**").permitAll()
                 .anyRequest().authenticated()
-                .and().httpBasic();
+
+                .and().formLogin()
+                .loginPage("/resources/loginPage.html").permitAll()
+        ;
+
     }
 }

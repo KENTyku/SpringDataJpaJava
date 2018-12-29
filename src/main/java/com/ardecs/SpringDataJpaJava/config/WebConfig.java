@@ -6,7 +6,7 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     // Этот метод должен содержать конфигурации которые инициализируют бины всего нашего приложения
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{AppConfig.class};
+        return new Class[]{AppConfig.class, SecurityConfig.class};
     }
 
     // Тут добавляем конфигурацию, в которой инициализируем ViewResolver
@@ -20,5 +20,4 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
     protected String[] getServletMappings() {
         return new String[]{"/"};
     }
-
 }

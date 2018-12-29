@@ -10,7 +10,7 @@
 <head>
     <title>Информация о заказе</title>
     <style>
-        body { background: url(/resources/background.png); }
+        body { background: url(/resources/images/background.png); }
     </style>
 </head>
 <body>

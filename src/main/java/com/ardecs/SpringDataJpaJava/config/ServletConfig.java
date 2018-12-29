@@ -31,7 +31,7 @@ public class ServletConfig extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
+//бин резолвера для форм с данными смешанного типа(картинки +текст)
     @Bean (name = "multipartResolver")
     public CommonsMultipartResolver setupMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();
