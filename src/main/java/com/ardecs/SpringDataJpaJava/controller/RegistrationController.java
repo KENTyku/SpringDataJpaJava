@@ -29,25 +29,29 @@ public class RegistrationController {
 
     @RequestMapping(value = {"/registrationClient"}, method = RequestMethod.POST)
     public String addClientAccount(
-            @RequestParam String login,
-            @RequestParam String password,
-            @RequestParam String passwordConfirm,
+            @RequestParam("login") String login,
+            @RequestParam("password") String password,
+            @RequestParam("passwordConfirm") String passwordConfirm,
             Model model
     ) {
+        System.out.println(login+password+passwordConfirm);
         boolean check = true;
+        System.out.println(check);
         if (clientRepository.existsById(login)) {
             model.addAttribute("messageLogin", "Логин занят, введите другой");
             check = false;
         }
-        if (password != passwordConfirm) {
+        System.out.println(check);
+        if (!password.equals(passwordConfirm)){
             model.addAttribute("messagePassword", "Пароли не совпадают, введите пароль и подтверждение повторно");
-            check = false & check;
+            check = false;
         }
+        System.out.println(check);
         if (!check) {
             return "registration";
         }
         Client client = new Client(login, password);
         clientRepository.save(client);
-        return "products";
+        return "redirect:/";
     }
 }
