@@ -1,5 +1,7 @@
 package com.ardecs.SpringDataJpaJava.config;
 
+import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
+import com.ardecs.SpringDataJpaJava.Repository.UserDetailsServiceCast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
+    private UserDetailsServiceCast userDetailsServiceCast;
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
@@ -25,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         ;
     }
 
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http,AuthenticationManagerBuilder authManBuilder) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -50,7 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
         ;
+        authManBuilder.userDetailsService(userDetailsServiceCast);
     }
+
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
