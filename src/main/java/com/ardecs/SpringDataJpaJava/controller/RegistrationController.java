@@ -34,23 +34,27 @@ public class RegistrationController {
             @RequestParam("passwordConfirm") String passwordConfirm,
             Model model
     ) {
-        System.out.println(login+password+passwordConfirm);
         boolean check = true;
-        System.out.println(check);
+        if(login.isEmpty()||password.isEmpty()||passwordConfirm.isEmpty()){
+            model.addAttribute("messageEmpty", "Поля не могут быть пустыми");
+            return "registration";
+        }if(login.length()<4||password.length()<4||passwordConfirm.length()<4){
+            model.addAttribute("messageShort", "Значения полей должны иметь длину более 3 символов");
+            return "registration";
+        }
         if (clientRepository.existsById(login)) {
             model.addAttribute("messageLogin", "Логин занят, введите другой");
             check = false;
         }
-        System.out.println(check);
         if (!password.equals(passwordConfirm)){
             model.addAttribute("messagePassword", "Пароли не совпадают, введите пароль и подтверждение повторно");
             check = false;
         }
-        System.out.println(check);
+
         if (!check) {
             return "registration";
         }
-        Client client = new Client(login, password);
+        Client client = new Client(login, passwordEncoder.encode(password));
         clientRepository.save(client);
         return "redirect:/";
     }

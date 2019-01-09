@@ -41,7 +41,7 @@ public class Client {
     }
 
     public Client(String login, String password) {
-        this.name = login;
+        this.login = login;
         this.password = password;
     }
 

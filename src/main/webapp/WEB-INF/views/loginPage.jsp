@@ -8,11 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration</title>
+    <title>LoginPage</title>
 </head>
 <body>
-Регистрация на сайте:
-<form method="POST" action="registrationClient" enctype="multipart/form-data">
+Вход:
+<form method="POST" action="login" enctype="multipart/form-data">
     <table>
         <tr>
             <td><b>Логин:</b></td>
@@ -25,15 +25,10 @@
             <td>${messagePassword}</td>
         </tr>
         <tr>
-            <td><b>Подтверждение пароля:</b></td>
-            <td><input name="passwordConfirm" type="password" id="passwordConfirm_registration"/></td>
-            <td>${messagePassword}</td>
+            <td>${messageEmpty}</td>
         </tr>
         <tr>
-            <td>${messageEmpty}${messageShort}</td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="submit" value="Зарегистрироваться"/></td>
+            <td colspan="2"><input type="submit" value="Войти"/></td>
         </tr>
     </table>
 </form>
