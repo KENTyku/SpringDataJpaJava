@@ -1,7 +1,5 @@
 package com.ardecs.SpringDataJpaJava.config;
 
-import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
-import com.ardecs.SpringDataJpaJava.Repository.UserDetailsServiceCast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,20 +14,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailsServiceCast userDetailsServiceCast;
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
-                .and()
-                .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN")
-        ;
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
-    protected void configure(HttpSecurity http,AuthenticationManagerBuilder authManBuilder) throws Exception {
+    //    @Bean
+//    public UserDetailsService userDetailsService() {
+//        return new UserDetailsServiceCast();
+//    }
+    @Autowired
+    private UserDetailsServiceCast userDetailsServiceCast;
+
+    @Override
+    public void configure(AuthenticationManagerBuilder registry) throws Exception {
+//        registry.inMemoryAuthentication()
+//                .withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
+//                .and()
+//                .withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER")
+//                .and()
+//                .withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN")
+//        ;
+        registry.userDetailsService(userDetailsServiceCast);
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -39,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/WEB-INF/views/editProduct.jsp").hasRole("USER")
                 .antMatchers("/resources/images/**").permitAll()
                 .antMatchers("/registration").permitAll()
-                .antMatchers(HttpMethod.POST,"/registrationClient").permitAll()
+                .antMatchers(HttpMethod.POST, "/registrationClient").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/clients").permitAll()
                 .anyRequest().authenticated()
@@ -55,12 +65,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
         ;
-        authManBuilder.userDetailsService(userDetailsServiceCast);
-    }
-
-
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }
