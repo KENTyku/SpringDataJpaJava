@@ -2,29 +2,30 @@ package com.ardecs.SpringDataJpaJava.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import static com.ardecs.SpringDataJpaJava.constants.Constants.ADMIN_ROLE;
 
 
 @Configuration
 @EnableWebSecurity
+@ComponentScan(basePackages = "com.ardecs.SpringDataJpaJava.config")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    //    @Bean
-//    public UserDetailsService userDetailsService() {
-//        return new UserDetailsServiceCast();
-//    }
     @Autowired
-    private UserDetailsServiceCast userDetailsServiceCast;
+    private UserDetailsService userDetailsServiceCast;
 
     @Override
     public void configure(AuthenticationManagerBuilder registry) throws Exception {
@@ -44,21 +45,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-//                .antMatchers("/editProduct").hasRole("USER")
-//                .antMatchers("/saveProduct").permitAll()
-//                .antMatchers("/WEB-INF/views/editProduct.jsp").hasRole("USER")
                 .antMatchers("/resources/images/**").permitAll()
                 .antMatchers("/registration").permitAll()
                 .antMatchers(HttpMethod.POST, "/registrationClient").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/clients").permitAll()
+                .antMatchers("/clients").hasRole(ADMIN_ROLE)
+                .antMatchers("/editProduct").hasRole(ADMIN_ROLE)
                 .anyRequest().authenticated()
 //                .and().httpBasic()
 
                 .and()
                 .formLogin()
                 .loginPage("/loginPage").permitAll()
-//                .loginProcessingUrl("/resources/images/sun.png")
+                .loginProcessingUrl("/loginPage")
 //                .defaultSuccessUrl("/cart", true)
                 .failureUrl("/resources/error.html")
 
