@@ -1,7 +1,6 @@
 package com.ardecs.SpringDataJpaJava.config;
 
 import javax.annotation.PostConstruct;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,13 +10,23 @@ import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
-import com.ardecs.SpringDataJpaJava.Repository.*;
+import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
+import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
+import com.ardecs.SpringDataJpaJava.constants.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
 @Component
 public class OnApplicationLoad {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
@@ -54,11 +63,12 @@ public class OnApplicationLoad {
         countryList.add(country);
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
-        Client client = new Client("Yuri", "9051111111","1234");
+        Client client = new Client("Yuri", "9051111111", passwordEncoder.encode("1234"));
+        client.setRole(Constants.ADMIN_ROLE);
         clientList.add(client);
-        client = new Client("Bob", "9052222222","321654");
+        client = new Client("Bob", "9052222222", passwordEncoder.encode("1234"));
         clientList.add(client);
-        client = new Client("Den", "9053333333","654654");
+        client = new Client("Den", "9053333333", passwordEncoder.encode("1234"));
         clientList.add(client);
         clientRepository.saveAll(clientList);
         for (int i = 0; i < 20; i++) {

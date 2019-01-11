@@ -20,8 +20,9 @@
             <td align="left"><a href="home">Каталог товаров</a><br></td>
             <td align="center"><a href="orders">Список заказов</a><br></td>
             <td align="right"><a href="cart">Корзина</a><br></td>
-            <td align="right"><a href="/registration">Регистрация</a><br></td>
-            <td align="right"><a href="/loginPage">Вход</a><br></td>
+            <td align="right"><a href="clients">Клиенты</a><br></td>
+            <td align="right"><a href="registration">Регистрация</a><br></td>
+            <td align="right"><a href="loginPage">Вход</a><br></td>
         </tr>
     </table>
 </div>
