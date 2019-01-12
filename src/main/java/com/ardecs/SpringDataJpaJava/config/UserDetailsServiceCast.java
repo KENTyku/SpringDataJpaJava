@@ -1,8 +1,5 @@
 package com.ardecs.SpringDataJpaJava.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +9,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 public class UserDetailsServiceCast implements UserDetailsService {
     @Autowired
     private ClientRepository clientRepository;
@@ -23,7 +22,12 @@ public class UserDetailsServiceCast implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String login) {
         Client client = clientRepository.findById(login).get();
-        return new User(client.getLogin(), client.getPassword(), getAuthorities(client.getRole()));
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
+        return new User(client.getLogin(), client.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
+                accountNonLocked, getAuthorities(client.getRole()));
     }
 
     private static List<GrantedAuthority> getAuthorities(String role) {

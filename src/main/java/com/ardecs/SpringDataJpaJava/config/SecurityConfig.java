@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static com.ardecs.SpringDataJpaJava.constants.Constants.ADMIN_ROLE;
@@ -25,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    private UserDetailsService userDetailsServiceCast;
+    private UserDetailsServiceCast userDetailsServiceCast;
 
     @Override
     public void configure(AuthenticationManagerBuilder registry) throws Exception {
@@ -57,9 +56,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/loginPage").permitAll()
-                .loginProcessingUrl("/loginPage")
+//                .loginProcessingUrl("/loginPage")
 //                .defaultSuccessUrl("/cart", true)
-                .failureUrl("/resources/error.html")
+//                .failureUrl("/resources/error.html")
 
                 .and()
                 .logout()
