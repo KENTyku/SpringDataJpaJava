@@ -18,6 +18,8 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
 import com.ardecs.SpringDataJpaJava.constants.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -46,6 +48,7 @@ public class OnApplicationLoad {
 
     @PostConstruct//выполняет этот метод после инициализации всех бинов
     public void onApplicationLoad() {
+        Logger logger = LoggerFactory.getLogger(OnApplicationLoad.class);
         List<Category> categoryList = new ArrayList<>();
         Category category = new Category("Computer");
         categoryList.add(category);
@@ -71,6 +74,7 @@ public class OnApplicationLoad {
         client = new Client("Den", "9053333333", passwordEncoder.encode("1234"));
         clientList.add(client);
         clientRepository.saveAll(clientList);
+        logger.info("Test users created");
         for (int i = 0; i < 20; i++) {
             float price = random.nextInt(100) + 1;
 //            String name = String.valueOf(random.nextInt(10000000) + 1);
@@ -82,5 +86,6 @@ public class OnApplicationLoad {
             Product product = new Product(price, name, comment, countryRepository.findById(idCountry).get(), categoryRepository.findById(idCategory).get());
             productRepository.save(product);
         }
+        logger.info("Test products created");
     }
 }
