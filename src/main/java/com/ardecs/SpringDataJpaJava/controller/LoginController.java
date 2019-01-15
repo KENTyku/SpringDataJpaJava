@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
-    @Autowired
+    /*@Autowired
     private ProductRepository productRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -45,5 +45,10 @@ public class LoginController {
 //        Client client = new Client(login, passwordEncoder.encode(password));
 //        clientRepository.save(client);
         return "redirect:/";
+    }*/
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(){
+        return "login";
     }
 }

@@ -12,11 +12,11 @@
 </head>
 <body>
 Вход:
-<form method="POST" action="login" enctype="multipart/form-data">
+<form method="POST" action="login">
     <table>
         <tr>
             <td><b>Логин:</b></td>
-            <td><input name="login" type="text"/></td>
+            <td><input name="username" type="text"/></td>
             <td>${messageLogin}</td>
         </tr>
         <tr>

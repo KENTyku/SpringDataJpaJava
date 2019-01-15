@@ -20,14 +20,14 @@ public class UserDetailsServiceCast implements UserDetailsService {
     private ClientRepository clientRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String login) {
-        Client client = clientRepository.findById(login).get();
+    public UserDetails loadUserByUsername(String username) {
+        Client client = clientRepository.findById(username).get();
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
         return new User(client.getLogin(), client.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
-                accountNonLocked, getAuthorities(client.getRole()));
+                accountNonLocked, getAuthorities("ROLE_" + client.getRole()));
     }
 
     private static List<GrantedAuthority> getAuthorities(String role) {

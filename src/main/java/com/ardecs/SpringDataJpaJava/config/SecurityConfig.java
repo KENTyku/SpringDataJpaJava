@@ -55,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .formLogin()
-                .loginPage("/loginPage").permitAll()
+                .loginPage("/login").permitAll()
 //                .loginProcessingUrl("/loginPage")
 //                .defaultSuccessUrl("/cart", true)
 //                .failureUrl("/resources/error.html")
