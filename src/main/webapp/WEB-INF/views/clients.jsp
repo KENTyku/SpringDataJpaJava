@@ -29,7 +29,7 @@
         <c:forEach var="client" items="${clientList}">
 
             <tr>
-                <form:form method="post" action="addClient">
+                <form:form method="post" action="editClient">
                     <input name="login" type="hidden" value="${client.login}" id="login_clients"/>
                     <td>${client.login}</td>
                     <%--<td><a href="editclient?id=${client.id}">${client.name}</a></td>--%>

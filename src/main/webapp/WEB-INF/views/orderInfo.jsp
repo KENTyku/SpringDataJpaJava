@@ -34,7 +34,7 @@
         </c:forEach>
         <tr>
             <td>Итого:</td>
-            <td>${fl}</td>
+            <td>${cost}</td>
         </tr>
     </table>
 </div>

@@ -32,5 +32,6 @@
         </tr>
     </table>
 </form>
+<td align="center"><a href="/">На главную</a><br></td>
 </body>
 </html>

@@ -23,6 +23,7 @@
             <td align="right"><a href="clients">Клиенты</a><br></td>
             <td align="right"><a href="registration">Регистрация</a><br></td>
             <td align="right"><a href="login">Вход</a><br></td>
+            <td align="right"><a href="logout">Выход</a><br></td>
         </tr>
     </table>
 </div>
