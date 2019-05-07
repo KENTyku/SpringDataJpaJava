@@ -1,9 +1,16 @@
 package com.ardecs.SpringDataJpaJava.config;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
@@ -18,11 +25,6 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
 import com.ardecs.SpringDataJpaJava.constants.Constants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 
 @Component
@@ -67,6 +69,7 @@ public class OnApplicationLoad {
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
         Client client = new Client("Yuri", "9051111111", passwordEncoder.encode("1234"));
+        client.setName("Yuri");
         client.setRole(Constants.ADMIN_ROLE);
         clientList.add(client);
         client = new Client("Bob", "9052222222", passwordEncoder.encode("1234"));

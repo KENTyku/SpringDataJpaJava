@@ -6,10 +6,11 @@ package com.ardecs.SpringDataJpaJava.Repository;
 
 import java.util.List;
 
-import com.ardecs.SpringDataJpaJava.Entity.Client;
-import com.ardecs.SpringDataJpaJava.Entity.Order;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+
+import com.ardecs.SpringDataJpaJava.Entity.Client;
+import com.ardecs.SpringDataJpaJava.Entity.Order;
 
 /**
  * @author Yuri Tveritin, e-mail: kentyku@bk.ru
@@ -24,4 +25,6 @@ public interface OrderRepository extends CrudRepository<Order, Long> {
 
     @Query("select o from Order o left join fetch o.orderPositions where o.id = :orderId")
     Order getOrderWithPositions(Long orderId);
+
+
 }
