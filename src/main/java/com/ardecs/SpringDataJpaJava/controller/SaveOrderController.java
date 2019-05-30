@@ -53,7 +53,9 @@ public class SaveOrderController {
         }
         order.setOrderPositions(list);
         orderRepository.save(order);
-        sessionStatus.setComplete();
+        httpSession.removeAttribute("positions");
+//        sessionStatus.setComplete();
+//        httpSession.invalidate();//TODO : sessiion isn't clean
         return "redirect:orders";
     }
 }
