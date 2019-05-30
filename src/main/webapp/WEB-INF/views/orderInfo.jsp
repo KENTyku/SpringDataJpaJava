@@ -22,6 +22,7 @@
             <td><b>id продукта:</b></td>
             <td><b>Наименование:</b></td>
             <td><b>Количество:</b></td>
+            <td><b>Цена:</b></td>
             <td><b>Стоимость:</b></td>
         </tr>
         <c:forEach var="orderPosition" items="${orderPositionList}">
@@ -29,12 +30,16 @@
                 <td>${orderPosition.id.product.id}</td>
                 <td>${orderPosition.id.product.name}</td>
                 <td>${orderPosition.quantity}</td>
-                <td>${orderPosition.quantity}</td>
+                <td>${orderPosition.id.product.price}</td>
+                <td>${orderPosition.id.product.price*orderPosition.quantity}</td>
             </tr>
         </c:forEach>
         <tr>
             <td>Итого:</td>
-            <td>${fl}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>${cost}</td>
         </tr>
     </table>
 </div>

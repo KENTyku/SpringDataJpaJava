@@ -9,8 +9,13 @@
 <html>
 <head>
     <title>Информация о заказе</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
-        body { background: url(/resources/background.png); }
+        body { background: url(/resources/images/background.png); }
     </style>
 </head>
 <body>
@@ -20,6 +25,10 @@
             <td align="left"><a href="home">Каталог товаров</a><br></td>
             <td align="center"><a href="orders">Список заказов</a><br></td>
             <td align="right"><a href="cart">Корзина</a><br></td>
+            <td align="right"><a href="clients">Клиенты</a><br></td>
+            <td align="right"><a href="registration">Регистрация</a><br></td>
+            <td align="right"><a href="login">Вход</a><br></td>
+            <td align="right"><a href="logout">Выход</a><br></td>
         </tr>
     </table>
 </div>

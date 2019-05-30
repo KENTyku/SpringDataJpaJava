@@ -5,7 +5,6 @@
 package com.ardecs.SpringDataJpaJava.Repository;
 
 import com.ardecs.SpringDataJpaJava.Entity.Country;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

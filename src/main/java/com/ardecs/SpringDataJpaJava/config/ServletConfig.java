@@ -15,7 +15,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan("com.ardecs.SpringDataJpaJava")
 //унаследовавшись от  класса WebMvcConfigurerAdapter мы получим возможность сконфигурировать
 // ResourceLocations(расположение статических ресурсов)
-public class ConfigServlet extends WebMvcConfigurerAdapter {
+public class ServletConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -31,7 +31,7 @@ public class ConfigServlet extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
+//бин резолвера для форм с данными смешанного типа(картинки +текст)
     @Bean (name = "multipartResolver")
     public CommonsMultipartResolver setupMultipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();

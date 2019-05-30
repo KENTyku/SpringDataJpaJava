@@ -19,26 +19,14 @@ public class LoggingSave {
     private ReportRepository reportRepository;
     private Object entity;
 
-@Pointcut(
-//        "(" +
-                "execution(* com.ardecs.SpringDataJpaJava.Repository..*.save(Object))" +
-                "&&!execution(* com.ardecs.SpringDataJpaJava.Repository.ReportRepository.save(Object))"+
-                //добавить исключение интерфейса ReportRepository
-//                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderRepository.save(Object))||" +
-//                "execution(* com.ardecs.SpringDataJpaJava.Repository.CategoryRepository.save(Object))||"+
-//                "execution(* com.ardecs.SpringDataJpaJava.Repository.CountryRepository.save(Object))||"+
-//                "execution(* com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository.save(Object))||"+
-//                "execution(* com.ardecs.SpringDataJpaJava.Repository.ProductRepository.save(Object))"+
-//        ")"+
-                "&&args(entity)"
-)
-    public void saveToReport(Object entity) {
-    }
-
-    @AfterReturning("saveToReport(entity)")
+    @AfterReturning(
+            "execution(* com.ardecs.SpringDataJpaJava.Repository..*.save(Object))" +
+                    "&&!execution(* com.ardecs.SpringDataJpaJava.Repository.ReportRepository.save(Object))" +
+                    "&&args(entity)"
+    )
     public void logEntity(Object entity) {
-        String nameClass=entity.getClass().getName();
-        Report report=new Report(nameClass,"save",LocalDateTime.now());
+        String nameClass = entity.getClass().getName();
+        Report report = new Report(nameClass, "save", LocalDateTime.now());
         reportRepository.save(report);
     }
 

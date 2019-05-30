@@ -25,19 +25,13 @@
             <td><b>Просмотреть:</b></td>
             <%--<td><b>Удалить:</b></td>--%>
         </tr>
-        <c:forEach var="order" items="${orderList}">
+        <c:forEach var="order" items="${ordersMap.keySet()}">
             <tr>
                 <td>${order.id}</td>
                 <td>${order.date}</td>
-                <td>
-
-                    <%--<c:forEach var="position" items="${order.orderPositions}">--%>
-                        <%--${position.id.product.price}--%>
-                    <%--</c:forEach>--%>
-                    <%--${order.orderPositions.stream().map(id.product->id.product.price*quantity).sum()}--%>
-                </td>
+                <td>${ordersMap.get(order)} </td>
                 <td><a href="orderInfo?id=${order.id}">Просмотреть</a></td>
-                <%--<td><a href="deleteOrder?orderId=${order.id}">Удалить</a></td>--%>
+                    <%--<td><a href="deleteOrder?orderId=${order.id}">Удалить</a></td>--%>
             </tr>
         </c:forEach>
     </table>

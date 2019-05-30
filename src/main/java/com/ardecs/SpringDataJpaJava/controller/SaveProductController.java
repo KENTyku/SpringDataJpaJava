@@ -34,7 +34,7 @@ public class SaveProductController {
     private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
-    final Random random = new Random();
+    private final Random random = new Random();
     private float price;
 
     @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)

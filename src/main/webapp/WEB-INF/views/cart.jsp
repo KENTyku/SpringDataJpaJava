@@ -38,15 +38,17 @@
                     <td>${position.value.first.id}</td>
                     <td>${position.value.first.name}</td>
                     <td>${position.value.first.comment}</td>
-                    <td><img src="/resources/${position.value.first.imageUrl}" alt="image" width="100"  height="100></td>
+                    <td><img src="/resources/${position.value.first.imageUrl}" alt="image" width="100" height="100">
+                    </td>
                     <td>${position.value.first.category.categoryName}</td>
                     <td>${position.value.first.country.name}</td>
                     <td>${position.value.first.price}</td>
-                    <td><input name="quantity" type="text" id="quantity_Products" value="${position.value.second}"/>
+                    <td>
+                        <input name="quantity" type="text" id="quantity_Products" value="${position.value.second}"/>
                     </td>
                     <td>${position.value.first.price*position.value.second}</td>
+                    <td colspan="1"><input type="submit" value="Пересчитать"></td>
                     <td><a href="deleteCartProduct?productId=${position.value.first.id}">Удалить</a></td>
-                    <td colspan="1"><input type="submit" value="Пересчитать"/></td>
                 </tr>
             </form:form>
         </c:forEach>

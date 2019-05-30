@@ -4,7 +4,11 @@ package com.ardecs.SpringDataJpaJava.Entity;/*
  * and open the template in the editor.
  */
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -14,36 +18,38 @@ import java.util.List;
 @Entity
 public class Client {
     @Id
-    @GeneratedValue
-    private long id;
+    private String login;
     @NotNull
     private String name;
-    @NotNull
+    //    @NotNull
     private String phoneNumber;
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = {CascadeType.REMOVE})
     private List<Order> orders;
+    @NotNull
+    private String password;
+    private String role;
 
     public Client() {
     }
 
-    public Client(String name, String phoneNumber) {
+    public Client(String login, String name, String phoneNumber, String password) {
+        this.login = login;
         this.name = name;
         this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
+    public Client(String login, String phoneNumber, String password) {
+        this.login = login;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
+    public Client(String login, String password) {
+        this.login = login;
+        this.password = password;
     }
+
 
     /**
      * @return the country_name
@@ -68,9 +74,33 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
 
-        return id + " " + name + " " + phoneNumber;
+        return login + " " + name + " " + phoneNumber;
     }
 }

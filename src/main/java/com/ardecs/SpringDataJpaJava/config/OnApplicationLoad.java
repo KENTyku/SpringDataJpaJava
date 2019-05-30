@@ -1,23 +1,36 @@
 package com.ardecs.SpringDataJpaJava.config;
 
-import javax.annotation.PostConstruct;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import javax.annotation.PostConstruct;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
-import com.ardecs.SpringDataJpaJava.Repository.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
+import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
+import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
+import com.ardecs.SpringDataJpaJava.constants.Constants;
 
 
 @Component
 public class OnApplicationLoad {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
@@ -37,6 +50,7 @@ public class OnApplicationLoad {
 
     @PostConstruct//выполняет этот метод после инициализации всех бинов
     public void onApplicationLoad() {
+        Logger logger = LoggerFactory.getLogger(OnApplicationLoad.class);
         List<Category> categoryList = new ArrayList<>();
         Category category = new Category("Computer");
         categoryList.add(category);
@@ -54,13 +68,16 @@ public class OnApplicationLoad {
         countryList.add(country);
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
-        Client client = new Client("Yuri", "9051111111");
+        Client client = new Client("Yuri", "9051111111", passwordEncoder.encode("1234"));
+        client.setName("Yuri");
+        client.setRole(Constants.ADMIN_ROLE);
         clientList.add(client);
-        client = new Client("Bob", "9052222222");
+        client = new Client("Bob", "9052222222", passwordEncoder.encode("1234"));
         clientList.add(client);
-        client = new Client("Den", "9053333333");
+        client = new Client("Den", "9053333333", passwordEncoder.encode("1234"));
         clientList.add(client);
         clientRepository.saveAll(clientList);
+        logger.info("Test users created");
         for (int i = 0; i < 20; i++) {
             float price = random.nextInt(100) + 1;
 //            String name = String.valueOf(random.nextInt(10000000) + 1);
@@ -72,5 +89,6 @@ public class OnApplicationLoad {
             Product product = new Product(price, name, comment, countryRepository.findById(idCountry).get(), categoryRepository.findById(idCategory).get());
             productRepository.save(product);
         }
+        logger.info("Test products created");
     }
 }

@@ -1,23 +1,29 @@
 package com.ardecs.SpringDataJpaJava.controller;
 
-import com.ardecs.SpringDataJpaJava.Entity.*;
-import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
-import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
-
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@SessionAttributes("positions")
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.ardecs.SpringDataJpaJava.Entity.Client;
+import com.ardecs.SpringDataJpaJava.Entity.Order;
+import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
+import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
+import com.ardecs.SpringDataJpaJava.Entity.Product;
+import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
+import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
+
 @Controller
 public class SaveOrderController {
     @Autowired
@@ -32,7 +38,9 @@ public class SaveOrderController {
             return "redirect:cart";
         }
 
-        Client client = clientRepository.findByName("Yuri");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String clientLogin = user.getUsername();
+        Client client = clientRepository.findByLogin(clientLogin);
         Order order = new Order(LocalDateTime.now(), client);
         List<OrderPosition> list = new ArrayList<>();
         if (positions == null || positions.isEmpty()) return "redirect:cart";
@@ -45,7 +53,9 @@ public class SaveOrderController {
         }
         order.setOrderPositions(list);
         orderRepository.save(order);
-        sessionStatus.setComplete();
+        httpSession.removeAttribute("positions");
+//        sessionStatus.setComplete();
+//        httpSession.invalidate();//TODO : sessiion isn't clean
         return "redirect:orders";
     }
 }
