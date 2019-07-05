@@ -120,8 +120,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="col-sm-5 col-md-offset-2  header-login">
                 <ul >
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
+                    <li><a href="../../resources/login.html">Login</a></li>
+                    <li><a href="/registration">Register</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
                 </ul>
             </div>
