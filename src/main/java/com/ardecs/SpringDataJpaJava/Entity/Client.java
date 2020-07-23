@@ -19,7 +19,7 @@ import java.util.List;
 public class Client {
     @Id
     private String login;
-    @NotNull
+//    @NotNull
     private String name;
     //    @NotNull
     private String phoneNumber;

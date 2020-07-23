@@ -68,13 +68,12 @@ public class OnApplicationLoad {
         countryList.add(country);
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
-        Client client = new Client("Yuri", "9051111111", passwordEncoder.encode("1234"));
-        client.setName("Yuri");
+        Client client = new Client("Yuri", "Yury","9051111111", passwordEncoder.encode("1234"));
         client.setRole(Constants.ADMIN_ROLE);
         clientList.add(client);
-        client = new Client("Bob", "9052222222", passwordEncoder.encode("1234"));
+        client = new Client("Bob", "BobName","9052222222", passwordEncoder.encode("1234"));
         clientList.add(client);
-        client = new Client("Den", "9053333333", passwordEncoder.encode("1234"));
+        client = new Client("Den","DenName", "9053333333", passwordEncoder.encode("1234"));
         clientList.add(client);
         clientRepository.saveAll(clientList);
         logger.info("Test users created");
