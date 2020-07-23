@@ -11,8 +11,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 @Configuration
-@EnableWebMvc
-@ComponentScan("com.ardecs.SpringDataJpaJava")
 //унаследовавшись от  класса WebMvcConfigurerAdapter мы получим возможность сконфигурировать
 // ResourceLocations(расположение статических ресурсов)
 public class ServletConfig extends WebMvcConfigurerAdapter {
