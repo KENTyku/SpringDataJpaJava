@@ -1,10 +1,5 @@
 package com.ardecs.SpringDataJpaJava.com.ardecs;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
@@ -12,6 +7,7 @@ import com.ardecs.SpringDataJpaJava.Entity.Order;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
+import com.ardecs.SpringDataJpaJava.Entity.Report;
 import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ClientRepository;
 import com.ardecs.SpringDataJpaJava.Repository.CountryRepository;
@@ -19,23 +15,29 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
 import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
-import com.ardecs.SpringDataJpaJava.config.AppConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.clientFindByCriteries;
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertArrayEquals;
-@RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
-@ContextConfiguration(classes = AppConfig.class)
-//указываем конфиг для работы автокофигурации контекста в тесте
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SpringDataJpaJavaTests {
+    private static final String LOGIN = "Bob";
+
     @Autowired
     private CountryRepository countryRepository;
     @Autowired
@@ -95,111 +97,83 @@ public class SpringDataJpaJavaTests {
                     countryRepository.findByName("Japan"), categoryRepository.findByName("Mobile"));
             productRepository.save(product);
         }
-        if (!clientRepository.existsByName("Bob")) {
-            Client client = new Client("Bob", "9052222222");
+        if (!clientRepository.existsByName(LOGIN)) {
+            Client client = new Client(LOGIN, "Bobik", "9052222222", "1234");
             clientRepository.save(client);
         }
     }
 
-//    @Test
-//
-//    public void clientRegistration() {
-//        Client client = new Client("Yuri", "9051111111");
-//        clientRepository.save(client);
-//        Long idClient = client.getId();
-//        assertEquals(Long.valueOf(23), idClient);
-//
-//    }
-//
-//    @Test
-//    public void clientSignIn() {
-//
-//        Optional<Client> clientOptional = clientRepository.findById((long) 19);
-//        Client client = clientOptional.get();
-//        assertEquals("Bob", client.getName());
-//        assertEquals("9052222222", client.getPhoneNumber());
-//    }
-//
-//
-//    @Test
-//    public void addOrder() {
-//        Optional<Client> clientOptional = clientRepository.findById((long) 19);
-//        Client client = clientOptional.get();
-//        Long idClient = client.getId();
-//        //create order
-//        LocalDateTime date;
-//        date = LocalDateTime.now();
-//        Order order = new Order(date, client);
-//        //find Products
-//        String namePart = "Sony";
-//        //select Category
-//        List<Category> categoriesList = (ArrayList<Category>) categoryRepository.findAll();
-//        for (Category item : categoriesList) {
-//            System.out.println(item.getCategoryName());
-//        }
-//        //doing request
-//        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), namePart);
-//        //show results
-//        for (Product item : products) {
-//            System.out.println(item);
-//        }
-//        //select product and quantity
-//        id = new OrderPositionId(order, products.get(0));
-//        OrderPosition orderPosition = new OrderPosition(id, 5);
-//        List<OrderPosition> list = new ArrayList<>();
-//        list.add(orderPosition);
-//
-//        //select product and quantity
-//        id = new OrderPositionId(order, products.get(1));
-//        orderPosition = new OrderPosition(id, 2);
-//        list.add(orderPosition);
-//
-//        //add to order and save order
-//        order.setOrderPositions(list);
-//        orderRepository.save(order);
-//        Long idOrder = order.getId();
-//        assertEquals(Long.valueOf(21), idOrder);
-//    }
-//
-//    @Test
-//    public void showAllClientOrders() {
-//        Optional<Client> clientOptional = clientRepository.findById((long) 19);
-//        Client client = clientOptional.get();
-//        List<Order> ordersList = orderRepository.findAllByClientOrderByDateDesc(client);
-//
-//        ArrayList<Long> listIdOrders = new ArrayList<>();
-//        for (Order item : ordersList) {
-//            listIdOrders.add(item.getId());
-//        }
-//        Long[] expecteds = {Long.valueOf(21)};
-//        Long[] actual = listIdOrders.toArray(new Long[listIdOrders.size()]);
-//        assertArrayEquals(expecteds, actual);
-//    }
-//
-//    @Test
-//    public void pagingAllProducts() {
-//        Page<Product> page = productRepository.findAll(PageRequest.of(1, 2, Sort.by(new Sort.Order(Sort.Direction.ASC, "price"))));
-//        List<Product> products = page.getContent();
-//        ArrayList<Long> listIdProducts = new ArrayList<>();
-//        for (Product item : products) {
-//            listIdProducts.add(item.getId());
-//        }
-//        Long[] expecteds = {Long.valueOf(13)};
-//        Long[] actual = listIdProducts.toArray(new Long[listIdProducts.size()]);
-//        assertArrayEquals(expecteds, actual);
-//    }
-//
-//    @Test
-//    public void searchClientsWithCriteries() {
-//        List<Client> clientList = clientRepository.findAll(clientFindByCriteries("Yuri", "9051111111"));
-//        ArrayList<Long> listIdClients = new ArrayList<>();
-//        for (Client item : clientList) {
-//            listIdClients.add(item.getId());
-//        }
-//        Long[] expecteds = {Long.valueOf(23)};
-//        Long[] actual = listIdClients.toArray(new Long[listIdClients.size()]);
-//        assertArrayEquals(expecteds, actual);
-//    }
+    @Test
+
+    public void clientRegistration() {
+        String login = "Yuri";
+        String password = "9051111111";
+        clientRepository.save(new Client(login,"Yuri","9051111111", password));
+        Client client = clientRepository.findByLogin(login);
+        assertEquals(password, client.getPassword());
+    }
+
+    @Test
+    public void clientSignIn() {
+        Client client = clientRepository.findByLogin(LOGIN);
+        assertEquals("Bobik", client.getName());
+        assertEquals("9052222222", client.getPhoneNumber());
+    }
+
+    @Test
+    public void addOrder() {
+        Client client = clientRepository.findByLogin(LOGIN);
+        //create order
+        LocalDateTime date;
+        date = LocalDateTime.now();
+        Order order = new Order(date, client);
+        //find Products
+        String namePart = "Sony";
+        //select Category
+        List<Category> categoriesList = (ArrayList<Category>) categoryRepository.findAll();
+        for (Category item : categoriesList) {
+            System.out.println(item.getCategoryName());
+        }
+        //doing request
+        List<Product> products = productRepository.findByCategoryAndProductNamePart(categoriesList.get(1), namePart);
+        //show results
+        for (Product item : products) {
+            System.out.println(item);
+        }
+        //select product and quantity
+        id = new OrderPositionId(order, products.get(0));
+        OrderPosition orderPosition = new OrderPosition(id, 5);
+        List<OrderPosition> list = new ArrayList<>();
+        list.add(orderPosition);
+
+        //select product and quantity
+        id = new OrderPositionId(order, products.get(1));
+        orderPosition = new OrderPosition(id, 2);
+        list.add(orderPosition);
+
+        //add to order and save order
+        order.setOrderPositions(list);
+        orderRepository.save(order);
+
+        assertEquals(2, orderRepository.getOrderWithPositionsByClient(client).size());
+    }
+
+
+    @Test
+    public void pagingAllProducts() {
+        Page<Product> page = productRepository.findAll(PageRequest.of(
+                1, 2, Sort.by(new Sort.Order(Sort.Direction.ASC, "price"))
+                )
+        );
+        assertEquals(2, page.getContent().size());
+    }
+
+    @Test
+    public void searchClientsWithCriteries() {
+        List<Client> clientList = clientRepository
+                .findAll(clientFindByCriteries("Yuri", "9051111111"));
+        assertEquals(1, clientList.size());
+    }
 
 
     @Test
@@ -207,8 +181,11 @@ public class SpringDataJpaJavaTests {
         Category category = new Category("Books");
         categoryRepository.save(category);
         categoryRepository.delete(category);
-        long count = reportRepository.count();
-        assertEquals(14, count);
+        Iterable<Report> iterable = reportRepository.findAll();
+        long count = StreamSupport.stream(iterable.spliterator(), false)
+                .filter(r -> r.getName().contains("Category"))
+                .count();
+        assertEquals(2, count);
     }
 }
 

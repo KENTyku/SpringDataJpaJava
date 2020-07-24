@@ -11,6 +11,9 @@ public class Report {
     @GeneratedValue
     private Long id;
 
+    public Report(){
+    }
+
     public Report(String name, String operation, LocalDateTime date) {
         this.name = name;
         this.operation = operation;

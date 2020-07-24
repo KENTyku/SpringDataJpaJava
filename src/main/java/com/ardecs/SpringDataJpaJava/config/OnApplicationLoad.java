@@ -68,7 +68,7 @@ public class OnApplicationLoad {
         countryList.add(country);
         countryRepository.saveAll(countryList);
         List<Client> clientList = new ArrayList<>();
-        Client client = new Client("Yuri", "Yury","9051111111", passwordEncoder.encode("1234"));
+        Client client = new Client("Yuri", "Yuri","9051111111", passwordEncoder.encode("1234"));
         client.setRole(Constants.ADMIN_ROLE);
         clientList.add(client);
         client = new Client("Bob", "BobName","9052222222", passwordEncoder.encode("1234"));
