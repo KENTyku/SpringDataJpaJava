@@ -121,8 +121,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-sm-5 col-md-offset-2  header-login">
                 <ul >
                     <li><a href="../../resources/login.html">Login</a></li>
-                    <li><a href="/registration">Register</a></li>
-                    <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="registration">Register</a></li>
+                    <li><a href="../../resources/checkout.html">Checkout</a></li>
                 </ul>
             </div>
 
@@ -291,10 +291,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                 </div>
                             </li>
-                            <li><a class="color3" href="product">Sale</a></li>
-                            <li><a class="color4" href="404.html">About</a></li>
-                            <li><a class="color5" href="typo.html">Short Codes</a></li>
-                            <li ><a class="color6" href="contact.html">Contact</a></li>
+                            <li><a class="color3" href="/editProduct">Sale</a></li>
+                            <li><a class="color4" href="../../resources/404.html">About</a></li>
+                            <li><a class="color5" href="../../resources/typo.html">Short Codes</a></li>
+                            <li ><a class="color6" href="../../resources/contact.html">Contact</a></li>
                         </ul>
                     </div><!-- /.navbar-collapse -->
 
@@ -309,7 +309,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="glyphicon glyphicon-search"> </i></a></li>
                 </ul>
                 <div class="cart box_1">
-                    <a href="checkout.html">
+                    <a href="../../resources/checkout.html">
                         <h3> <div class="total">
                             <span class="simpleCart_total"></span></div>
                             <img src="../../resources/images/cart.png" alt=""/></h3>
@@ -730,9 +730,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h6>Information</h6>
                 <ul class=" in">
                     <li><a href="404.html">About</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="../../resources/contact.html">Contact Us</a></li>
                     <li><a href="#">Returns</a></li>
-                    <li><a href="contact.html">Site Map</a></li>
+                    <li><a href="../../resources/contact.html">Site Map</a></li>
                 </ul>
                 <ul class="in in1">
                     <li><a href="#">Order History</a></li>
