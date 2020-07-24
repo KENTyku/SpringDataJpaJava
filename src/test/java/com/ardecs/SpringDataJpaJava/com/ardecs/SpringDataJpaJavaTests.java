@@ -1,15 +1,8 @@
 package com.ardecs.SpringDataJpaJava.com.ardecs;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import com.ardecs.SpringDataJpaJava.Entity.Category;
 import com.ardecs.SpringDataJpaJava.Entity.Client;
 import com.ardecs.SpringDataJpaJava.Entity.Country;
-import com.ardecs.SpringDataJpaJava.Entity.Order;
-import com.ardecs.SpringDataJpaJava.Entity.OrderPosition;
 import com.ardecs.SpringDataJpaJava.Entity.OrderPositionId;
 import com.ardecs.SpringDataJpaJava.Entity.Product;
 import com.ardecs.SpringDataJpaJava.Repository.CategoryRepository;
@@ -19,22 +12,17 @@ import com.ardecs.SpringDataJpaJava.Repository.OrderPositionRepository;
 import com.ardecs.SpringDataJpaJava.Repository.OrderRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ProductRepository;
 import com.ardecs.SpringDataJpaJava.Repository.ReportRepository;
-import com.ardecs.SpringDataJpaJava.config.AppConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static com.ardecs.SpringDataJpaJava.Repository.specification.ClientSpecificaton.clientFindByCriteries;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertArrayEquals;
-@RunWith(SpringJUnit4ClassRunner.class)//специальный класс JUnit,требуется для поддержки контекста в JUnit
-@ContextConfiguration(classes = AppConfig.class)
-//указываем конфиг для работы автокофигурации контекста в тесте
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SpringDataJpaJavaTests {
     @Autowired
     private CountryRepository countryRepository;
@@ -101,15 +89,15 @@ public class SpringDataJpaJavaTests {
         }
     }
 
-//    @Test
-//
-//    public void clientRegistration() {
-//        Client client = new Client("Yuri", "9051111111");
-//        clientRepository.save(client);
-//        Long idClient = client.getId();
-//        assertEquals(Long.valueOf(23), idClient);
-//
-//    }
+    @Test
+
+    public void clientRegistration() {
+        String login="Yuri";
+        String password="9051111111";
+        clientRepository.save(new Client(login, password));
+        Client client=clientRepository.findByLogin(login);
+        assertEquals(password,client.getPassword());
+    }
 //
 //    @Test
 //    public void clientSignIn() {
@@ -208,7 +196,7 @@ public class SpringDataJpaJavaTests {
         categoryRepository.save(category);
         categoryRepository.delete(category);
         long count = reportRepository.count();
-        assertEquals(14, count);
+        assertEquals(26, count);
     }
 }
 
