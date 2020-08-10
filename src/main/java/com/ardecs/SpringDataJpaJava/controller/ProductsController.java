@@ -16,7 +16,7 @@ public class ProductsController {
     @Autowired
     private ProductRepository productRepository;
 
-    @RequestMapping(value = {"/product"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/products"}, method = RequestMethod.GET)
     public String showProducts(Model model) {
         List<Product> productsList = (ArrayList<Product>) productRepository.findAll();
         model.addAttribute(productsList);

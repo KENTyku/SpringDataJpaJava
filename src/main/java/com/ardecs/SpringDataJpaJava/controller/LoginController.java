@@ -46,7 +46,7 @@ public class LoginController {
 //        clientRepository.save(client);
         return "redirect:/";
     }*/
-
+//TODO: This stub for use embedded Spring security login controller. Change it.
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(){
         return "login";

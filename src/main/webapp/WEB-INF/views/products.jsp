@@ -117,9 +117,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="col-sm-5 col-md-offset-2  header-login">
                 <ul >
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Register</a></li>
+                    <li><a href="login">Login</a></li>
+                    <li><a href="registration">Register</a></li>
                     <li><a href="checkout.html">Checkout</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
 
@@ -157,7 +158,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
                         <ul class="nav navbar-nav nav_1">
-                            <li><a class="color" href="home">Home</a></li>
+                            <li><a class="color" href="products">Catalog</a></li>
 
                             <li class="dropdown mega-dropdown active">
                                 <a class="color1" href="#" class="dropdown-toggle" data-toggle="dropdown">Women<span class="caret"></span></a>
