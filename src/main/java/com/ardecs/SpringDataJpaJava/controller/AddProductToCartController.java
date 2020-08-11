@@ -40,6 +40,6 @@ public class AddProductToCartController {
         positions.put(product.getId(), Pair.of(product, quantity));
 
         httpSession.setAttribute("positions", positions);
-        return "redirect:/";
+        return "redirect:products";
     }
 }
