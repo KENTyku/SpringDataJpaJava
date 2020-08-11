@@ -36,7 +36,7 @@
 <%--</body>--%>
 <%--</html>--%>
 
-<!--A Design by W3layouts
+<!--A Design by Yury Tveritin
 Author: Yury Tveritin
 Author URL: http:/kentyku.ru
 License: My License

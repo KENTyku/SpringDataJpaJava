@@ -52,12 +52,17 @@
 <%--</html>--%>
 
 
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
+<!--A Design by Yury Tveritin
+Author: Yury Tveritin
+Author URL: http:/kentyku.ru
+License: My License
+License URL: http://kentyku.ru/licence
 -->
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -367,6 +372,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="container">
         <div class="col-md-9">
             <div class="mid-popular">
+                <c:forEach var="product" items="${productList}">
+                    <form:form method="post" action="addProductToCart">
+                        <input name="productId" type="hidden" value="${product.id}" id="productId_Products"/>
+                        <input name="quantity" type="hidden" id="quantity_Products" value="1"/>
                 <div class="col-md-4 item-grid1 simpleCart_shelfItem">
                     <div class=" mid-pop">
                         <div class="pro-img">
@@ -379,16 +388,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="mid-1">
                             <div class="women">
                                 <div class="women-top">
-                                    <span>Women</span>
-                                    <h6><a href="single.html">Sed ut perspiciati</a></h6>
+                                    <span>${product.category.categoryName}</span>
+                                    <h6><a href="single.html">${product.name}</a></h6>
                                 </div>
                                 <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
+                                    <input type="submit" value="Add" />
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
                                 </div>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
+                                <p ><label>$100.00</label><em class="item_price">${product.price}</em></p>
                                 <div class="block">
                                     <div class="starbox small ghosting"> </div>
                                 </div>
@@ -399,263 +409,265 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc1.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc1.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Women</span>
-                                    <h6><a href="single.html">At vero eos</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc1.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc1.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Women</span>--%>
+                                    <%--<h6><a href="single.html">At vero eos</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc2.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc2.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Men</span>
-                                    <h6><a href="single.html">Sed ut perspiciati</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc2.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc2.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Men</span>--%>
+                                    <%--<h6><a href="single.html">Sed ut perspiciati</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc3.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc3.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Women</span>
-                                    <h6><a href="single.html">On the other</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc3.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc3.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Women</span>--%>
+                                    <%--<h6><a href="single.html">On the other</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc4.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc4.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Men</span>
-                                    <h6><a href="single.html">On the other</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc4.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc4.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Men</span>--%>
+                                    <%--<h6><a href="single.html">On the other</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc5.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc5.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Men</span>
-                                    <h6><a href="single.html">Sed ut perspiciati</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc5.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc5.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Men</span>--%>
+                                    <%--<h6><a href="single.html">Sed ut perspiciati</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+<%----%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc6.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc6.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Women</span>--%>
+                                    <%--<h6><a href="single.html">At vero eos</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc6.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc6.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Women</span>
-                                    <h6><a href="single.html">At vero eos</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc7.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc7.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Men</span>--%>
+                                    <%--<h6><a href="single.html">Sed ut perspiciati</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc7.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc7.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Men</span>
-                                    <h6><a href="single.html">Sed ut perspiciati</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<div class="col-md-4 item-grid1 simpleCart_shelfItem">--%>
+                    <%--<div class=" mid-pop">--%>
+                        <%--<div class="pro-img">--%>
+                            <%--<img src="../../resources/images/pc.jpg" class="img-responsive" alt="">--%>
+                            <%--<div class="zoom-icon ">--%>
+                                <%--<a class="picture" href="../../resources/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>--%>
+                                <%--<a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                        <%--<div class="mid-1">--%>
+                            <%--<div class="women">--%>
+                                <%--<div class="women-top">--%>
+                                    <%--<span>Women</span>--%>
+                                    <%--<h6><a href="single.html">At vero eos</a></h6>--%>
+                                <%--</div>--%>
+                                <%--<div class="img item_add">--%>
+                                    <%--<a href="#"><img src="../../resources/images/ca.png" alt=""></a>--%>
+                                <%--</div>--%>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
+                            <%--<div class="mid-2">--%>
+                                <%--<p ><label>$100.00</label><em class="item_price">$70.00</em></p>--%>
+                                <%--<div class="block">--%>
+                                    <%--<div class="starbox small ghosting"> </div>--%>
+                                <%--</div>--%>
 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 item-grid1 simpleCart_shelfItem">
-                    <div class=" mid-pop">
-                        <div class="pro-img">
-                            <img src="../../resources/images/pc.jpg" class="img-responsive" alt="">
-                            <div class="zoom-icon ">
-                                <a class="picture" href="../../resources/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
-                            </div>
-                        </div>
-                        <div class="mid-1">
-                            <div class="women">
-                                <div class="women-top">
-                                    <span>Women</span>
-                                    <h6><a href="single.html">At vero eos</a></h6>
-                                </div>
-                                <div class="img item_add">
-                                    <a href="#"><img src="../../resources/images/ca.png" alt=""></a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="mid-2">
-                                <p ><label>$100.00</label><em class="item_price">$70.00</em></p>
-                                <div class="block">
-                                    <div class="starbox small ghosting"> </div>
-                                </div>
+                                <%--<div class="clearfix"></div>--%>
+                            <%--</div>--%>
 
-                                <div class="clearfix"></div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
+                        <%--</div>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                    </form:form>
+                </c:forEach>
                 <div class="clearfix"></div>
             </div>
         </div>
@@ -857,7 +869,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li><a href="#"><img src="../../resources/images/f2.png" class="img-responsive" alt=""></a></li>
                 <li><a href="#"><img src="../../resources/images/f3.png" class="img-responsive" alt=""></a></li>
             </ul>
-            <p class="footer-class">&copy; 2016 Shopin. All Rights Reserved | Design by  <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+            <p class="footer-class">&copy; 2016 Shopin. All Rights Reserved | Design by  <a href="http://kentyku.ru/" target="_blank">W3layouts</a> </p>
             <div class="clearfix"> </div>
         </div>
     </div>
