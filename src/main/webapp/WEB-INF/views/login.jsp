@@ -284,7 +284,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-sm-2 search-right">
                 <ul class="heart">
                     <li>
-                        <a href="wishlist.html" >
+                        <a href="../../resources/wishlist.html" >
                             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                         </a></li>
                     <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="glyphicon glyphicon-search"> </i></a></li>
@@ -423,7 +423,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
                 <ul class="in in1">
                     <li><a href="#">Order History</a></li>
-                    <li><a href="wishlist.html">Wish List</a></li>
+                    <li><a href="../../resources/wishlist.html">Wish List</a></li>
                     <li><a href="login.html">Login</a></li>
                 </ul>
                 <div class="clearfix"></div>

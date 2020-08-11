@@ -306,7 +306,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-sm-2 search-right">
                 <ul class="heart">
                     <li>
-                        <a href="wishlist.html" >
+                        <a href="../../resources/wishlist.html" >
                             <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                         </a></li>
                     <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog"><i class="glyphicon glyphicon-search"> </i></a></li>
@@ -382,14 +382,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <img src="../../resources/images/pc.jpg" class="img-responsive" alt="">
                             <div class="zoom-icon ">
                                 <a class="picture" href="../../resources/images/pc.jpg" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
-                                <a href="single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+                                <a href="../../resources/single.html"><i class="glyphicon glyphicon-menu-right icon"></i></a>
                             </div>
                         </div>
                         <div class="mid-1">
                             <div class="women">
                                 <div class="women-top">
                                     <span>${product.category.categoryName}</span>
-                                    <h6><a href="single.html">${product.name}</a></h6>
+                                    <h6><a href="../../resources/single.html">${product.name}</a></h6>
                                 </div>
                                 <div class="img item_add">
                                     <input type="submit" value="Add" />
@@ -834,7 +834,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </ul>
                 <ul class="in in1">
                     <li><a href="#">Order History</a></li>
-                    <li><a href="wishlist.html">Wish List</a></li>
+                    <li><a href="../../resources/wishlist.html">Wish List</a></li>
                     <li><a href="login.html">Login</a></li>
                 </ul>
                 <div class="clearfix"></div>
