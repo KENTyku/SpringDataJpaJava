@@ -52,11 +52,9 @@ public class OnApplicationLoad {
     public void onApplicationLoad() {
         Logger logger = LoggerFactory.getLogger(OnApplicationLoad.class);
         List<Category> categoryList = new ArrayList<>();
-        Category category = new Category("Computer");
+        Category category = new Category("Women");
         categoryList.add(category);
-        category = new Category("Mobile");
-        categoryList.add(category);
-        category = new Category("Audio");
+        category = new Category("Men");
         categoryList.add(category);
         categoryRepository.saveAll(categoryList);
         List<Country> countryList = new ArrayList<>();
@@ -83,8 +81,8 @@ public class OnApplicationLoad {
             String name = java.util.UUID.randomUUID().toString();
 //            String comment = String.valueOf(random.nextInt(10000000) + 1);
             String comment = java.util.UUID.randomUUID().toString();
-            long idCountry = random.nextInt(3) + 4;
-            long idCategory = random.nextInt(3) + 1;
+            long idCountry = random.nextInt(3) + 3;
+            long idCategory = random.nextInt(2) + 1;
             Product product = new Product(price, name, comment, countryRepository.findById(idCountry).get(), categoryRepository.findById(idCategory).get());
             productRepository.save(product);
         }
