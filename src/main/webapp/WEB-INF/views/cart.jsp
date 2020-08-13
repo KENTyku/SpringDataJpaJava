@@ -412,49 +412,55 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         <th>Prices</th>
                         <th >Delivery </th>
+                        <th >Count </th>
                         <th>Subtotal</th>
                     </tr>
+                    <c:forEach var="position" items="${positions}">
+                        <form:form method="post" action="editCartProduct">
                     <tr class="cart-header">
 
                         <td class="ring-in"><a href="../../resources/single.html" class="at-in"><img src="../../resources/images/ch.jpg" class="img-responsive" alt=""></a>
                             <div class="sed">
-                                <h5><a href="../../resources/single.html">Sed ut perspiciatis unde</a></h5>
-                                <p>(At vero eos et accusamus et iusto odio dignissimos ducimus ) </p>
+                                <h5><a href="../../resources/single.html">${position.value.first.name}</a></h5>
+                                <p>(${position.value.first.comment} ) </p>
 
                             </div>
                             <div class="clearfix"> </div>
                             <div class="close1"> </div></td>
-                        <td>$100.00</td>
+                        <td>${position.value.first.price}</td>
                         <td>FREE SHIPPING</td>
-                        <td class="item_price">$100.00</td>
-                        <td class="add-check"><a class="item_add hvr-skew-backward" href="#">Add To Cart</a></td>
+                        <td>${position.value.second}</td>
+                        <td class="item_price">${position.value.first.price*position.value.second}</td>
+                        <td class="add-check"><a class="item_add hvr-skew-backward" href="deleteCartProduct?productId=${position.value.first.id}">Remove</a></td>
                     </tr>
-                    <tr class="cart-header1">
-                        <td class="ring-in"><a href="../../resources/single.html" class="at-in"><img src="../../resources/images/ch2.jpg" class="img-responsive" alt=""></a>
-                            <div class="sed">
-                                <h5><a href="../../resources/single.html">Sed ut perspiciatis unde</a></h5>
-                                <p>(At vero eos et accusamus et iusto odio dignissimos ducimus ) </p>
-                            </div>
-                            <div class="clearfix"> </div>
-                            <div class="close2"> </div></td>
-                        <td>$100.00</td>
-                        <td>FREE SHIPPING</td>
-                        <td class="item_price">$100.00</td>
-                        <td class="add-check"><a class="item_add hvr-skew-backward" href="#">Add To Cart</a></td>
-                    </tr>
-                    <tr class="cart-header2">
-                        <td class="ring-in"><a href="../../resources/single.html" class="at-in"><img src="../../resources/images/ch1.jpg" class="img-responsive" alt=""></a>
-                            <div class="sed">
-                                <h5><a href="../../resources/single.html">Sed ut perspiciatis unde</a></h5>
-                                <p>(At vero eos et accusamus et iusto odio dignissimos ducimus ) </p>
-                            </div>
-                            <div class="clearfix"> </div>
-                            <div class="close3"> </div></td>
-                        <td>$100.00</td>
-                        <td>FREE SHIPPING</td>
-                        <td class="item_price">$100.00</td>
-                        <td class="add-check"><a class="item_add hvr-skew-backward" href="#">Add To Cart</a></td>
-                    </tr>
+                    <%--<tr class="cart-header1">--%>
+                        <%--<td class="ring-in"><a href="../../resources/single.html" class="at-in"><img src="../../resources/images/ch2.jpg" class="img-responsive" alt=""></a>--%>
+                            <%--<div class="sed">--%>
+                                <%--<h5><a href="../../resources/single.html">Sed ut perspiciatis unde</a></h5>--%>
+                                <%--<p>(At vero eos et accusamus et iusto odio dignissimos ducimus ) </p>--%>
+                            <%--</div>--%>
+                            <%--<div class="clearfix"> </div>--%>
+                            <%--<div class="close2"> </div></td>--%>
+                        <%--<td>$100.00</td>--%>
+                        <%--<td>FREE SHIPPING</td>--%>
+                        <%--<td class="item_price">$100.00</td>--%>
+                        <%--<td class="add-check"><a class="item_add hvr-skew-backward" href="#">Add To Cart</a></td>--%>
+                    <%--</tr>--%>
+                    <%--<tr class="cart-header2">--%>
+                        <%--<td class="ring-in"><a href="../../resources/single.html" class="at-in"><img src="../../resources/images/ch1.jpg" class="img-responsive" alt=""></a>--%>
+                            <%--<div class="sed">--%>
+                                <%--<h5><a href="../../resources/single.html">Sed ut perspiciatis unde</a></h5>--%>
+                                <%--<p>(At vero eos et accusamus et iusto odio dignissimos ducimus ) </p>--%>
+                            <%--</div>--%>
+                            <%--<div class="clearfix"> </div>--%>
+                            <%--<div class="close3"> </div></td>--%>
+                        <%--<td>$100.00</td>--%>
+                        <%--<td>FREE SHIPPING</td>--%>
+                        <%--<td class="item_price">$100.00</td>--%>
+                        <%--<td class="add-check"><a class="item_add hvr-skew-backward" href="#">Add To Cart</a></td>--%>
+                    <%--</tr>--%>
+                        </form:form>
+                    </c:forEach>
 
                 </table>
             </div>
