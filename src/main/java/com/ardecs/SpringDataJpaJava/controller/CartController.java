@@ -22,7 +22,7 @@ public class CartController {
         if (positions == null) {
             positions = new HashMap<>();
         }
-        model.addAttribute(positions);
+        model.addAttribute("positionList",positions);
         if (positions.size()!=0) {
             float totalCost = 0;
             Set<Map.Entry<Long, Pair<Product, Long>>> setList = positions.entrySet();

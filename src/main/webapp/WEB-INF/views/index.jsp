@@ -61,7 +61,7 @@ License URL: http://kentyku.ru/licence
 <html>
 <head>
     <title>My shop</title>
-<%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--%>
+    <%--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <ul >
                     <li><a href="login">Login</a></li>
                     <li><a href="registration">Register</a></li>
-                    <li><a href="../../resources/checkout.html">Checkout</a></li>
+                    <%--                    <li><a href="../../resources/checkout.html">Checkout</a></li>--%>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
             </div>
@@ -314,7 +314,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span class="simpleCart_total"></span></div>
                             <img src="../../resources/images/cart.png" alt=""/></h3>
                     </a>
-                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
+<%--                    <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>--%>
 
                 </div>
                 <div class="clearfix"> </div>
@@ -778,7 +778,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 <!--//footer-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="../../resources/js/simpleCart.min.js"> </script>
+<script src="../../resources/js/simpleCart.min.js"></script>
 <!-- slide -->
 <script src="../../resources/js/bootstrap.min.js"></script>
 <!--light-box-files -->
